@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import { addUserThunk } from "../../store/session";
+import { signInThunk } from "../../store/session";
 import {Redirect} from 'react-router-dom';
 import './LoginForm.css';
 
@@ -21,7 +21,7 @@ function LoginFormPage(){
             credential,
             password
         }
-        const loggedUse = await dispatch(addUserThunk(user))
+        const loggedUse = await dispatch(signInThunk(user))
         if(loggedUse&&loggedUse.errors){
             setErrors(loggedUse.errors)
         }

@@ -10,14 +10,14 @@ export const addUser = (user)=>{
     }
 }
 
-export const removeUser = (userId)=>{
+export const removeUser = (user)=>{
     return{
         type: REMOVE_SESSION,
-        userId
+        user
     }
 }
 
-export const addUserThunk = (user)=> async (dispatch)=>{
+export const signInThunk = (user)=> async (dispatch)=>{
     const {credential, password} = user
     const response = await csrfFetch('/api/session',{
         method: "POST",
@@ -40,6 +40,22 @@ export const restoreUser = () => async dispatch => {
         return data;
     }
   };
+
+export const signUpUser = (user)=> async dispatch=>{
+    const {username, email, password} = user
+    const response = await csrfFetch('/api/users',{
+        method: "POST",
+        body: JSON.stringify({username, email, password})
+    })
+    if(response.ok){
+        const data = await response.json();
+        dispatch(removeUser(data.user));
+        return user;
+    }else{
+        return false;
+    }
+}
+
 
 const initialState = { user: null }
 
