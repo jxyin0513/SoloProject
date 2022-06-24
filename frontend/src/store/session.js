@@ -49,13 +49,25 @@ export const signUpUser = (user)=> async dispatch=>{
     })
     if(response.ok){
         const data = await response.json();
-        dispatch(removeUser(data.user));
-        return user;
+        dispatch(addUser(data.user));
+        return data;
     }else{
         return false;
     }
 }
 
+export const logOutUser = ()=> async dispatch=>{
+    const response = await csrfFetch('/api/session',{
+        method: "DELETE",
+    })
+    if(response.ok){
+        const data = await response.json();
+        dispatch(removeUser(data.user));
+        return data;
+    }else{
+        return false;
+    }
+}
 
 const initialState = { user: null }
 
@@ -63,7 +75,6 @@ const sessionReducer = (state=initialState, action)=>{
     let newState = {...state}
     switch(action.type){
         case ADD_SESSION:
-            console.log("here")
             newState.user= action.user;
             return newState;
         case REMOVE_SESSION:
