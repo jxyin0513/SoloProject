@@ -10,10 +10,9 @@ export const addUser = (user)=>{
     }
 }
 
-export const removeUser = (user)=>{
+export const removeUser = ()=>{
     return{
-        type: REMOVE_SESSION,
-        user
+        type: REMOVE_SESSION
     }
 }
 
@@ -62,7 +61,7 @@ export const logOutUser = ()=> async dispatch=>{
     })
     if(response.ok){
         const data = await response.json();
-        dispatch(removeUser(data.user));
+        dispatch(removeUser());
         return data;
     }else{
         return false;

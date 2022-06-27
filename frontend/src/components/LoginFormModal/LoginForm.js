@@ -1,19 +1,14 @@
 import React, {useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import { signInThunk } from "../../store/session";
-import {Redirect} from 'react-router-dom';
 import './LoginForm.css';
 
-function LoginFormPage(){
+function LoginForm(){
     const dispatch = useDispatch();
-    const sessionUser = useSelector(state=>state.session.user)
     const [credential, setCredential] = useState("");
     const [password, setPassword]= useState("");
     const [errors, setErrors] = useState([])
 
-    if(sessionUser){
-        return <Redirect to="/" />
-    }
     async function onSubmit(e){
         e.preventDefault();
         setErrors([]);
@@ -28,17 +23,17 @@ function LoginFormPage(){
     }
     return (
         <>
-            <form onSubmit={onSubmit}>
+            <form class="sign-in" onSubmit={onSubmit}>
                 <ul>
                     {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                 </ul>
-                <label>Username
+                <label>Username or Email
                     <input required type="text" name="password" value={credential} onChange={e=>setCredential(e.target.value)}>
                     </input>
                 </label>
 
                 <label>Password
-                    <input required type="text" name="password" value={password} onChange={e=>setPassword(e.target.value)}>
+                    <input required type="password" name="password" value={password} onChange={e=>setPassword(e.target.value)}>
                     </input>
                 </label>
                 <button type="submit">Log In</button>
@@ -47,4 +42,4 @@ function LoginFormPage(){
     );
 }
 
-export default LoginFormPage;
+export default LoginForm;

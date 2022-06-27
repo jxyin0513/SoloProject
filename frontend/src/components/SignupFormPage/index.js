@@ -37,7 +37,7 @@ function SignupFormPage(){
     }
     return (
         <>
-            <form onSubmit={onSubmit}>
+            <form class="sign-up" onSubmit={onSubmit}>
                 <ul>
                     {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                 </ul>
@@ -52,15 +52,15 @@ function SignupFormPage(){
                 </label>
 
                 <label>Password
-                    <input required type="text" name="password" value={password} onChange={e=>setPassword(e.target.value)}>
+                    <input required type="password" name="password" value={password} onChange={e=>setPassword(e.target.value)}>
                     </input>
                 </label>
 
                 <label>Confirm Password
-                    <input required type="text" name="confirmPassword" value={confirmPassword} onChange={e=>setConfirmPassword(e.target.value)}>
+                    <input required type="password" name="confirmPassword" value={confirmPassword} onChange={e=>setConfirmPassword(e.target.value)}>
                     </input>
                 </label>
-                <button type="submit">Log In</button>
+                <button type="submit">Sign Up</button>
             </form>
         </>
     );
