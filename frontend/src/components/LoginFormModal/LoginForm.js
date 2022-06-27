@@ -5,13 +5,15 @@ import './LoginForm.css';
 
 function LoginForm(){
     const dispatch = useDispatch();
-    const [credential, setCredential] = useState("");
+    let [credential, setCredential] = useState("");
     const [password, setPassword]= useState("");
     const [errors, setErrors] = useState([])
 
     async function onSubmit(e){
         e.preventDefault();
         setErrors([]);
+        credential=credential.toLowerCase();
+
         const user={
             credential,
             password

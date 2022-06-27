@@ -4,7 +4,7 @@ import {Route, Switch} from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
-
+import AddBusiness from "./components/Business/AddBusiness";
 
 function App() {
 
@@ -21,6 +21,9 @@ function App() {
       (<Switch>
         <Route path="/signup">
           <SignupFormPage />
+        </Route>
+        <Route path="/create-business">
+          <AddBusiness />
         </Route>
       </Switch>
       )}
