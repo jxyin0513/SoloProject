@@ -7,8 +7,8 @@ import "./SignupForm.css"
 function SignupFormPage(){
     const dispatch = useDispatch();
     const sessionUser = useSelector(state=>state.session.user)
-    const [username, setUsername] = useState("")
-    const [email, setEmail] = useState("");
+    let [username, setUsername] = useState("")
+    let [email, setEmail] = useState("");
     const [password, setPassword]= useState("");
     const [confirmPassword, setConfirmPassword] = useState("")
     const [errors, setErrors] = useState([])
@@ -19,6 +19,8 @@ function SignupFormPage(){
     async function onSubmit(e){
         e.preventDefault();
         setErrors([]);
+        username = username.toLowerCase();
+        email = email.toLowerCase();
         const user={
             username,
             email,
