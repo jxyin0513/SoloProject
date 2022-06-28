@@ -6,6 +6,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import AddBusiness from "./components/Business/AddBusiness";
 import AllBusinesses from "./components/Business/getBusinesses";
+import BusinessDetail from "./components/Business/BusinessDetail";
 
 function App() {
 
@@ -28,6 +29,9 @@ function App() {
         </Route>
         <Route path="/create-business">
           <AddBusiness />
+        </Route>
+        <Route path={`/businesses/:businessId`}>
+          <BusinessDetail />
         </Route>
 
       </Switch>

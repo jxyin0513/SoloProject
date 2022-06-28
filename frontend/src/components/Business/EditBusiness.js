@@ -5,29 +5,28 @@ import { editBusinessThunk } from "../../store/business";
 
 function EditBusiness({business}){
     const dispatch = useDispatch();
-    const owner = useSelector(state=>state.session.user);
     const[name, setName] = useState(business.name);
     const [phoneNumber, setPhoneNumber] = useState(business.phoneNumber);
     const [description, setDescription] = useState(business.description);
     const [zipCode, setZipCode] = useState(business.zipCode);
+    const id= business.id
 
     async function onSubmit(e){
         e.preventDefault();
         const business = {
-            owner,
+            id,
             name,
             phoneNumber,
             description,
             zipCode
         }
-    const newBusiness = await dispatch(editBusinessThunk(business, owner))
+    const newBusiness = await dispatch(editBusinessThunk(business))
 
     }
 
     return (
         <>
             <form onSubmit={onSubmit}>
-                <label></label>
                 <label>Name:
                     <input type="text" name="name" value={name} onChange={e=>setName(e.target.value)}></input>
                 </label>
@@ -40,7 +39,7 @@ function EditBusiness({business}){
                 <label> Zip Code
                     <input type="text" name="zipCode" value={zipCode} onChange={e=>setZipCode(e.target.value)}></input>
                 </label>
-                <button type="submit">Add Business</button>
+                <button type="submit">Edit Business</button>
             </form>
 
         </>

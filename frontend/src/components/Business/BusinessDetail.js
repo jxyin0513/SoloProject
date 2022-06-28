@@ -1,15 +1,16 @@
-import React, { useEffect} from "react";
+import React, { useEffect, useState} from "react";
 import {useDispatch, useSelector} from 'react-redux';
-import { getBusinessesThunk, deleteBusinessThunk } from "../../store/business";
-import BusinessDetail from "./BusinessDetail";
-import {Route} from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
+import { getBusinessesThunk, deleteBusinessThunk} from "../../store/business";
+import EditBusiness from "./EditBusiness";
+import { useParams } from 'react-router-dom';
 
-function AllBusinesses(){
+function BusinessDetail(){
     const dispatch = useDispatch();
+    const {businessId} = useParams();
+    const [editButton, setEditButton] = useState(false);
     const user = useSelector(state=>state.session.user)
-    const allBusinesses = useSelector(state=>state.allBusinesses);
 
+    const businessDetail = Object.values(useSelector(state=>state.allBusinesses)).filter(business=>business.id===Number(businessId));
     useEffect(()=>{
         dispatch(getBusinessesThunk())
     },[dispatch])
@@ -20,24 +21,20 @@ function AllBusinesses(){
 
     return (
         <>
-        {allBusinesses&&(
+        {businessDetail&&(
             <li>
-                {Object.values(allBusinesses).map(business=>{
+                {Object.values(businessDetail).map(business=>{
                     return (
                         <div id={business.id}>
                             <ul key={business.id}>{business.name}</ul>
+
                             {user&&user.id===business.ownerId &&
                             <>
+                                <button id={business.id} onClick={()=>setEditButton(true)} >Edit</button>
                                 <button id={business.id} onClick={deleteBusiness}>Delete</button>
-                                <NavLink to={`/businesses/${business.id}`}>
-                                    <button className={business} id={business.id} >Edit</button>
-                                </NavLink>
-                                <Route path={`/businesses/:businessId`}>
-                                    <BusinessDetail />
-                                </Route>
                             </>
-
                             }
+                            {editButton&&<EditBusiness business={business} /> }
                         </div>
                     )
                 }
@@ -49,4 +46,4 @@ function AllBusinesses(){
     )
 }
 
-export default AllBusinesses;
+export default BusinessDetail;

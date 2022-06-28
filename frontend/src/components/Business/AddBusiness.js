@@ -29,7 +29,6 @@ function AddBusiness(){
     return (
         <>
             <form onSubmit={onSubmit}>
-                <label></label>
                 <label>Name:
                     <input type="text" name="name" value={name} onChange={e=>setName(e.target.value)}></input>
                 </label>

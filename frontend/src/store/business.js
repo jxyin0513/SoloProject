@@ -16,6 +16,11 @@ const getBusinesses = (businesses)=>({
     businesses
 })
 
+const editBusiness = (business)=>({
+    type: EDIT_BUSINESS,
+    business
+})
+
 const removeBusiness= (businessId)=>({
     type:DELETE_BUSINESS,
     businessId
@@ -48,21 +53,22 @@ export const getBusinessesThunk =()=>async dispatch=>{
 }
 
 export const editBusinessThunk =(business) => async dispatch=>{
+    console.log(business)
     const response = await csrfFetch(`/api/businesses/${business.id}/edit`,{
         method: "POST",
         body: JSON.stringify(business)
     })
     if(response.ok){
         const data = await response.json();
-        dispatch(addBusiness(data))
+        dispatch(editBusiness(data))
         return data;
     }else{
         return false;
     }
 }
 
-export const deleteBusinessThunk = (business)=> async dispatch=>{
-    const response = await csrfFetch(`/api/businesses/${business.id}/delete`,{
+export const deleteBusinessThunk = (businessId)=> async dispatch=>{
+    const response = await csrfFetch(`/api/businesses/${businessId}/delete`,{
         method: "POST",
     })
     if(response.ok){
@@ -79,12 +85,11 @@ const businessDetailReducer = (state=initialState, action)=>{
     let newState = {...state}
     switch(action.type){
         case ADD_BUSINESS:
-            if(!newState[action.business.id]){
-                newState[action.business.id].businessData = action.business;
-                newState[action.business.id].user = action.owner;
-            }else{
-
-            }
+            console.log(action.business, action.owner)
+            const businessData = {"businessData" : action.business}
+            const user = {"user": action.owner}
+            newState[action.business.id]= businessData
+            newState[action.business.id]= user
 
             return newState;
 
@@ -105,12 +110,12 @@ export const businesseslReducer = (state=initialState, action)=>{
     let newState = {...state}
     switch(action.type){
         case ADD_BUSINESS:
-            newState[action.business.id] = action.business
-            newState[action.owner.username] = action.owner
+            newState[action.business.id.businessData] = action.business
+            newState[action.business.id.user] = action.owner
             return newState;
         case READ_BUSINESS:
             action.businesses.forEach(business=>{
-                newState[business.id]=business
+                newState[business.id]= business
             })
             return newState;
 
