@@ -11,6 +11,7 @@ function EditBusiness({business}){
     const [zipCode, setZipCode] = useState(business.zipCode);
     const id= business.id
 
+
     async function onSubmit(e){
         e.preventDefault();
         const business = {

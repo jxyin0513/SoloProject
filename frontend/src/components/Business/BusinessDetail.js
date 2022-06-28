@@ -9,8 +9,8 @@ function BusinessDetail(){
     const {businessId} = useParams();
     const [editButton, setEditButton] = useState(false);
     const user = useSelector(state=>state.session.user)
+    const business = useSelector(state=>state.allBusinesses[businessId])
 
-    const businessDetail = Object.values(useSelector(state=>state.allBusinesses)).filter(business=>business.id===Number(businessId));
     useEffect(()=>{
         dispatch(getBusinessesThunk())
     },[dispatch])
@@ -21,26 +21,21 @@ function BusinessDetail(){
 
     return (
         <>
-        {businessDetail&&(
-            <li>
-                {Object.values(businessDetail).map(business=>{
-                    return (
-                        <div id={business.id}>
-                            <ul key={business.id}>{business.name}</ul>
+        {business&&(
 
-                            {user&&user.id===business.ownerId &&
-                            <>
-                                <button id={business.id} onClick={()=>setEditButton(true)} >Edit</button>
-                                <button id={business.id} onClick={deleteBusiness}>Delete</button>
-                            </>
-                            }
-                            {editButton&&<EditBusiness business={business} /> }
-                        </div>
-                    )
+            <div id={business.id}>
+                <ul key={business.id}>{business.name}</ul>
+                <ul>{business.description}</ul>
+                <ul>{business.zipCode}</ul>
+                {user&&user.id===business.ownerId &&
+                <>
+                    <button id={business.id} onClick={()=>setEditButton(true)} >Edit</button>
+                    <button id={business.id} onClick={deleteBusiness}>Delete</button>
+                </>
                 }
-
-                )}
-            </li>)
+                {editButton&&<EditBusiness business={business} /> }
+            </div>
+            )
             }
         </>
     )
