@@ -17,7 +17,7 @@ const getBusinesses = (businesses)=>({
 })
 
 const editBusiness = (business)=>({
-    type: EDIT_BUSINESS,
+    type: ADD_BUSINESS,
     business
 })
 
@@ -85,12 +85,13 @@ const businessDetailReducer = (state=initialState, action)=>{
     let newState = {...state}
     switch(action.type){
         case ADD_BUSINESS:
-            console.log(action.business, action.owner)
-            const businessData = {"businessData" : action.business}
-            const user = {"user": action.owner}
-            newState[action.business.id]= businessData
-            newState[action.business.id]= user
-
+            if(!newState[action.business.id]){
+                newState[action.business.id]= {}
+                newState[action.business.id]["businessData"]= action.business
+                newState[action.business.id]["user"]= action.owner
+                return newState;
+            }
+            newState[action.business.id.businessData] = action.business
             return newState;
 
         case READ_BUSINESS:
@@ -110,8 +111,9 @@ export const businesseslReducer = (state=initialState, action)=>{
     let newState = {...state}
     switch(action.type){
         case ADD_BUSINESS:
-            newState[action.business.id.businessData] = action.business
-            newState[action.business.id.user] = action.owner
+            newState[action.business.id]= {}
+            newState[action.business.id]["businessData"]= action.business
+            newState[action.business.id]["user"]= action.owner
             return newState;
         case READ_BUSINESS:
             action.businesses.forEach(business=>{
