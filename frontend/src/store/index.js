@@ -1,13 +1,13 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import sessionReducer from "./session";
-import businessReducer, {businessDetailReducer} from "./business";
+import businessDetailReducer, {businesseslReducer} from "./business";
 
 const rootReducer = combineReducers({
   // add reducer functions here
   session: sessionReducer,
-  businessDetail: businessReducer,
-  allBusinesses: businessDetailReducer
+  businessDetail: businessDetailReducer,
+  allBusinesses: businesseslReducer
 });
 
 let enhancer;

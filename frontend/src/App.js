@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import AddBusiness from "./components/Business/AddBusiness";
+import AllBusinesses from "./components/Business/getBusinesses";
 
 function App() {
 
@@ -19,12 +20,16 @@ function App() {
       <Navigation isLoaded={{isLoaded}}/>
       {isLoaded&&
       (<Switch>
+        <Route exact path="/">
+          <AllBusinesses />
+        </Route>
         <Route path="/signup">
           <SignupFormPage />
         </Route>
         <Route path="/create-business">
           <AddBusiness />
         </Route>
+
       </Switch>
       )}
     </>
