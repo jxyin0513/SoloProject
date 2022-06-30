@@ -4,81 +4,87 @@ const ADD_REVIEW = '/add/review';
 const READ_REVIEW = '/get/reviews'
 const DELETE_REVIEW = '/delete/review'
 
-const addReview= (review)=>({
+const addReview= (review, businessId)=>({
     type: ADD_REVIEW,
-    review
+    review,
+    businessId
 })
 
-const getReview = (reviews, businessId)=>({
+const getReview = (reviews)=>({
     type: READ_REVIEW,
-    reviews,
-    businessId
+    reviews
 })
 
-const deleteReview= (reviewId, businessId)=>({
+const deleteReview= (reviewId)=>({
     type: DELETE_REVIEW,
-    reviewId,
-    businessId
+    reviewId
 })
 
-
-const addReviewThunk =(review)=> async(dispatch)=>{
+export const addReviewThunk =(review, businessId)=> async(dispatch)=>{
     const response = await csrfFetch('/api/reviews',{
         method: "POST",
         body: JSON.stringify(review)
     })
     if(response.ok){
         const data = await response.json();
-        dispatch(addReview(data))
+        dispatch(addReview(data, businessId))
         return data;
     }else{
         return false;
     }
 }
 
-const getReviewsThunk =(businessId)=> async(dispatch)=>{
+export const getReviewsThunk =(businessId)=> async(dispatch)=>{
     const response = await csrfFetch(`/api/reviews/${businessId}/all`)
     if(response.ok){
         const data = await response.json();
-        dispatch(getReview(data, businessId))
+        console.log(data)
+        dispatch(getReview(data))
         return data;
     }else{
         return false;
     }
 }
 
-const deleteReviewThunk =(review)=> async(dispatch)=>{
-    const response = await csrfFetch(`/api/reviews/${review.id}/delete`,{
+export const deleteReviewThunk =(reviewId)=> async(dispatch)=>{
+    const response = await csrfFetch(`/api/reviews/${reviewId}/delete`,{
         method:"POST"
     })
     if(response.ok){
         const data = await response.json();
-        dispatch(deleteReview(data, businessId))
+        dispatch(deleteReview(reviewId))
         return data;
     }else{
         return false;
     }
 }
+
 const initialState={}
 
-const reviewDetailReducer= (state=initialState, action)=>{
-    let newState = {...state};
-    switch(action.type){
-        case ADD_REVIEW:
+const reviewsReducer = (state=initialState, action)=>{
+    let newState = {...state };
 
-            return {...state, [action.businessId]: {["reviews"]: {...state[action.businessId.reviews], [action.review.id]: action.review}}}
+    switch(action.type){
+
+        case ADD_REVIEW:
+            newState[action.review.id] = action.review
+            return newState;
 
         case READ_REVIEW:
+            console.log(action.reviews)
+
             action.reviews.forEach(review=>{
-                newState[action.businessId]["reviews"]={}
-                newState[action.businessId.reviews][review.id] = review
+                newState[review.id] = review
             })
             return newState;
 
         case DELETE_REVIEW:
-            delete newState[action.businessId.reviews.action.reviewId];
+            delete newState[action.reviewId];
             return newState;
+
+        default:
+            return state;
     }
 }
 
-export default reviewDetailReducer;
+export default reviewsReducer;

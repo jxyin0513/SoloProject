@@ -1,6 +1,6 @@
 import React, {useState} from "react";
-import {useDispatch, useSelector} from 'react-redux';
-import { addReviewThunk } from "../../store/business";
+import {useDispatch} from 'react-redux';
+import { addReviewThunk } from "../../store/review";
 import {Redirect} from 'react-router-dom';
 
 function AddReview ({user, business}){
@@ -19,7 +19,7 @@ function AddReview ({user, business}){
             comment
         }
 
-        const newReview = await dispatch(addReviewThunk(review, business.id))
+        await dispatch(addReviewThunk(review, business.id))
     }
     return (
         <>

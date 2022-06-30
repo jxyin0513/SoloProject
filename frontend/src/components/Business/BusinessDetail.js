@@ -1,6 +1,6 @@
 import React, { useEffect, useState} from "react";
 import {useDispatch, useSelector} from 'react-redux';
-import { getBusinessesThunk, getReviewsThunk, deleteBusinessThunk} from "../../store/business";
+import { getBusinessesThunk,getBusinessDetailThunk, deleteBusinessThunk} from "../../store/business";
 import GetReviews from "../Review/getReviews";
 import AddReview from "../Review/AddReview";
 import EditBusiness from "./EditBusiness";
@@ -18,7 +18,7 @@ function BusinessDetail(){
 
 
     useEffect(()=>{
-        dispatch(getBusinessesThunk())
+        dispatch(getBusinessDetailThunk(businessId))
     },[dispatch])
 
     function deleteBusiness(e){
@@ -33,7 +33,7 @@ function BusinessDetail(){
                 <ul key={business.id}>{business.name}</ul>
                 <ul>{business.description}</ul>
                 <ul>{business.zipCode}</ul>
-                <GetReviews businessId={business.id}/>
+                <GetReviews businessId={businessId}/>
                 <button onClick={()=>setReviewButton(true)}>Write a review</button>
                 {user&&user.id===business.ownerId &&
                 <>
