@@ -1,7 +1,8 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import { addBusinessThunk } from "../../store/business";
 import {Redirect} from 'react-router-dom';
+import './AddBusiness.css'
 
 function AddBusiness(){
     const dispatch = useDispatch();
@@ -10,9 +11,29 @@ function AddBusiness(){
     const [phoneNumber, setPhoneNumber] = useState('');
     const [description, setDescription] = useState('');
     const [zipCode, setZipCode] = useState('');
+    const [errors, setErrors]=useState([])
+
+    // if(!owner){
+    //     return <Redirect to="/" />
+    // }
+
+    useEffect(()=>{
+        const error=[]
+        if(description.length>=255){
+            error.push("Description must be less than 255 characters")
+        }
+        if(phoneNumber.length>10){
+            error.push("Please provide a valid phone number.")
+        }
+        if(zipCode.length>5){
+            error.push("Please provide a valid code.")
+        }
+        setErrors(error);
+    },[description, phoneNumber, zipCode])
 
     async function onSubmit(e){
         e.preventDefault();
+
         const business = {
             owner,
             name,
@@ -21,14 +42,26 @@ function AddBusiness(){
             zipCode
         }
     const newBusiness = await dispatch(addBusinessThunk(business, owner))
-    // if(newBusiness){
-    //     return <Redirect to="/" />
-    // }
-    }
 
+    if(newBusiness){
+        reset()
+        return <Redirect to="/" />
+    }
+}
+
+    function reset(){
+        setName('');
+        setDescription('');
+        setPhoneNumber('');
+        setZipCode('');
+        setErrors([])
+    }
     return (
         <>
-            <form onSubmit={onSubmit}>
+            <form className="add-business" onSubmit={onSubmit}>
+                {errors.length!==0&&errors.map(error=>
+                <ul>{error}</ul>
+                )}
                 <label>Name:
                     <input type="text" name="name" value={name} onChange={e=>setName(e.target.value)}></input>
                 </label>
@@ -41,7 +74,7 @@ function AddBusiness(){
                 <label> Zip Code
                     <input type="text" name="zipCode" value={zipCode} onChange={e=>setZipCode(e.target.value)}></input>
                 </label>
-                <button type="submit">Add Business</button>
+                <button type="submit" disabled={errors.length===0 ? false : true}>Add Business</button>
             </form>
 
         </>

@@ -105,6 +105,7 @@ const businessesReducer = (state=initialState, action)=>{
             return newState;
 
         case READ_BUSINESS_DETAIL:
+            newState={}
             newState[action.business.id] = action.business
             return newState;
 

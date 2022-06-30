@@ -7,7 +7,9 @@ function GetReviews({businessId}){
     console.log(businessId)
     const reviews = useSelector(state=>state.reviews);
     const user = useSelector(state=>state.session.user)
-    const reviewsArr = Object.values(reviews)
+    const reviewsArr = Object.values(reviews).filter(review=>{
+        if(review.businessId===Number(businessId)) return review
+    })
 
     useEffect(()=>{
         console.log("2nd")
@@ -21,7 +23,7 @@ function GetReviews({businessId}){
 
     return (
         <>
-            {/* {reviews&& */}
+            {reviewsArr.length!==0&&
             <table>
                 <thead>
                     <tr>
@@ -47,7 +49,7 @@ function GetReviews({businessId}){
                 </tbody>
             </table>
 
-
+                    }
         </>
     )
 }

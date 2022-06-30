@@ -5,6 +5,7 @@ import GetReviews from "../Review/getReviews";
 import AddReview from "../Review/AddReview";
 import EditBusiness from "./EditBusiness";
 import { useParams } from 'react-router-dom';
+import { getReviewsThunk } from "../../store/review";
 
 function BusinessDetail(){
     const dispatch = useDispatch();
@@ -15,7 +16,6 @@ function BusinessDetail(){
 
     const user = useSelector(state=>state.session.user)
     const business = useSelector(state=>state.allBusinesses[businessId])
-
 
     useEffect(()=>{
         dispatch(getBusinessDetailThunk(businessId))
@@ -33,8 +33,8 @@ function BusinessDetail(){
                 <ul key={business.id}>{business.name}</ul>
                 <ul>{business.description}</ul>
                 <ul>{business.zipCode}</ul>
-                <GetReviews businessId={businessId}/>
                 <button onClick={()=>setReviewButton(true)}>Write a review</button>
+                <GetReviews businessId={businessId}/>
                 {user&&user.id===business.ownerId &&
                 <>
                     <button id={business.id} onClick={()=>setEditButton(true)} >Edit</button>

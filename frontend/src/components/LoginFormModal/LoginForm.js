@@ -5,27 +5,32 @@ import './LoginForm.css';
 
 function LoginForm(){
     const dispatch = useDispatch();
-    let [credential, setCredential] = useState("");
+    const [credential, setCredential] = useState("");
     const [password, setPassword]= useState("");
     const [errors, setErrors] = useState([])
 
     async function onSubmit(e){
         e.preventDefault();
         setErrors([]);
-        credential=credential.toLowerCase();
 
         const user={
             credential,
             password
         }
-        const loggedUse = await dispatch(signInThunk(user))
-        if(loggedUse&&loggedUse.errors){
-            setErrors(loggedUse.errors)
-        }
+        // const loggedUse = await dispatch(signInThunk(user))
+        // console.log(loggedUse)
+        // if(loggedUse&&loggedUse.errors){
+        //     setErrors(loggedUse.errors)
+        // }
+        return dispatch(signInThunk(user))
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+      });
     }
     return (
         <>
-            <form class="sign-in" onSubmit={onSubmit}>
+            <form className="sign-in" onSubmit={onSubmit}>
                 <ul>
                     {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                 </ul>

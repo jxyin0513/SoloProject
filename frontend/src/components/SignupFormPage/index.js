@@ -7,8 +7,8 @@ import "./SignupForm.css"
 function SignupFormPage(){
     const dispatch = useDispatch();
     const sessionUser = useSelector(state=>state.session.user)
-    let [username, setUsername] = useState("")
-    let [email, setEmail] = useState("");
+    const [username, setUsername] = useState("")
+    const [email, setEmail] = useState("");
     const [password, setPassword]= useState("");
     const [confirmPassword, setConfirmPassword] = useState("")
     const [errors, setErrors] = useState([])
@@ -19,8 +19,7 @@ function SignupFormPage(){
     async function onSubmit(e){
         e.preventDefault();
         setErrors([]);
-        username = username.toLowerCase();
-        email = email.toLowerCase();
+
         const user={
             username,
             email,
@@ -28,18 +27,21 @@ function SignupFormPage(){
             confirmPassword
         }
 
-        if(password !== confirmPassword){
-           return setErrors(['Confirm Password field must be the same as the Password field'])
+        if(password === confirmPassword){
+            setErrors([])
+            return dispatch(signUpUser(user))
+                .catch(async (res) => {
+                const data = await res.json();
+                console.log(data)
+                if (data && data.errors) setErrors(data.errors);
+            });
         }
 
-        const signedUser = await dispatch(signUpUser(user))
-        if(signedUser&&signedUser.errors){
-            setErrors(signedUser.errors)
-        }
+        return setErrors(['Confirm Password field must be the same as the Password field']);
     }
     return (
         <>
-            <form class="sign-up" onSubmit={onSubmit}>
+            <form className="sign-up" onSubmit={onSubmit}>
                 <ul>
                     {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                 </ul>
