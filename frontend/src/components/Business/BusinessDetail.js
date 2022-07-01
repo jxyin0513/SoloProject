@@ -30,27 +30,32 @@ function BusinessDetail(){
         {business&&(
 
             <div className="business-detail">
-                <div className="business-info">
-                    {user&&user.id===business.ownerId &&
+                {user&&user.id===business.ownerId &&
                         <div className="business-button">
                             <button className="edit" onClick={()=>setEditButton(true)} >Edit Business</button>
                             <button className="delete" onClick={deleteBusiness}>Delete Business</button>
                         </div>
                     }
-                    <ul >Name: {business.name}</ul>
-                    {business.coverImg&&<img src={business.coverImg} alt=""></img>}
-                    <ul>Phone Number: {business.phoneNumber} </ul>
-                    <ul>Description: {business.description}</ul>
-                    <ul>Address: {business.address },  {business.city},   {business.state}</ul>
-                    <ul>Zip Code: {business.zipCode}</ul>
+                <div className="form-table">
+                    <div className="business-info">
 
+                        <ul >Name: {business.name}</ul>
+                        {business.coverImg&&<img src={business.coverImg} alt=""></img>}
+                        <ul>Phone Number: {business.phoneNumber} </ul>
+                        <ul>Description: {business.description}</ul>
+                        <ul>Address: {business.address },  {business.city},   {business.state}</ul>
+                        <ul>Zip Code: {business.zipCode}</ul>
+                    </div>
+                    <div className="edit-delete">
+                        {editButton&&<EditBusiness business={business} hide={()=>setEditButton(false)}/> }
+                        {reviewButton&&<AddReview business={business} hide={()=>setReviewButton(false)} />}
+                    </div>
                 </div>
                 <button onClick={()=>setReviewButton(true)}>Write a review</button>
                 <GetReviews businessId={businessId}/>
 
 
-                {editButton&&<EditBusiness business={business} hide={()=>setEditButton(false)}/> }
-                {reviewButton&&<AddReview business={business} hide={()=>setReviewButton(false)} />}
+
             </div>
             )
             }

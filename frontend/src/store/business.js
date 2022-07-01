@@ -46,11 +46,9 @@ export const addBusinessThunk = (business, owner)=> async dispatch=>{
 }
 
 export const getBusinessesThunk =()=>async dispatch=>{
-    console.log("here")
     const response = await csrfFetch("/api/businesses/")
     if(response.ok){
         const data = await response.json();
-        console.log(data)
         dispatch(getBusinesses(data))
         return data;
     }else{
