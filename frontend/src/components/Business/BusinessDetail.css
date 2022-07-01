@@ -11,6 +11,7 @@ button:hover{
 .business-info > ul{
     font-family: Arial, Helvetica, sans-serif;
 }
-.business-info  button.edit{
-    margin-left: 600px;
+.business-button{
+    display: flex;
+    justify-content:flex-end;
 }
