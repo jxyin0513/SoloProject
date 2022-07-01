@@ -61,6 +61,10 @@ function AddBusiness(){
     function reset(){
         setName('');
         setDescription('');
+        setCoverImg('');
+        setAddress('');
+        setCity('');
+        setState('')
         setPhoneNumber('');
         setZipCode('');
         setErrors([])

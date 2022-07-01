@@ -8,7 +8,6 @@ const { User, Business } = require('../../db/models');
 
 router.get('/', asyncHandler( async (req, res)=>{
     const businesses = await Business.findAll();
-    console.log(businesses)
     return res.json(businesses)
 
 }))

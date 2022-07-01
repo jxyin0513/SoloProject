@@ -15,3 +15,16 @@ button:hover{
     display: flex;
     justify-content:flex-end;
 }
+.form-table{
+    display: grid;
+    grid-template-areas:
+    "info fix";
+    grid-template-columns: 1fr 1fr;
+
+}
+.business-info{
+    grid-area: info;
+}
+.edit-delete{
+    grid-area: fix;
+}

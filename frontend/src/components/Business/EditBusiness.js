@@ -7,6 +7,10 @@ function EditBusiness({business, hide}){
     const dispatch = useDispatch();
     const[name, setName] = useState(business.name);
     const [phoneNumber, setPhoneNumber] = useState(business.phoneNumber);
+    const [coverImg, setCoverImg] = useState(business.coverImg);
+    const [address, setAddress] = useState(business.address);
+    const [city, setCity] = useState(business.city);
+    const [state, setState] = useState(business.state);
     const [description, setDescription] = useState(business.description);
     const [zipCode, setZipCode] = useState(business.zipCode);
     const [errors, setErrors] = useState([])
@@ -60,10 +64,22 @@ function EditBusiness({business, hide}){
                 <label>Description
                     <textarea name="description" value={description} placeholder="tell us about your business" onChange={e=>setDescription(e.target.value)}></textarea>
                 </label>
+                <label>Image:
+                     <input type="text" name="coverImg" value={coverImg} onChange={e=>setCoverImg(e.target.value)}></input>
+                </label>
+                <label>Address:
+                    <input type="text" name="address" value={address} onChange={e=>setAddress(e.target.value)}></input>
+                </label>
+                <label>City:
+                    <input type="text" name="city" value={city} onChange={e=>setCity(e.target.value)}></input>
+                </label>
+                <label>State:
+                    <input type="text" name="state" value={state} onChange={e=>setState(e.target.value)}></input>
+                </label>
                 <label> Zip Code
                     <input type="text" name="zipCode" value={zipCode} onChange={e=>setZipCode(e.target.value)}></input>
                 </label>
-                <button type="submit" disabled={errors.length===0 ? false : true}>Edit Business</button>
+                <button type="submit" disabled={errors.length===0 ? false : true}>Submit</button>
             </form>
 
         </>
