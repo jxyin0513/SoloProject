@@ -1,0 +1,9 @@
+.edit-business > label{
+    display: block;
+}
+label{
+    font-family:Arial, Helvetica, sans-serif;
+}
+.errors {
+    color: crimson;
+}

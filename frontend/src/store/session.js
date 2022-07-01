@@ -24,6 +24,7 @@ export const signInThunk = (user)=> async (dispatch)=>{
     })
     if(response.ok){
         const data = await response.json();
+        console.log(data)
         dispatch(addUser(data.user));
         return user;
     }else{

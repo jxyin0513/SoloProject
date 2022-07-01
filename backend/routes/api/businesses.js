@@ -6,28 +6,49 @@ const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { User, Business } = require('../../db/models');
 
 
-router.get('/', (req, res)=>{
+router.get('/', asyncHandler( async (req, res)=>{
+    const businesses = await Business.findAll();
+    return res.json(businesses)
 
+}))
 
-})
+router.get('/:businessId', asyncHandler(async (req, res)=>{
+    const id = parseInt(req.params.businessId, 10);
+    const business = await Business.findByPk(id)
+    res.json(business)
+}))
 
-router.get('/:businessId', (req, res)=>{
+router.post('/:businessId/edit', asyncHandler(async (req, res)=>{
+    const id = parseInt(req.params.businessId, 10)
+    const business = await Business.findByPk(id);
+    const newBusiness = await business.update(req.body);
+    res.json(newBusiness)
+}))
 
+router.post('/:businessId/delete', asyncHandler(async (req, res)=>{
+    const businessId = parseInt(req.params.businessId,10);
+    const deleteBusiness = await Business.findByPk(businessId);
 
-})
+    await deleteBusiness.destroy();
 
+    return res.json(businessId)
+}))
 
-router.post('/create-business', async(req, res)=>{
-    const {owner, name, phoneNumber, description, zipCode} = req.body;
+router.post('/create-business', asyncHandler( async(req, res)=>{
+    const {owner, name, phoneNumber, description, coverImg, address, city, state, zipCode} = req.body;
     const newBusiness = await Business.create({
         ownerId: owner.id,
         name,
         phoneNumber,
         description,
+        coverImg,
+        address,
+        city,
+        state,
         zipCode
     })
-    res.json(newBusiness)
-})
+    return res.json(newBusiness)
+}))
 
 // router.post()
 
