@@ -2,30 +2,39 @@ import React, {useState} from "react";
 import {useDispatch} from "react-redux";
 import { signInThunk } from "../../store/session";
 import './LoginForm.css';
+// import { Redirect } from "react-router-dom";
 
 function LoginForm(){
     const dispatch = useDispatch();
-    let [credential, setCredential] = useState("");
+    const [credential, setCredential] = useState("");
     const [password, setPassword]= useState("");
     const [errors, setErrors] = useState([])
-
+    // if(demo){
+    //     console.log("here")
+    //     const user={
+    //         credential: "Demo-lition",
+    //         password: "password"
+    //     }
+    //     dispatch(signInThunk(user))
+    //     return <Redirect to="/" />
+    // }
     async function onSubmit(e){
         e.preventDefault();
         setErrors([]);
-        credential=credential.toLowerCase();
 
         const user={
             credential,
             password
         }
-        const loggedUse = await dispatch(signInThunk(user))
-        if(loggedUse&&loggedUse.errors){
-            setErrors(loggedUse.errors)
-        }
+        return dispatch(signInThunk(user))
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+      });
     }
     return (
         <>
-            <form class="sign-in" onSubmit={onSubmit}>
+            <form className="sign-in" onSubmit={onSubmit}>
                 <ul>
                     {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                 </ul>

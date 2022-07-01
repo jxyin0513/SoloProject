@@ -1,0 +1,33 @@
+ul.each-business {
+    display: inline-block;
+    padding: 35px;
+    margin: 25px;
+}
+.footer-container {
+    display: flex;
+    /* border-top: 3px;
+    border-top-color: black; */
+
+
+    /* background-color: black; */
+}
+.footer-outer{
+    position: absolute;
+    bottom: 0px;
+}
+
+/* .all-businesses{
+    padding-left: 30px;
+} */
+
+.footer-container > div{
+    padding: 10px;
+    margin: 10px;
+}
+.footer-col > ul a{
+    text-decoration: none;
+    color: black;
+}
+.footer-col > ul a:hover{
+    color:darkgray;
+}
