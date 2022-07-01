@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from "react";
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import { editBusinessThunk } from "../../store/business";
 import './EditBusiness.css'
 
-function EditBusiness({business}){
+function EditBusiness({business, hide}){
     const dispatch = useDispatch();
     const[name, setName] = useState(business.name);
     const [phoneNumber, setPhoneNumber] = useState(business.phoneNumber);
@@ -37,6 +37,9 @@ function EditBusiness({business}){
             zipCode
         }
     const editBusiness = await dispatch(editBusinessThunk(business))
+    if(editBusiness){
+        hide()
+    }
 
     }
 
@@ -45,7 +48,7 @@ function EditBusiness({business}){
             <form className="edit-business" onSubmit={onSubmit}>
                 <ul>
                     {errors.length!==0&&errors.map(error=>
-                        <li>{error}</li>
+                        <li className="erros">{error}</li>
                     )}
                 </ul>
                 <label>Name:
@@ -60,7 +63,7 @@ function EditBusiness({business}){
                 <label> Zip Code
                     <input type="text" name="zipCode" value={zipCode} onChange={e=>setZipCode(e.target.value)}></input>
                 </label>
-                <button type="submit">Edit Business</button>
+                <button type="submit" disabled={errors.length===0 ? false : true}>Edit Business</button>
             </form>
 
         </>

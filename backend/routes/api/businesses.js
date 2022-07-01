@@ -35,12 +35,16 @@ router.post('/:businessId/delete', asyncHandler(async (req, res)=>{
 }))
 
 router.post('/create-business', asyncHandler( async(req, res)=>{
-    const {owner, name, phoneNumber, description, zipCode} = req.body;
+    const {owner, name, phoneNumber, description, coverImg, address, city, state, zipCode} = req.body;
     const newBusiness = await Business.create({
         ownerId: owner.id,
         name,
         phoneNumber,
         description,
+        coverImg,
+        address,
+        city,
+        state,
         zipCode
     })
     return res.json(newBusiness)

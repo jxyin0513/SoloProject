@@ -7,6 +7,7 @@ import Navigation from "./components/Navigation";
 import AddBusiness from "./components/Business/AddBusiness";
 import AllBusinesses from "./components/Business/getBusinesses";
 import BusinessDetail from "./components/Business/BusinessDetail";
+import DemoLogin from "./components/LoginFormModal/Demo";
 
 function App() {
 
@@ -21,6 +22,9 @@ function App() {
       <Navigation isLoaded={{isLoaded}}/>
       {isLoaded&&
       (<Switch>
+        <Route path='/demo-user'>
+          <DemoLogin />
+        </Route>
         <Route exact path="/">
           <AllBusinesses />
         </Route>

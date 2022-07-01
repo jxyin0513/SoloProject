@@ -1,14 +1,19 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import { addBusinessThunk } from "../../store/business";
-import {Redirect} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import './AddBusiness.css'
 
 function AddBusiness(){
     const dispatch = useDispatch();
     const owner = useSelector(state=>state.session.user);
     const[name, setName] = useState('');
+    const history = useHistory();
     const [phoneNumber, setPhoneNumber] = useState('');
+    const [address, setAddress] = useState('');
+    const [city, setCity] = useState('');
+    const [state, setState] = useState('');
+    const [coverImg, setCoverImg] = useState('')
     const [description, setDescription] = useState('');
     const [zipCode, setZipCode] = useState('');
     const [errors, setErrors]=useState([])
@@ -23,7 +28,7 @@ function AddBusiness(){
             error.push("Description must be less than 255 characters")
         }
         if(phoneNumber.length>10){
-            error.push("Please provide a valid phone number.")
+            error.push("Please provide only phone number without any character.")
         }
         if(zipCode.length>5){
             error.push("Please provide a valid code.")
@@ -39,13 +44,17 @@ function AddBusiness(){
             name,
             phoneNumber,
             description,
+            coverImg,
+            address,
+            city,
+            state,
             zipCode
         }
     const newBusiness = await dispatch(addBusinessThunk(business, owner))
 
     if(newBusiness){
         reset()
-        return <Redirect to="/" />
+        history.push('/')
     }
 }
 
@@ -58,24 +67,40 @@ function AddBusiness(){
     }
     return (
         <>
-            <form className="add-business" onSubmit={onSubmit}>
-                {errors.length!==0&&errors.map(error=>
-                <ul>{error}</ul>
-                )}
-                <label>Name:
-                    <input type="text" name="name" value={name} onChange={e=>setName(e.target.value)}></input>
-                </label>
-                <label>Phone Number:
-                    <input type="text" name="phoneNumber" value={phoneNumber} onChange={e=>setPhoneNumber(e.target.value)}></input>
-                </label>
-                <label>Description
-                    <textarea name="description" value={description} placeholder="tell us about your business" onChange={e=>setDescription(e.target.value)}></textarea>
-                </label>
-                <label> Zip Code
-                    <input type="text" name="zipCode" value={zipCode} onChange={e=>setZipCode(e.target.value)}></input>
-                </label>
-                <button type="submit" disabled={errors.length===0 ? false : true}>Add Business</button>
-            </form>
+            <div className="add-background">
+                <form className="add-business" onSubmit={onSubmit}>
+                    <ul>
+                        {errors.length!==0&&errors.map(error=>
+                            <li className="error">{error}</li>
+                        )}
+                    </ul>
+                    <label>Name:
+                        <input type="text" name="name" value={name} onChange={e=>setName(e.target.value)}></input>
+                    </label>
+                    <label>Phone Number:
+                        <input type="text" name="phoneNumber" value={phoneNumber} placeholder="ex: 000-000-0000" onChange={e=>setPhoneNumber(e.target.value)}></input>
+                    </label>
+                    <label>Description:
+                        <textarea name="description" rows="5" cols="35" value={description} placeholder="Tell us about your business" onChange={e=>setDescription(e.target.value)}></textarea>
+                    </label>
+                    <label>Image:
+                        <input type="text" name="coverImg" value={coverImg} onChange={e=>setCoverImg(e.target.value)}></input>
+                    </label>
+                    <label>Address:
+                        <input type="text" name="address" value={address} onChange={e=>setAddress(e.target.value)}></input>
+                    </label>
+                    <label>City:
+                        <input type="text" name="city" value={city} onChange={e=>setCity(e.target.value)}></input>
+                    </label>
+                    <label>State:
+                        <input type="text" name="state" value={state} onChange={e=>setState(e.target.value)}></input>
+                    </label>
+                    <label> Zip Code:
+                        <input type="text" name="zipCode" value={zipCode} onChange={e=>setZipCode(e.target.value)}></input>
+                    </label>
+                    <button type="submit" disabled={errors.length===0 ? false : true}>Add Business</button>
+                </form>
+            </div>
 
         </>
     )

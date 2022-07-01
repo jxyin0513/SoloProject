@@ -2,13 +2,22 @@ import React, {useState} from "react";
 import {useDispatch} from "react-redux";
 import { signInThunk } from "../../store/session";
 import './LoginForm.css';
+// import { Redirect } from "react-router-dom";
 
 function LoginForm(){
     const dispatch = useDispatch();
     const [credential, setCredential] = useState("");
     const [password, setPassword]= useState("");
     const [errors, setErrors] = useState([])
-
+    // if(demo){
+    //     console.log("here")
+    //     const user={
+    //         credential: "Demo-lition",
+    //         password: "password"
+    //     }
+    //     dispatch(signInThunk(user))
+    //     return <Redirect to="/" />
+    // }
     async function onSubmit(e){
         e.preventDefault();
         setErrors([]);
@@ -17,11 +26,6 @@ function LoginForm(){
             credential,
             password
         }
-        // const loggedUse = await dispatch(signInThunk(user))
-        // console.log(loggedUse)
-        // if(loggedUse&&loggedUse.errors){
-        //     setErrors(loggedUse.errors)
-        // }
         return dispatch(signInThunk(user))
       .catch(async (res) => {
         const data = await res.json();

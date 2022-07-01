@@ -3,7 +3,7 @@ const router = express.Router();
 const asyncHandler = require('express-async-handler');
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User, Business, Review } = require('../../db/models');
+const { Review } = require('../../db/models');
 
 
 router.get('/:businessId/all',  asyncHandler(async(req, res)=>{
@@ -17,12 +17,13 @@ router.get('/:businessId/all',  asyncHandler(async(req, res)=>{
 }))
 
 router.post('/', asyncHandler(async(req, res)=>{
-    const {userId, businessId, rating, comment} = req.body
+    const {userId, businessId, coverImg, rating, comment} = req.body
     const review = await Review.create({
         userId,
         businessId,
         rating,
-        comment
+        comment,
+        coverImg
     })
     return res.json(review);
 }))

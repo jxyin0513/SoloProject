@@ -4,6 +4,7 @@ import { getBusinessesThunk, deleteBusinessThunk } from "../../store/business";
 // import BusinessDetail from "./BusinessDetail";
 // import {Route} from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
+import './getBusinesses.css';
 
 function AllBusinesses(){
     const dispatch = useDispatch();
@@ -22,10 +23,10 @@ function AllBusinesses(){
     return (
         <>
         {allBusinesses&&(
-            <ul>
+            <div className="all-businesses">
                 {Object.values(allBusinesses).map(business=>{
                     return (
-                        <div>
+                        <ul className="each-business">
                             <li key={business.id} >{business.name}</li>
 
                             <NavLink to={`/businesses/${business.id}`}>
@@ -40,11 +41,11 @@ function AllBusinesses(){
 
 
 
-                        </div>
+                        </ul>
                     )
                 })}
 
-            </ul>
+            </div>
             )}
         </>
     )

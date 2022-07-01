@@ -1,0 +1,23 @@
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+
+
+    /* padding: 7px 5%; */
+}
+
+button.profile{
+    margin: 10px;
+    padding: 3px;
+}
+button.list-business{
+    margin: 10px;
+    padding: 5px;
+}
+img.img{
+    max-width: 50px;
+    max-height: 50px;
+    border-radius: 15px;
+}

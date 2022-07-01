@@ -1,11 +1,11 @@
 import React, { useEffect, useState} from "react";
 import {useDispatch, useSelector} from 'react-redux';
-import { getBusinessesThunk,getBusinessDetailThunk, deleteBusinessThunk} from "../../store/business";
+import {getBusinessDetailThunk, deleteBusinessThunk} from "../../store/business";
 import GetReviews from "../Review/getReviews";
 import AddReview from "../Review/AddReview";
 import EditBusiness from "./EditBusiness";
 import { useParams } from 'react-router-dom';
-import { getReviewsThunk } from "../../store/review";
+import './BusinessDetail.css'
 
 function BusinessDetail(){
     const dispatch = useDispatch();
@@ -22,28 +22,35 @@ function BusinessDetail(){
     },[dispatch])
 
     function deleteBusiness(e){
-        dispatch(deleteBusinessThunk(e.target.id))
+        dispatch(deleteBusinessThunk(businessId))
     }
 
     return (
         <>
         {business&&(
 
-            <div id={business.id}>
-                <ul key={business.id}>{business.name}</ul>
-                <ul>{business.description}</ul>
-                <ul>{business.zipCode}</ul>
+            <div className="business-detail">
+                <div className="business-info">
+                    {user&&user.id===business.ownerId &&
+                        <>
+                            <button className="edit" onClick={()=>setEditButton(true)} >Edit Business</button>
+                            <button className="delete" onClick={deleteBusiness}>Delete Business</button>
+                        </>
+                    }
+                    <ul >Name: {business.name}</ul>
+                    {business.coverImg&&<img src={business.coverImg} alt=""></img>}
+                    <ul>Phone Number: {business.phoneNumber} </ul>
+                    <ul>Description: {business.description}</ul>
+                    <ul>Address: {business.address },  {business.city},   {business.state}</ul>
+                    <ul>Zip Code: {business.zipCode}</ul>
+
+                </div>
                 <button onClick={()=>setReviewButton(true)}>Write a review</button>
                 <GetReviews businessId={businessId}/>
-                {user&&user.id===business.ownerId &&
-                <>
-                    <button id={business.id} onClick={()=>setEditButton(true)} >Edit</button>
-                    <button id={business.id} onClick={deleteBusiness}>Delete</button>
-                </>
-                }
 
-                {editButton&&<EditBusiness business={business} /> }
-                {reviewButton&&<AddReview business={business} user={user} />}
+
+                {editButton&&<EditBusiness business={business} hide={()=>setEditButton(false)}/> }
+                {reviewButton&&<AddReview business={business} hide={()=>setReviewButton(false)} />}
             </div>
             )
             }
