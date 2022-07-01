@@ -32,10 +32,10 @@ function BusinessDetail(){
             <div className="business-detail">
                 <div className="business-info">
                     {user&&user.id===business.ownerId &&
-                        <>
+                        <div className="business-button">
                             <button className="edit" onClick={()=>setEditButton(true)} >Edit Business</button>
                             <button className="delete" onClick={deleteBusiness}>Delete Business</button>
-                        </>
+                        </div>
                     }
                     <ul >Name: {business.name}</ul>
                     {business.coverImg&&<img src={business.coverImg} alt=""></img>}
