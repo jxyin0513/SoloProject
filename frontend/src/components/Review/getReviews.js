@@ -1,18 +1,15 @@
 import React, { useEffect} from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import { getReviewsThunk, deleteReviewThunk } from "../../store/review";
+import './getReview.css';
 
 function GetReviews({businessId}){
     const dispatch = useDispatch();
-    console.log(businessId)
     const reviews = useSelector(state=>state.reviews);
     const user = useSelector(state=>state.session.user)
-    const reviewsArr = Object.values(reviews).filter(review=>{
-        if(review.businessId===Number(businessId)) return review
-    })
+    const reviewsArr = Object.values(reviews)
 
     useEffect(()=>{
-        console.log("2nd")
         dispatch(getReviewsThunk(businessId))
     }, [dispatch])
 

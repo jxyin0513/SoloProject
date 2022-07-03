@@ -8,8 +8,10 @@
 button:hover{
     background-color:black;
 }
-.business-info > ul{
+.business-info > li{
+    margin-left: 20px;
     font-family: Arial, Helvetica, sans-serif;
+    padding: 5px;
 }
 .business-button{
     display: flex;
@@ -27,4 +29,9 @@ button:hover{
 }
 .edit-delete{
     grid-area: fix;
+}
+img.image{
+    max-height: 250px;
+    max-width: 250px;
+    padding-left: 40px;
 }
