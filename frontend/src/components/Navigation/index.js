@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
 import './Navigation.css';
-import logo from '../Business/images/1.jpg'
 
 function Navigation ({ isLoaded}){
     const sessionUser = useSelector(state => state.session.user);
@@ -35,7 +34,7 @@ function Navigation ({ isLoaded}){
       <header>
         <ul>
           <li className='header'>
-            <NavLink exact to="/"><img className='img' src={`${logo}`} alt='logo'></img></NavLink>
+            <NavLink exact to="/"><img className='img' src="/images/1.jpg" alt='logo'></img></NavLink>
             {isLoaded && sessionLinks}
           </li>
         </ul>

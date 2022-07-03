@@ -24,34 +24,41 @@ function BusinessDetail(){
     function deleteBusiness(e){
         dispatch(deleteBusinessThunk(businessId))
     }
-
+    function edit(e){
+        setReviewButton(false);
+        setEditButton(true);
+    }
+    function review(e){
+        setEditButton(false)
+        setReviewButton(true)
+    }
     return (
         <>
         {business&&(
 
             <div className="business-detail">
-                {user&&user.id===business.ownerId &&
-                        <div className="business-button">
-                            <button className="edit" onClick={()=>setEditButton(true)} >Edit Business</button>
-                            <button className="delete" onClick={deleteBusiness}>Delete Business</button>
-                        </div>
-                    }
                 <div className="form-table">
                     <div className="business-info">
 
-                        <ul >Name: {business.name}</ul>
-                        {business.coverImg&&<img src={business.coverImg} alt=""></img>}
-                        <ul>Phone Number: {business.phoneNumber} </ul>
-                        <ul>Description: {business.description}</ul>
-                        <ul>Address: {business.address },  {business.city},   {business.state}</ul>
-                        <ul>Zip Code: {business.zipCode}</ul>
+                        <li >Name: {business.name}</li>
+                        {business.coverImg&&<img className="image" src={business.coverImg} alt="businessImg"></img>}
+                        <li>Phone Number: {business.phoneNumber} </li>
+                        <li>Description: {business.description}</li>
+                        <li>Address: {business.address },  {business.city},   {business.state}</li>
+                        <li>Zip Code: {business.zipCode}</li>
                     </div>
                     <div className="edit-delete">
+                        {user&&user.id===business.ownerId &&
+                            <div className="business-button">
+                                <button className="edit" onClick={edit} >Edit Business</button>
+                                <button className="delete" onClick={deleteBusiness}>Delete Business</button>
+                            </div>
+                        }
                         {editButton&&<EditBusiness business={business} hide={()=>setEditButton(false)}/> }
                         {reviewButton&&<AddReview business={business} hide={()=>setReviewButton(false)} />}
                     </div>
                 </div>
-                <button onClick={()=>setReviewButton(true)}>Write a review</button>
+                <button onClick={review}>Write a review</button>
                 <GetReviews businessId={businessId}/>
 
 
