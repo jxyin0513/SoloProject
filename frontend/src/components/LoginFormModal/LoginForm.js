@@ -26,9 +26,14 @@ function LoginForm(){
             credential,
             password
         }
+        // const logIn = await dispatch(signInThunk(user))
+        // console.log(logIn.ok)
+        // const err = await logIn.json()
+        // console.log(err)
         return dispatch(signInThunk(user))
       .catch(async (res) => {
         const data = await res.json();
+        console.log(data)
         if (data && data.errors) setErrors(data.errors);
       });
     }

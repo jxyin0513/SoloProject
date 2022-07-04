@@ -27,14 +27,11 @@ function AddBusiness(){
         if(description.length>=255){
             error.push("Description must be less than 255 characters")
         }
-        if(phoneNumber.length>10){
-            error.push("Please provide only phone number without any character.")
-        }
         if(zipCode.length>5){
             error.push("Please provide a valid code.")
         }
         setErrors(error);
-    },[description, phoneNumber, zipCode])
+    },[description, zipCode])
 
     async function onSubmit(e){
         e.preventDefault();
@@ -42,7 +39,7 @@ function AddBusiness(){
         const business = {
             owner,
             name,
-            phoneNumber,
+            phoneNumber: phoneNumber.trim(),
             description,
             coverImg,
             address,
@@ -50,12 +47,21 @@ function AddBusiness(){
             state,
             zipCode
         }
-    const newBusiness = await dispatch(addBusinessThunk(business, owner))
+    // const newBusiness = await dispatch(addBusinessThunk(business, owner))
 
-    if(newBusiness){
-        reset()
-        history.push('/')
-    }
+    return dispatch(addBusinessThunk(business, owner))
+    .then(()=>{
+        reset();
+        history.push('/')})
+    .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+        return data;
+    });
+    // if(newBusiness){
+    //     reset()
+    //     history.push('/')
+    // }
 }
 
     function reset(){

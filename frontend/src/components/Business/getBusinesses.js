@@ -27,11 +27,15 @@ function AllBusinesses(){
                 {Object.values(allBusinesses).map(business=>{
                     return (
                         <ul className="each-business">
-                            <li key={business.id} >{business.name}</li>
-
                             <NavLink to={`/businesses/${business.id}`}>
-                                <button className={business} id={business.id} >Detail</button>
+                                <img className="business-logo" alt="logo" src={`${business.coverImg}`}></img>
+                                <li key={business.id}>{business.name}</li>
                             </NavLink>
+                            {/* <li key={business.id}>{business.name}</li>
+                            <li>{business.phoneNumber}</li> */}
+                            {/* <NavLink to={`/businesses/${business.id}`}>
+                                <button className={business} id={business.id} >Detail</button>
+                            </NavLink> */}
 
 
                             {/* <Route path={`/businesses/:businessId`}>

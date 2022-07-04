@@ -26,6 +26,7 @@ button:hover{
 }
 .business-info{
     grid-area: info;
+
 }
 .edit-delete{
     grid-area: fix;

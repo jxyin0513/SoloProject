@@ -4,12 +4,12 @@ import {getBusinessDetailThunk, deleteBusinessThunk} from "../../store/business"
 import GetReviews from "../Review/getReviews";
 import AddReview from "../Review/AddReview";
 import EditBusiness from "./EditBusiness";
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory, Redirect } from 'react-router-dom';
 import './BusinessDetail.css'
 
 function BusinessDetail(){
     const dispatch = useDispatch();
-
+    const history = useHistory();
     const {businessId} = useParams();
     const [editButton, setEditButton] = useState(false);
     const [reviewButton, setReviewButton] = useState(false);
@@ -21,8 +21,11 @@ function BusinessDetail(){
         dispatch(getBusinessDetailThunk(businessId))
     },[dispatch])
 
-    function deleteBusiness(e){
-        dispatch(deleteBusinessThunk(businessId))
+    async function deleteBusiness(e){
+        const deleteBusiness =  await dispatch(deleteBusinessThunk(businessId))
+        if(deleteBusiness){
+            history.push('/');
+        }
     }
     function edit(e){
         setReviewButton(false);

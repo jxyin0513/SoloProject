@@ -22,21 +22,22 @@ function EditBusiness({business, hide}){
         if(description.length>=255){
             error.push("Description must be less than 255 characters")
         }
-        if(phoneNumber.length>10){
-            error.push("Please provide a valid phone number.")
-        }
         if(zipCode.length>5){
             error.push("Please provide a valid code.")
         }
         setErrors(error);
-    },[description, phoneNumber, zipCode])
+    },[description, zipCode])
 
     async function onSubmit(e){
         e.preventDefault();
         const business = {
             id,
             name,
-            phoneNumber,
+            phoneNumber: phoneNumber.trim(),
+            coverImg,
+            address,
+            city,
+            state,
             description,
             zipCode
         }
