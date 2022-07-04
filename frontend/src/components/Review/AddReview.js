@@ -6,7 +6,7 @@ import './AddReview.css'
 function AddReview ({business, hide}){
 
     const dispatch = useDispatch();
-    const [rating, setRating] = useState(0)
+    const [rating, setRating] = useState(1)
     const [comment, setComment] = useState('');
     const [coverImg, setCoverImg] = useState('')
     const [errors, setErrors] = useState([]);
@@ -14,8 +14,8 @@ function AddReview ({business, hide}){
 
     useEffect(()=>{
         const error=[]
-        if(rating>5 || rating<0){
-            error.push("Rating must be between 0 and 5.")
+        if(rating>5 || rating<1){
+            error.push("Rating must be between 1-5.")
         }
         if(comment.length>255){
             error.push("Please provide a comment less than 255 character")
@@ -34,10 +34,18 @@ function AddReview ({business, hide}){
             comment
         }
 
-        const addReview = await dispatch(addReviewThunk(review, business.id))
-        if(addReview){
-            hide();
-        }
+        // const addReview =
+
+        return dispatch(addReviewThunk(review, business.id))
+            .then(()=>hide())
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.errors) setErrors(data.errors);
+                return data;
+            });
+        // if(addReview){
+        //     hide();
+        // }
     }
     return (
         <>

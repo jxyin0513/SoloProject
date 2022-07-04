@@ -1,19 +1,32 @@
 ul.each-business {
     display: inline-block;
-    padding: 35px;
+    padding: 25px;
     margin: 25px;
+    background-color:floralwhite;
+    border-radius: 15px;
+}
+.each-business  li{
+    display: flex;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color:black;
+    padding-top: 8px;
+}
+.each-business > a{
+    text-decoration: none;
+}
+.business-logo{
+    max-height: 120px;
+    max-width: 120px;
+    border-radius: 10px;
 }
 .footer-container {
     display: flex;
-    /* border-top: 3px;
-    border-top-color: black; */
-
-
-    /* background-color: black; */
 }
 .footer-outer{
     position: absolute;
     bottom: 0px;
+    width: 100%;
 }
 
 /* .all-businesses{

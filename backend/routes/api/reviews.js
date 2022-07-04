@@ -1,10 +1,28 @@
 const express = require('express')
 const router = express.Router();
 const asyncHandler = require('express-async-handler');
+const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { Review } = require('../../db/models');
 
+const reviewValidator=[
+    check('userId')
+        .exists({ checkFalsy: true })
+        .withMessage('Please provide your ID'),
+    check('businessId')
+        .exists({ checkFalsy: true })
+        .withMessage('Please provide ID of business you want to review on'),
+    check('rating')
+        .exists({ checkFalsy: true })
+        .withMessage('Please provide your rating'),
+    check('comment')
+        .exists({ checkFalsy: true })
+        .withMessage('Please tell us about your experience')
+        .isLength({min: 10, max: 255 })
+        .withMessage('Please provide your comment to 10 to 255 characters'),
+    handleValidationErrors
+]
 
 router.get('/:businessId/all',  asyncHandler(async(req, res)=>{
     const businessId = parseInt(req.params.businessId, 10)
@@ -16,7 +34,7 @@ router.get('/:businessId/all',  asyncHandler(async(req, res)=>{
     return res.json(reviews)
 }))
 
-router.post('/', asyncHandler(async(req, res)=>{
+router.post('/', reviewValidator, asyncHandler(async(req, res)=>{
     const {userId, businessId, coverImg, rating, comment} = req.body
     const review = await Review.create({
         userId,

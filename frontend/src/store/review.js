@@ -27,6 +27,7 @@ export const addReviewThunk =(review, businessId)=> async(dispatch)=>{
     })
     if(response.ok){
         const data = await response.json();
+        console.log(data)
         dispatch(addReview(data, businessId))
         return data;
     }else{
@@ -38,7 +39,6 @@ export const getReviewsThunk =(businessId)=> async(dispatch)=>{
     const response = await csrfFetch(`/api/reviews/${businessId}/all`)
     if(response.ok){
         const data = await response.json();
-        console.log(data)
         dispatch(getReview(data))
         return data;
     }else{
