@@ -24,6 +24,10 @@ function BusinessDetail(){
     useEffect(()=>{
         dispatch(restoreUser()).then(()=>setIsLoaded(true))
         dispatch(getBusinessDetailThunk(businessId))
+        const header = document.getElementById("header-original");
+        console.log(header.value)
+        header.hidden=true;
+
     },[dispatch])
 
     async function deleteBusiness(e){
@@ -42,7 +46,7 @@ function BusinessDetail(){
     }
     return (
         <>
-        <div className="header">
+        {/* <div className="header">
             <NavLink exact to="/"><img className='img' src="/images/1.jpg" alt='logo'></img></NavLink>
             <div>
                 {user&&business&&user.id===business.ownerId &&
@@ -54,14 +58,22 @@ function BusinessDetail(){
                 {!user&&<LoginFormModal />}
                 {user&&<ProfileButton user={user}/>}
             </div>
-        </div>
+        </div> */}
         {business&&(
 
             <div className="business-detail">
                 <div className="form-table">
                     <div className="business-info">
+
                         <p className="name">{business.name}</p>
-                        {business.coverImg.length&&<img className="image" src={business.coverImg} alt="businessImg"></img>}
+                        {business.coverImg.length>0&&<img className="image" src={business.coverImg} alt="businessImg"></img>}
+                        {user&&user.id===business.ownerId &&
+                    <div>
+                        <button className="edit" onClick={edit} >Edit Business</button>
+                        <button className="delete" onClick={deleteBusiness}>Delete Business ?</button>
+                    </div>
+                }
+
                         <p>Phone Number: {business.phoneNumber} </p>
                         <p>Description: {business.description}</p>
                         <p>Address: {business.address },  {business.city},   {business.state}</p>

@@ -4,10 +4,10 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Provider as ReduxProvider } from 'react-redux';
 import './index.css';
 import App from './App';
-import BusinessDetail from './components/Business/BusinessDetail';
-import DemoLogin from "./components/LoginFormModal/Demo";
-import SignupFormPage from "./components/SignupFormPage";
-import AddBusiness from "./components/Business/AddBusiness";
+// import BusinessDetail from './components/Business/BusinessDetail';
+// import DemoLogin from "./components/LoginFormModal/Demo";
+// import SignupFormPage from "./components/SignupFormPage";
+// import AddBusiness from "./components/Business/AddBusiness";
 import configureStore from './store';
 import { ModalProvider } from './context/Modal';
 import { restoreCSRF, csrfFetch } from './store/csrf';
@@ -29,9 +29,10 @@ function Root() {
     <ReduxProvider store={store}>
       <ModalProvider>
         <BrowserRouter>
-          <Switch>
+          <App />
+          {/* <Switch>
             <Route exact path='/'>
-              <App />
+
             </Route>
             <Route path='/demo-user'>
               <DemoLogin />
@@ -45,7 +46,7 @@ function Root() {
             <Route path="/create-business">
               <AddBusiness />
             </Route>
-          </Switch>
+          </Switch> */}
         </BrowserRouter>
       </ModalProvider>
     </ReduxProvider>
