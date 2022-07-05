@@ -52,9 +52,9 @@ I used React to render in frontend, and Redux for managing data.
 
 ## Technical Difficulties
  1. Figuring out how to build a easy to use and effecient state shape was challenging part. \
-  ![state-shape](/images/state-shape.png)
+  ![state-shape](./images/state-shape.png)
  2. How to dynamically show and hide forms are also challenging.\
-  ![d](/images/challenge.png)
+  ![d](./images/challenge.png)
   
 ## Future Features
 
