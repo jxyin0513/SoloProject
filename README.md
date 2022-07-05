@@ -6,7 +6,7 @@ Advisor: Rawaha Memon
 
 Please check out my live link [here](https://yelpsoloproject.herokuapp.com)
 
-Eat! is clone of website Yelp, which provide reviews about businesses, but I narrow it down to only for food places. \
+Eat! is clone of website Yelp, which provide reviews about businesses, but I narrow it down to only for food places.
 I used React to render in frontend, and Redux for managing data. \
 
 
