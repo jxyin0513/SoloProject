@@ -9,6 +9,7 @@ Please check out my live link [here](https://yelpsoloproject.herokuapp.com)
 Eat! is clone of website Yelp, which provide reviews about businesses, but I narrow it down to only for food places. \
 I used React to render in frontend, and Redux for managing data. \
 
+
 Eat! is multiple page app, but mainly two pages that shows all businesses in the `main` page, and each business in ```/businesses/:businessId``` page.
 
 ## Installation Instruction
@@ -22,7 +23,7 @@ Eat! is multiple page app, but mainly two pages that shows all businesses in the
 
 ## Links
 1. Feature List Document: [Feature List](https://github.com/jxyin0513/SoloProject/wiki/Feature-List)
-2. React Component List: [Component](https://github.com/jxyin0513/SoloProject/wiki/Component-List) 
+2. React Component List: [Component](https://github.com/jxyin0513/SoloProject/wiki/Component-List)
 3. DataBase Schema: [Data Base](https://github.com/jxyin0513/SoloProject/wiki/DataBase-Schema)
 4. Frontend Routes Document: [Front End](https://github.com/jxyin0513/SoloProject/wiki/Frontend-Routes)
 5. API routes document: [Backend Routes](https://github.com/jxyin0513/SoloProject/wiki/API-Backend-Documents)
@@ -30,10 +31,11 @@ Eat! is multiple page app, but mainly two pages that shows all businesses in the
 
 ## Site Features
 
+* For any forms that you are submitting, you are checked to have submitted in a correct format by error handler. \
+* I used React and express-validator in the backend to check any errors.
 
 ### Main Page
 
-  
 1. On the main page, you can see login, logout, signup in the top bar, for the better I recommend to experience this site as demo user.
 2. Also, you can see all the businesses that listed on the site.
 ![main](./images/freshmain.png)
@@ -44,14 +46,14 @@ Eat! is multiple page app, but mainly two pages that shows all businesses in the
 2. You can check each eat's info, and its reviews.
 ![detail](./images/detailpage.png)
 
-### Edit/Delete
-
-1. You can edit or delete business page that you listed in the site.
-2. If you lick ```Edit Business``` button, edit form will show up, and you can edit it.
+### Edit/Delete Functionality
+![edit](./images/edit.png)
+1. You can edit or delete business page that only you listed in the site.
+2. If you lick ```Edit Business``` button, edit form will show up, and you can edit infos of business.
 3. If you click ```Delete Business``` button, you will delete your listed business, and back to main page.
 
-### Review
- 
+### Review Form
+ ![review](./images/review.png)
  1. On each specific business page, you can write a review with a click ```Write a Review ``` button.
  2. Also you can delete review you wrote.
 
@@ -61,7 +63,7 @@ Eat! is multiple page app, but mainly two pages that shows all businesses in the
  2. How to dynamically show and hide forms are also challenging.\
   ![d](./images/hide.png) \
   ![d](./images/hide1.png)
-  
+
 ## Future Features
 
 1. Search Bar
