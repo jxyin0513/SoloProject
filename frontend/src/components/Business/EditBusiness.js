@@ -41,10 +41,16 @@ function EditBusiness({business, hide}){
             description,
             zipCode
         }
-    const editBusiness = await dispatch(editBusinessThunk(business))
-    if(editBusiness){
-        hide()
-    }
+    // const editBusiness = await dispatch(editBusinessThunk(business))
+    // if(editBusiness){
+    //     hide()
+    // }
+    return dispatch(editBusinessThunk(business)).then(()=>hide())
+    .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+        return data;
+    });
 
     }
 

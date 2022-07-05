@@ -1,11 +1,12 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import { signUpUser } from "../../store/session";
-import {Redirect} from 'react-router-dom';
+import {Redirect, useHistory} from 'react-router-dom';
 import "./SignupForm.css"
 
 function SignupFormPage(){
     const dispatch = useDispatch();
+    const history = useHistory();
     const sessionUser = useSelector(state=>state.session.user)
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("");
@@ -32,40 +33,45 @@ function SignupFormPage(){
             return dispatch(signUpUser(user))
                 .catch(async (res) => {
                 const data = await res.json();
-                console.log(data)
                 if (data && data.errors) setErrors(data.errors);
             });
         }
 
         return setErrors(['Confirm Password field must be the same as the Password field']);
     }
+    function cancelButton(){
+        history.pushState('/');
+    }
     return (
         <>
-            <form className="sign-up" onSubmit={onSubmit}>
-                <ul>
-                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-                </ul>
-                <label>Username
-                    <input required type="text" name="username" value={username} onChange={e=>setUsername(e.target.value)}>
-                    </input>
-                </label>
+            <div className="signup-background">
+                <form className="sign-up" onSubmit={onSubmit}>
+                    <ul>
+                        {errors.map((error, idx) => <li className="error" key={idx}>{error}</li>)}
+                    </ul>
+                    <label>Username
+                        <input required type="text" name="username" value={username} onChange={e=>setUsername(e.target.value)}>
+                        </input>
+                    </label>
 
-                <label>Email
-                    <input required type="text" name="email" value={email} onChange={e=>setEmail(e.target.value)}>
-                    </input>
-                </label>
+                    <label>Email
+                        <input required type="text" name="email" value={email} onChange={e=>setEmail(e.target.value)}>
+                        </input>
+                    </label>
 
-                <label>Password
-                    <input required type="password" name="password" value={password} onChange={e=>setPassword(e.target.value)}>
-                    </input>
-                </label>
+                    <label>Password
+                        <input required type="password" name="password" value={password} onChange={e=>setPassword(e.target.value)}>
+                        </input>
+                    </label>
 
-                <label>Confirm Password
-                    <input required type="password" name="confirmPassword" value={confirmPassword} onChange={e=>setConfirmPassword(e.target.value)}>
-                    </input>
-                </label>
-                <button type="submit">Sign Up</button>
-            </form>
+                    <label>Confirm Password
+                        <input required type="password" name="confirmPassword" value={confirmPassword} onChange={e=>setConfirmPassword(e.target.value)}>
+                        </input>
+                    </label>
+                    <button type="submit">Sign Up</button>
+                    <button onClick={cancelButton}></button>
+                </form>
+            </div>
         </>
     );
 }
