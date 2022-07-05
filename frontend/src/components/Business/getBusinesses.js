@@ -27,7 +27,7 @@ function AllBusinesses(){
                     return (
                         <ul className="each-business">
                             <NavLink to={`/businesses/${business.id}`}>
-                                <img className="business-logo" alt="logo" src={`${business.logo}`}></img>
+                                {business.logo.length>0&&<img className="business-logo" alt="logo" src={`${business.logo}`}></img>}
                                 <li key={business.id}>{business.name}</li>
                             </NavLink>
                             {/* <li key={business.id}>{business.name}</li>

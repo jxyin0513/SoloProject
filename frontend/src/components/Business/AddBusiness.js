@@ -42,6 +42,7 @@ function AddBusiness(){
             name,
             phoneNumber: phoneNumber.trim(),
             description,
+            logo,
             coverImg,
             address,
             city,
