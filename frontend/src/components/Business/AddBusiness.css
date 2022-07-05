@@ -7,12 +7,24 @@
     background-color: darkgray;
 } */
 .add-business {
-    padding-left: 250px;
+    /* padding-left: 250px;
+    text-align: left; */
     text-align: left;
+    margin: auto;
+    background-color:ghostwhite;
 }
 .add-background{
-    text-align: center;
-    padding-top: 100px;
+    /* text-align: center;
+    padding-top: 100px; */
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7);
 }
 button {
     color:white;

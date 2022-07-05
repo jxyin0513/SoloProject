@@ -18,6 +18,8 @@ button:hover{
     /* justify-content:flex-end; */
 }
 .form-table{
+    padding-top: 20px;
+    margin-top: 30px;
     display: grid;
     grid-template-areas:
     "info fix";

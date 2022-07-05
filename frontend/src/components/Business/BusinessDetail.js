@@ -3,8 +3,10 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getBusinessDetailThunk, deleteBusinessThunk} from "../../store/business";
 import GetReviews from "../Review/getReviews";
 import AddReview from "../Review/AddReview";
+import LoginFormModal from "../LoginFormModal";
+import ProfileButton from "../Navigation/ProfileButton";
 import EditBusiness from "./EditBusiness";
-import { useParams, useHistory, Redirect } from 'react-router-dom';
+import { useParams, useHistory, NavLink } from 'react-router-dom';
 import './BusinessDetail.css'
 
 function BusinessDetail(){
@@ -37,36 +39,37 @@ function BusinessDetail(){
     }
     return (
         <>
+        <div className="header">
+            <NavLink exact to="/"><img className='img' src="/images/1.jpg" alt='logo'></img></NavLink>
+            <div>
+                {user&&user.id===business.ownerId ?
+                    (<>
+                        <button className="edit" onClick={edit} >Edit Business</button>
+                        <button className="delete" onClick={deleteBusiness}>Delete Business</button>
+                     </>
+                    ) : <LoginFormModal />
+                    }
+                {user&&<ProfileButton user={user}/>}
+            </div>
+        </div>
         {business&&(
 
             <div className="business-detail">
                 <div className="form-table">
                     <div className="business-info">
-                        {user&&user.id===business.ownerId &&
-                            <div className="business-button">
-                                <button className="edit" onClick={edit} >Edit Business</button>
-                                <button className="delete" onClick={deleteBusiness}>Delete Business</button>
-                            </div>
-                        }
-
                         {business.coverImg.length&&<img className="image" src={business.coverImg} alt="businessImg"></img>}
                         <li >Name: {business.name}</li>
                         <li>Phone Number: {business.phoneNumber} </li>
                         <li>Description: {business.description}</li>
                         <li>Address: {business.address },  {business.city},   {business.state}</li>
                         <li>Zip Code: {business.zipCode}</li>
-                        {editButton&&<EditBusiness business={business} hide={()=>setEditButton(false)}/> }
+                        <button onClick={review}>Write a review</button>
                         {reviewButton&&<AddReview business={business} hide={()=>setReviewButton(false)} />}
                     </div>
                     <div className="edit-delete">
-                        {/* {user&&user.id===business.ownerId &&
-                            <div className="business-button">
-                                <button className="edit" onClick={edit} >Edit Business</button>
-                                <button className="delete" onClick={deleteBusiness}>Delete Business</button>
-                            </div>
-                        } */}
-                        <button onClick={review}>Write a review</button>
-                        <GetReviews businessId={businessId}/>
+                        {editButton&&<EditBusiness business={business} hide={()=>setEditButton(false)}/> }
+
+                        {!editButton&&<GetReviews businessId={businessId}/>}
                     </div>
 
                 </div>

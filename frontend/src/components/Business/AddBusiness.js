@@ -58,11 +58,10 @@ function AddBusiness(){
         if (data && data.errors) setErrors(data.errors);
         return data;
     });
-    // if(newBusiness){
-    //     reset()
-    //     history.push('/')
-    // }
 }
+    function cancelButton(){
+        history.push('/')
+    }
 
     function reset(){
         setName('');
@@ -109,6 +108,7 @@ function AddBusiness(){
                         <input type="text" name="zipCode" value={zipCode} onChange={e=>setZipCode(e.target.value)}></input>
                     </label>
                     <button type="submit" disabled={errors.length===0 ? false : true}>Add Business</button>
+                    <button onClick={cancelButton}>Cancel</button>
                 </form>
             </div>
 
