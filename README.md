@@ -38,31 +38,31 @@ Eat! is multiple page app, but mainly two pages that shows all businesses in the
 
 1. On the main page, you can see login, logout, signup in the top bar, for the better I recommend to experience this site as demo user.
 2. Also, you can see all the businesses that listed on the site.
-![main](./images/freshmain.png)
+![main](./frontend/images/freshmain.png)
 
 ### Specific Business Page
 
 1. If you click on any one of the businesses in the main page, you will directed to its detail page.
 2. You can check each eat's info, and its reviews.
-![detail](./images/detailpage.png)
+![detail](./frontend/images/detailpage.png)
 
 ### Edit/Delete Functionality
-![edit](./images/edit.png)
+![edit](./frontend/images/edit.png)
 1. You can edit or delete business page that only you listed in the site.
 2. If you lick ```Edit Business``` button, edit form will show up, and you can edit infos of business.
 3. If you click ```Delete Business``` button, you will delete your listed business, and back to main page.
 
 ### Review Form
- ![review](./images/review.png)
+ ![review](./frontend/images/review.png)
  1. On each specific business page, you can write a review with a click ```Write a Review ``` button.
  2. Also you can delete review you wrote.
 
 ## Technical Difficulties
  1. Figuring out how to build a easy to use and effecient state shape was challenging part. \
-  ![state-shape](./images/state-shape.png)
+  ![state-shape](./frontend/images/state-shape.png)
  2. How to dynamically show and hide forms are also challenging.\
-  ![d](./images/hide.png) \
-  ![d](./images/hide1.png)
+  ![d](./frontend/images/hide.png) \
+  ![d](./frontend/images/hide1.png)
 
 ## Future Features
 
