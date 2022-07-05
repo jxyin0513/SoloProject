@@ -29,9 +29,10 @@ function Root() {
     <ReduxProvider store={store}>
       <ModalProvider>
         <BrowserRouter>
-          <Switch>
+          <App />
+          {/* <Switch>
             <Route exact path='/'>
-              <App />
+
             </Route>
             <Route path='/demo-user'>
               <DemoLogin />
@@ -45,7 +46,7 @@ function Root() {
             <Route path="/create-business">
               <AddBusiness />
             </Route>
-          </Switch>
+          </Switch> */}
         </BrowserRouter>
       </ModalProvider>
     </ReduxProvider>

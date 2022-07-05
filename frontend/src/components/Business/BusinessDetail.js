@@ -42,7 +42,7 @@ function BusinessDetail(){
         <div className="header">
             <NavLink exact to="/"><img className='img' src="/images/1.jpg" alt='logo'></img></NavLink>
             <div>
-                {user&&user.id===business.ownerId &&
+                {user&&business&&user.id===business.ownerId &&
                     <>
                         <button className="edit" onClick={edit} >Edit Business</button>
                         <button className="delete" onClick={deleteBusiness}>Delete Business</button>
