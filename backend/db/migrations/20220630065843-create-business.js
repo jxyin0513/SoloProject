@@ -17,6 +17,13 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
+      coverImg: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      logo: {
+        type: Sequelize.STRING
+      },
       phoneNumber: {
         allowNull: false,
         type: Sequelize.STRING
@@ -39,12 +46,6 @@ module.exports = {
       },
       zipCode: {
         allowNull: false,
-        type: Sequelize.STRING
-      },
-      coverImg: {
-        type: Sequelize.STRING
-      },
-      logo: {
         type: Sequelize.STRING
       },
       createdAt: {

@@ -4,14 +4,21 @@
     cursor: pointer;
 
 } */
-
+div.header{
+    padding-left: 40px;
+}
+.name {
+    font-size: xx-large;
+    font-weight: bold;
+}
 button:hover{
     background-color:black;
 }
-.business-info > li{
+.business-info > p{
     margin-left: 20px;
     font-family: Arial, Helvetica, sans-serif;
     padding: 5px;
+    font-weight: bold;
 }
 .business-button{
     display: flex;
@@ -32,9 +39,11 @@ button:hover{
 }
 .edit-delete{
     grid-area: fix;
+    font-weight: bolder;
 }
+
 img.image{
-    max-height: 250px;
-    max-width: 250px;
-    padding-left: 40px;
+    height: 220px;
+    width: 250px;
+    padding-left: 20px;
 }

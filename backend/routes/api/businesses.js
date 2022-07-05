@@ -31,7 +31,9 @@ const businessValidators = [
         .withMessage('Please provide your state'),
     check('zipCode')
         .exists({ checkFalsy: true })
-        .withMessage('Zip Code must be included'),
+        .withMessage('Zip Code must be included')
+        .matches(/^[0-9a-zA-Z]{5}/, 'g')
+        .withMessage("Please provide correct zip code,"),
     handleValidationErrors
 ]
 
@@ -64,7 +66,7 @@ router.post('/:businessId/delete', asyncHandler(async (req, res)=>{
 }))
 
 router.post('/create-business', businessValidators, asyncHandler( async(req, res)=>{
-    const {owner, name, phoneNumber, description, coverImg, address, city, state, zipCode} = req.body;
+    const {owner, name, phoneNumber, description, coverImg, logo, address, city, state, zipCode} = req.body;
 
     const newBusiness = await Business.create({
         ownerId: owner.id,
@@ -72,6 +74,7 @@ router.post('/create-business', businessValidators, asyncHandler( async(req, res
         phoneNumber,
         description,
         coverImg,
+        logo,
         address,
         city,
         state,

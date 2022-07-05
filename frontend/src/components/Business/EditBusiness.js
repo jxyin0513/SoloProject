@@ -8,6 +8,7 @@ function EditBusiness({business, hide}){
     const[name, setName] = useState(business.name);
     const [phoneNumber, setPhoneNumber] = useState(business.phoneNumber);
     const [coverImg, setCoverImg] = useState(business.coverImg);
+    const [logo, setLogo] = useState(business.logo)
     const [address, setAddress] = useState(business.address);
     const [city, setCity] = useState(business.city);
     const [state, setState] = useState(business.state);
@@ -56,6 +57,7 @@ function EditBusiness({business, hide}){
 
     return (
         <>
+            <div className="edit-outer">
             <form className="edit-business" onSubmit={onSubmit}>
                 <ul>
                     {errors.length!==0&&errors.map(error=>
@@ -63,17 +65,20 @@ function EditBusiness({business, hide}){
                     )}
                 </ul>
                 <label>Name:
-                    <input type="text" name="name" value={name} onChange={e=>setName(e.target.value)}></input>
+                    <input type="text" name="name"  value={name} onChange={e=>setName(e.target.value)}></input>
                 </label>
                 <label>Phone Number:
                     <input type="text" name="phoneNumber" value={phoneNumber} onChange={e=>setPhoneNumber(e.target.value)}></input>
                 </label>
                 <label>Description
-                    <textarea name="description" value={description} placeholder="tell us about your business" onChange={e=>setDescription(e.target.value)}></textarea>
+                    <textarea name="description" value={description} rows="5" cols="20" placeholder="tell us about your business" onChange={e=>setDescription(e.target.value)}></textarea>
                 </label>
                 <label>Image:
                      <input type="text" name="coverImg" value={coverImg} onChange={e=>setCoverImg(e.target.value)}></input>
                 </label>
+                <label>Logo:
+                        <input type="text" name="coverImg" value={logo} onChange={e=>setLogo(e.target.value)}></input>
+                    </label>
                 <label>Address:
                     <input type="text" name="address" value={address} onChange={e=>setAddress(e.target.value)}></input>
                 </label>
@@ -89,7 +94,7 @@ function EditBusiness({business, hide}){
                 <button type="submit" disabled={errors.length===0 ? false : true}>Submit</button>
                 <button onClick={hide}>Cancel</button>
             </form>
-
+            </div>
         </>
     )
 }

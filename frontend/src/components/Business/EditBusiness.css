@@ -1,9 +1,18 @@
 .edit-business > label{
     display: block;
+    margin-top: 5px;
 }
 label{
     font-family:Arial, Helvetica, sans-serif;
 }
 .errors {
     color: crimson;
+}
+.edit-business{
+    margin: 40px;
+    padding: 10px;
+}
+.edit-outer{
+    background-color: darkgray;
+    border-radius: 15px;
 }

@@ -10,6 +10,7 @@ function AddBusiness(){
     const[name, setName] = useState('');
     const history = useHistory();
     const [phoneNumber, setPhoneNumber] = useState('');
+    const [logo, setLogo] = useState('')
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
@@ -93,7 +94,10 @@ function AddBusiness(){
                         <textarea name="description" rows="5" cols="35" value={description} placeholder="Tell us about your business" onChange={e=>setDescription(e.target.value)}></textarea>
                     </label>
                     <label>Image:
-                        <input type="text" name="coverImg" value={coverImg} onChange={e=>setCoverImg(e.target.value)}></input>
+                        <input type="text" name="coverImg" value={coverImg} placeholder="provide URL of image" onChange={e=>setCoverImg(e.target.value)}></input>
+                    </label>
+                    <label>Logo:
+                        <input type="text" name="coverImg" value={logo} placeholder="provide URL of image" onChange={e=>setLogo(e.target.value)}></input>
                     </label>
                     <label>Address:
                         <input type="text" name="address" value={address} onChange={e=>setAddress(e.target.value)}></input>

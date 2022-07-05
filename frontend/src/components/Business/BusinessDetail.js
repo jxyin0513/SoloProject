@@ -18,7 +18,7 @@ function BusinessDetail(){
 
     const user = useSelector(state=>state.session.user)
     const business = useSelector(state=>state.allBusinesses[businessId])
-
+    const reviews = useSelector(state=>state.reviews)
     useEffect(()=>{
         dispatch(getBusinessDetailThunk(businessId))
     },[dispatch])
@@ -42,13 +42,13 @@ function BusinessDetail(){
         <div className="header">
             <NavLink exact to="/"><img className='img' src="/images/1.jpg" alt='logo'></img></NavLink>
             <div>
-                {user&&user.id===business.ownerId ?
-                    (<>
+                {user&&user.id===business.ownerId &&
+                    <>
                         <button className="edit" onClick={edit} >Edit Business</button>
                         <button className="delete" onClick={deleteBusiness}>Delete Business</button>
-                     </>
-                    ) : <LoginFormModal />
-                    }
+                    </>
+                }
+                {!user&&<LoginFormModal />}
                 {user&&<ProfileButton user={user}/>}
             </div>
         </div>
@@ -57,18 +57,19 @@ function BusinessDetail(){
             <div className="business-detail">
                 <div className="form-table">
                     <div className="business-info">
+                        <p className="name">{business.name}</p>
                         {business.coverImg.length&&<img className="image" src={business.coverImg} alt="businessImg"></img>}
-                        <li >Name: {business.name}</li>
-                        <li>Phone Number: {business.phoneNumber} </li>
-                        <li>Description: {business.description}</li>
-                        <li>Address: {business.address },  {business.city},   {business.state}</li>
-                        <li>Zip Code: {business.zipCode}</li>
+                        <p>Phone Number: {business.phoneNumber} </p>
+                        <p>Description: {business.description}</p>
+                        <p>Address: {business.address },  {business.city},   {business.state}</p>
+                        <p>Zip Code: {business.zipCode}</p>
                         <button onClick={review}>Write a review</button>
                         {reviewButton&&<AddReview business={business} hide={()=>setReviewButton(false)} />}
                     </div>
                     <div className="edit-delete">
+                        {/* <span>{}</span>
+                        <span>{Object.keys(reviews).length} Ratings</span> */}
                         {editButton&&<EditBusiness business={business} hide={()=>setEditButton(false)}/> }
-
                         {!editButton&&<GetReviews businessId={businessId}/>}
                     </div>
 

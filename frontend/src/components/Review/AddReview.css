@@ -1,3 +1,12 @@
 .add-review > label {
     display: block;
 }
+.review-outer{
+    background-color: darkgray;
+    max-width: 300px;
+    border-radius: 15px;
+}
+.add-review{
+    margin: 20x;
+    padding: 10px;
+}

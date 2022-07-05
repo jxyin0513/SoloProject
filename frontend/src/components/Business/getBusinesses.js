@@ -1,6 +1,6 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect} from "react";
 import {useDispatch, useSelector} from 'react-redux';
-import { getBusinessesThunk, deleteBusinessThunk } from "../../store/business";
+import { getBusinessesThunk } from "../../store/business";
 // import BusinessDetail from "./BusinessDetail";
 // import {Route} from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
@@ -10,15 +10,14 @@ function AllBusinesses(){
     const dispatch = useDispatch();
     const user = useSelector(state=>state.session.user)
     const allBusinesses = useSelector(state=>state.allBusinesses);
-    const [detail, setDetail] = useState(false);
 
     useEffect(()=>{
         dispatch(getBusinessesThunk())
     },[dispatch])
 
-    function deleteBusiness(e){
-        dispatch(deleteBusinessThunk(e.target.id))
-    }
+    // function deleteBusiness(e){
+    //     dispatch(deleteBusinessThunk(e.target.id))
+    // }
 
     return (
         <>
@@ -28,7 +27,7 @@ function AllBusinesses(){
                     return (
                         <ul className="each-business">
                             <NavLink to={`/businesses/${business.id}`}>
-                                <img className="business-logo" alt="logo" src={`${business.coverImg}`}></img>
+                                <img className="business-logo" alt="logo" src={`${business.logo}`}></img>
                                 <li key={business.id}>{business.name}</li>
                             </NavLink>
                             {/* <li key={business.id}>{business.name}</li>

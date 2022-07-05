@@ -21,31 +21,32 @@ function GetReviews({businessId}){
     return (
         <>
             {reviewsArr.length!==0&&
-            <table>
-                <thead>
-                    <tr>
-                        <th>rating</th>
-                        <th>comment</th>
-                    </tr>
-                </thead>
+            <div className="review-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>rating</th>
+                            <th>comment</th>
+                        </tr>
+                    </thead>
 
-                <tbody>
-                    {
-                    reviewsArr.map(review=>{
-                        return(
-                            <tr>
-                                <td key={review.id}>{review.rating}</td>
-                                <td key={review.userId}>{review.comment}</td>
-                                {user&&user.id===review.userId&&
-                                <td >
-                                    <button type="submit" id={review.id} onClick={onClick}>Delete</button>
-                                </td>}
-                            </tr>
-                            )
-                        })}
-                </tbody>
-            </table>
-
+                    <tbody>
+                        {
+                        reviewsArr.map(review=>{
+                            return(
+                                <tr>
+                                    <td key={review.id}>{review.rating}</td>
+                                    <td key={review.userId}>{review.comment}</td>
+                                    {user&&user.id===review.userId&&
+                                    <td >
+                                        <button type="submit" id={review.id} onClick={onClick}>Delete</button>
+                                    </td>}
+                                </tr>
+                                )
+                            })}
+                    </tbody>
+                </table>
+            </div>
                     }
         </>
     )
