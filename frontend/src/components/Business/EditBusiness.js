@@ -81,6 +81,7 @@ function EditBusiness({business, hide}){
                     <input type="text" name="zipCode" value={zipCode} onChange={e=>setZipCode(e.target.value)}></input>
                 </label>
                 <button type="submit" disabled={errors.length===0 ? false : true}>Submit</button>
+                <button onClick={hide}>Cancel</button>
             </form>
 
         </>

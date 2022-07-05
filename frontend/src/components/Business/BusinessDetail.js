@@ -42,27 +42,35 @@ function BusinessDetail(){
             <div className="business-detail">
                 <div className="form-table">
                     <div className="business-info">
-
-                        <li >Name: {business.name}</li>
-                        {business.coverImg&&<img className="image" src={business.coverImg} alt="businessImg"></img>}
-                        <li>Phone Number: {business.phoneNumber} </li>
-                        <li>Description: {business.description}</li>
-                        <li>Address: {business.address },  {business.city},   {business.state}</li>
-                        <li>Zip Code: {business.zipCode}</li>
-                    </div>
-                    <div className="edit-delete">
                         {user&&user.id===business.ownerId &&
                             <div className="business-button">
                                 <button className="edit" onClick={edit} >Edit Business</button>
                                 <button className="delete" onClick={deleteBusiness}>Delete Business</button>
                             </div>
                         }
+
+                        {business.coverImg.length&&<img className="image" src={business.coverImg} alt="businessImg"></img>}
+                        <li >Name: {business.name}</li>
+                        <li>Phone Number: {business.phoneNumber} </li>
+                        <li>Description: {business.description}</li>
+                        <li>Address: {business.address },  {business.city},   {business.state}</li>
+                        <li>Zip Code: {business.zipCode}</li>
                         {editButton&&<EditBusiness business={business} hide={()=>setEditButton(false)}/> }
                         {reviewButton&&<AddReview business={business} hide={()=>setReviewButton(false)} />}
                     </div>
+                    <div className="edit-delete">
+                        {/* {user&&user.id===business.ownerId &&
+                            <div className="business-button">
+                                <button className="edit" onClick={edit} >Edit Business</button>
+                                <button className="delete" onClick={deleteBusiness}>Delete Business</button>
+                            </div>
+                        } */}
+                        <button onClick={review}>Write a review</button>
+                        <GetReviews businessId={businessId}/>
+                    </div>
+
                 </div>
-                <button onClick={review}>Write a review</button>
-                <GetReviews businessId={businessId}/>
+
 
 
 

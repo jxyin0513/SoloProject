@@ -1,4 +1,4 @@
 table{
     max-height: 180px;
-    overflow: scroll;
+    overflow-y: scroll;
 }

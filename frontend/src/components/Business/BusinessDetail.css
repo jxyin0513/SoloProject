@@ -15,7 +15,7 @@ button:hover{
 }
 .business-button{
     display: flex;
-    justify-content:flex-end;
+    /* justify-content:flex-end; */
 }
 .form-table{
     display: grid;
