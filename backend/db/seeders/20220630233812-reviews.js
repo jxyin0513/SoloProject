@@ -19,7 +19,6 @@ module.exports = {
       comment: "This place was nice.",
       createdAt: new Date(),
       updatedAt: new Date()
-
     }
    ], {});
   },
