@@ -7,7 +7,9 @@ Advisor: Rawaha Memon
 Please check out my live link [here](https://yelpsoloproject.herokuapp.com)
 
 Eat! is clone of website Yelp, which provide reviews about businesses, but I narrow it down to only for food places. \
-I used React to render in frontend, and Redux for managing data.
+I used React to render in frontend, and Redux for managing data. \
+
+Eat! is multiple page app, but mainly two pages that shows all businesses in the `main` page, and each business in ```/businesses/:businessId``` page.
 
 ## Installation Instruction
 
@@ -31,13 +33,16 @@ I used React to render in frontend, and Redux for managing data.
 
 ### Main Page
 
-1. On the main page, you can see login, logout, signup in the top bar.
+  
+1. On the main page, you can see login, logout, signup in the top bar, for the better I recommend to experience this site as demo user.
 2. Also, you can see all the businesses that listed on the site.
+![main](./images/freshmain.png)
 
 ### Specific Business Page
 
 1. If you click on any one of the businesses in the main page, you will directed to its detail page.
 2. You can check each eat's info, and its reviews.
+![detail](./images/detailpage.png)
 
 ### Edit/Delete
 
@@ -54,7 +59,8 @@ I used React to render in frontend, and Redux for managing data.
  1. Figuring out how to build a easy to use and effecient state shape was challenging part. \
   ![state-shape](./images/state-shape.png)
  2. How to dynamically show and hide forms are also challenging.\
-  ![d](./images/challenge.png)
+  ![d](./images/hide.png) \
+  ![d](./images/hide1.png)
   
 ## Future Features
 
