@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getBusinessDetailThunk, deleteBusinessThunk} from "../../store/business";
 import GetReviews from "../Review/getReviews";
 import AddReview from "../Review/AddReview";
+import { restoreUser } from "../../store/session";
 import LoginFormModal from "../LoginFormModal";
 import ProfileButton from "../Navigation/ProfileButton";
 import EditBusiness from "./EditBusiness";
@@ -15,11 +16,13 @@ function BusinessDetail(){
     const {businessId} = useParams();
     const [editButton, setEditButton] = useState(false);
     const [reviewButton, setReviewButton] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
 
     const user = useSelector(state=>state.session.user)
     const business = useSelector(state=>state.allBusinesses[businessId])
     const reviews = useSelector(state=>state.reviews)
     useEffect(()=>{
+        dispatch(restoreUser()).then(()=>setIsLoaded(true))
         dispatch(getBusinessDetailThunk(businessId))
     },[dispatch])
 
@@ -42,7 +45,7 @@ function BusinessDetail(){
         <div className="header">
             <NavLink exact to="/"><img className='img' src="/images/1.jpg" alt='logo'></img></NavLink>
             <div>
-                {user&&user.id===business.ownerId &&
+                {user&&business&&user.id===business.ownerId &&
                     <>
                         <button className="edit" onClick={edit} >Edit Business</button>
                         <button className="delete" onClick={deleteBusiness}>Delete Business</button>
