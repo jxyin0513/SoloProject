@@ -36,6 +36,7 @@ function EditBusiness({business, hide}){
             name,
             phoneNumber: phoneNumber.trim(),
             coverImg,
+            logo,
             address,
             city,
             state,
@@ -77,7 +78,7 @@ function EditBusiness({business, hide}){
                      <input type="text" name="coverImg" value={coverImg} onChange={e=>setCoverImg(e.target.value)}></input>
                 </label>
                 <label>Logo:
-                        <input type="text" name="coverImg" value={logo} onChange={e=>setLogo(e.target.value)}></input>
+                        <input type="text" name="logo" value={logo} onChange={e=>setLogo(e.target.value)}></input>
                     </label>
                 <label>Address:
                     <input type="text" name="address" value={address} onChange={e=>setAddress(e.target.value)}></input>

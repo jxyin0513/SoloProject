@@ -69,6 +69,7 @@ function AddBusiness(){
         setDescription('');
         setCoverImg('');
         setAddress('');
+        setLogo('')
         setCity('');
         setState('')
         setPhoneNumber('');
@@ -97,7 +98,7 @@ function AddBusiness(){
                         <input type="text" name="coverImg" value={coverImg} placeholder="provide URL of image" onChange={e=>setCoverImg(e.target.value)}></input>
                     </label>
                     <label>Logo:
-                        <input type="text" name="coverImg" value={logo} placeholder="provide URL of image" onChange={e=>setLogo(e.target.value)}></input>
+                        <input type="text" name="logo" value={logo} placeholder="provide URL of image" onChange={e=>setLogo(e.target.value)}></input>
                     </label>
                     <label>Address:
                         <input type="text" name="address" value={address} onChange={e=>setAddress(e.target.value)}></input>
