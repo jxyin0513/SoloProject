@@ -20,6 +20,7 @@ module.exports = {
       city: "New York",
       state: "New York",
       coverImg: "/images/chicken.png",
+      logo: "/images/chicken.png",
       zipCode:"03194",
       createdAt: new Date(),
       updatedAt: new Date()
@@ -27,13 +28,15 @@ module.exports = {
      },
 
      {
-       ownerId:"1",
+       ownerId:"2",
        name: "Ball Taco",
        phoneNumber: "201-987-2289",
        description: "This place has best combination of taco, burito, etc.",
        address: "321 Flatbush Ave",
        city: "Fort Lee",
        state: "New York",
+       coverImg: "/images/taco.png",
+       logo: "/images/tacobell-logo.png",
        zipCode: "07650",
        createdAt: new Date(),
        updatedAt: new Date()
@@ -46,18 +49,22 @@ module.exports = {
       address: "53-55 Essex St",
       city: " Hackensack",
       state: "NJ",
+      coverImg: "/images/pizzahut.png",
+      logo: "/images/pizzahut-logo.png",
       zipCode: "07601",
       createdAt: new Date(),
       updatedAt: new Date()
      },
      {
-      ownerId:"1",
+      ownerId:"3",
       name: "King of Burger",
       phoneNumber: "453-223-4444",
       description: "This place has some kick for burgers, and chicken nuggets are magic!",
       address: "811 Palisade Ave",
       city: "Fort Lee",
       state: "NJ",
+      coverImg: "/images/burger.png",
+      logo: "/images/burger-logo.png",
       zipCode: "07024",
       createdAt: new Date(),
       updatedAt: new Date()
