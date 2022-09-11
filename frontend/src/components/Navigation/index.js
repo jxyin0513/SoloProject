@@ -35,12 +35,12 @@ function Navigation ({ isLoaded}){
     }
     return (
       <header>
-        <ul>
-          <li id='header-original' className='header'>
+
+          <div id='header-original' className='header'>
             <NavLink exact to="/"><img className='img' src="/images/1.jpg" alt='logo'></img></NavLink>
             {isLoaded && sessionLinks}
-          </li>
-        </ul>
+          </div>
+
       </header>
       );
 

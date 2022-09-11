@@ -4,8 +4,7 @@ import {getBusinessDetailThunk, deleteBusinessThunk} from "../../store/business"
 import GetReviews from "../Review/getReviews";
 import AddReview from "../Review/AddReview";
 import { restoreUser } from "../../store/session";
-// import LoginFormModal from "../LoginFormModal";
-// import ProfileButton from "../Navigation/ProfileButton";
+import { getMenusThunk } from "../../store/menu";
 import AddMenuModal from "../Menu/AddMenuModal";
 import EditMenuModal from "../Menu/EditMenuModal";
 import EditBusiness from "./EditBusiness";
@@ -25,10 +24,12 @@ function BusinessDetail(){
 
     const user = useSelector(state=>state.session.user)
     const business = useSelector(state=>state.allBusinesses[businessId])
+    const menus = useSelector(state=>state.menus)
     // const reviews = useSelector(state=>state.reviews)
     useEffect(()=>{
         dispatch(restoreUser()).then(()=>setIsLoaded(true))
         dispatch(getBusinessDetailThunk(businessId))
+        dispatch(getMenusThunk(businessId))
         const header = document.getElementById("header-original");
         console.log(header.value)
         header.hidden=true;
@@ -69,21 +70,42 @@ function BusinessDetail(){
             <div className="business-detail">
                 <div className="form-table">
                     <div className="business-info">
+                        <div className="image-Outer">
+                        {business.coverImg.length>0&&
+                        <img className="image" src={business.coverImg} alt="businessImg">
 
-                        <p className="name">{business.name}</p>
-                        {business.coverImg.length>0&&<img className="image" src={business.coverImg} alt="businessImg"></img>}
+                        </img>}
+                        <p className="restaurant-name">{business.name}</p>
+                        </div>
+                        {/* {reviewButton&&<AddReview business={business} hide={()=>setReviewButton(false)} />} */}
                         {user&&user.id===business.ownerId &&
-                    <div>
-                        <button className="edit" onClick={edit} >Edit Business</button>
-                        <button className="delete" onClick={deleteBusiness}>Delete Business ?</button>
-                    </div>
-                }
+                            <div className="top-buttons">
+                                <button>Add Menu</button>
+                                <button onClick={review}>Write a review</button>
+                                <button className="edit" onClick={edit} >Edit Business</button>
+                                <button className="delete" onClick={deleteBusiness}>Delete Business</button>
+                            </div>}
+                        <div className="menu-container">
+                            <div className="menu-bar">
+                                <div className="menu-header">Menu</div>
+                                <i className="fa-solid fa-plus" id="add-menu"></i>
+                            </div>
+                            {/* {menus && (menus.map(menu=>(
+                                <div key={menu.id}>
+                                    <img src={menu.image_url} alt='i'></img>
+                                    <div>{menu.price}</div>
+                                    <div>{menu.name}</div>
+                                </div>
+                            )))} */}
 
-                        <p>Phone Number: {business.phoneNumber} </p>
-                        <p>Description: {business.description}</p>
-                        <p>Address: {business.address },  {business.city},   {business.state}</p>
-                        <p>Zip Code: {business.zipCode}</p>
-                        <button onClick={review}>Write a review</button>
+                        </div>
+                        <div className="restaurant-info">
+                            <p>Phone Number: {business.phoneNumber} </p>
+                            <p>Description: {business.description}</p>
+                            <p>Address: {business.address },  {business.city},   {business.state}</p>
+                            <p>Zip Code: {business.zipCode}</p>
+                        </div>
+                        {/* <button onClick={review}>Write a review</button> */}
                         {reviewButton&&<AddReview business={business} hide={()=>setReviewButton(false)} />}
                     </div>
                     <div className="edit-delete">

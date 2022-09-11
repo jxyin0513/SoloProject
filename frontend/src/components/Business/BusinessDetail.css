@@ -7,9 +7,14 @@
 div.header{
     padding-left: 40px;
 }
-.name {
-    font-size: xx-large;
+.restaurant-name {
+    position: absolute;
+    bottom: 0;
+    left:30px;
+    font-size: 70px;
     font-weight: bold;
+    color: azure;
+    font-style: italic;
 }
 button:hover{
     background-color:black;
@@ -24,26 +29,44 @@ button:hover{
     display: flex;
     /* justify-content:flex-end; */
 }
+.top-buttons{
+    padding-bottom: 10px;
+    border-bottom: 1px grey solid;
+}
 .form-table{
     padding-top: 20px;
-    margin-top: 30px;
-    display: grid;
+    /* margin-top: 30px; */
+    /* display: grid;
     grid-template-areas:
     "info fix";
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr; */
 
 }
-.business-info{
-    grid-area: info;
+/* .business-info{
 
-}
+
+} */
 .edit-delete{
-    grid-area: fix;
+    /* grid-area: fix; */
     font-weight: bolder;
 }
 
 img.image{
-    height: 220px;
-    width: 250px;
-    padding-left: 20px;
+    width: 100%;
+    height: 500px;
+    /* padding-left: 20px; */
+}
+.image-Outer{
+    position: relative;
+}
+
+.menu-header{
+    display: inline-block;
+}
+#add-menu:hover{
+    background-color:gray;
+    cursor: pointer;
+}
+.menu-bar{
+    margin: 10px 0;
 }

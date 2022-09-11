@@ -21,11 +21,12 @@ const Search = () => {
       setEnhancedSearch(search)
     }
     return (
-        <>
+        <div className='search-Bar'>
           <input
             className='restaurant-Search'
             type='text'
             placeholder="Search your favorite restaurant"
+            size={28}
             onChange={
               filteredRestaurant
               }
@@ -40,7 +41,7 @@ const Search = () => {
               </NavLink>
             ))}
           </div>
-        </>
+        </div>
       )
     };
 

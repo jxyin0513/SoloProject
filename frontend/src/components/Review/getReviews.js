@@ -34,9 +34,9 @@ function GetReviews({businessId}){
                         {
                         reviewsArr.map(review=>{
                             return(
-                                <tr>
-                                    <td key={review.id}>{review.rating}</td>
-                                    <td key={review.userId}>{review.comment}</td>
+                                <tr key={review.id}>
+                                    <td >{review.rating}</td>
+                                    <td >{review.comment}</td>
                                     {user&&user.id===review.userId&&
                                     <td >
                                         <button type="submit" id={review.id} onClick={onClick}>Delete</button>

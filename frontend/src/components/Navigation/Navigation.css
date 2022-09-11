@@ -3,6 +3,9 @@
     display:flex;
     justify-content:space-between;
     align-items:flex-start;
+    background-color:floralwhite;
+    height: 70px;
+    padding-top: 15px;
     /* padding: 7px 5%; */
 }
 
