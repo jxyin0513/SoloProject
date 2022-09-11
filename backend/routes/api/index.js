@@ -4,11 +4,13 @@ const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
 const businessRouter = require('./businesses');
 const reviewRouter = require('./reviews.js')
+const menuRouter = require('./menu.js')
 
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
 router.use('/businesses', businessRouter);
 router.use('/reviews', reviewRouter)
+router.use('/menus', menuRouter)
 
 router.post('/test', function(req, res) {
     res.json({ requestBody: req.body });

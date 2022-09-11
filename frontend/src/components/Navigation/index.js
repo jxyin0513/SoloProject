@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
+import Search from '../Search/search';
 import './Navigation.css';
 
 function Navigation ({ isLoaded}){
@@ -12,6 +13,7 @@ function Navigation ({ isLoaded}){
     if (sessionUser) {
         sessionLinks = (
           <div>
+            <Search />
             <NavLink to="/create-business" >
               <button className='list-business'>List your business</button>
             </NavLink>
@@ -23,6 +25,7 @@ function Navigation ({ isLoaded}){
     else {
         sessionLinks = (
         <div>
+            <Search />
             <NavLink to="/demo-user"><button>Demo User</button></NavLink>
             <LoginFormModal />
             <NavLink to="/signup"><button>Sign Up</button></NavLink>

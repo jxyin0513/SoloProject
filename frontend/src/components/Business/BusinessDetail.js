@@ -4,10 +4,12 @@ import {getBusinessDetailThunk, deleteBusinessThunk} from "../../store/business"
 import GetReviews from "../Review/getReviews";
 import AddReview from "../Review/AddReview";
 import { restoreUser } from "../../store/session";
-import LoginFormModal from "../LoginFormModal";
-import ProfileButton from "../Navigation/ProfileButton";
+// import LoginFormModal from "../LoginFormModal";
+// import ProfileButton from "../Navigation/ProfileButton";
+import AddMenuModal from "../Menu/AddMenuModal";
+import EditMenuModal from "../Menu/EditMenuModal";
 import EditBusiness from "./EditBusiness";
-import { useParams, useHistory, NavLink } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import './BusinessDetail.css'
 
 function BusinessDetail(){
@@ -17,10 +19,13 @@ function BusinessDetail(){
     const [editButton, setEditButton] = useState(false);
     const [reviewButton, setReviewButton] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [addMenu, setAddMenu] = useState(false)
+    const [editMenu, setEditMenu] = useState(false);
+    const [menuId, setMenuId] = useState(0)
 
     const user = useSelector(state=>state.session.user)
     const business = useSelector(state=>state.allBusinesses[businessId])
-    const reviews = useSelector(state=>state.reviews)
+    // const reviews = useSelector(state=>state.reviews)
     useEffect(()=>{
         dispatch(restoreUser()).then(()=>setIsLoaded(true))
         dispatch(getBusinessDetailThunk(businessId))
@@ -28,7 +33,7 @@ function BusinessDetail(){
         console.log(header.value)
         header.hidden=true;
 
-    },[dispatch])
+    },[dispatch, businessId])
 
     async function deleteBusiness(e){
         const deleteBusiness =  await dispatch(deleteBusinessThunk(businessId))
@@ -85,7 +90,7 @@ function BusinessDetail(){
                         {/* <span>{}</span>
                         <span>{Object.keys(reviews).length} Ratings</span> */}
                         {editButton&&<EditBusiness business={business} hide={()=>setEditButton(false)}/> }
-                        {!editButton&&<GetReviews businessId={businessId}/>}
+                        {!editButton&&<GetReviews businessId={businessId}  />}
                     </div>
 
                 </div>
@@ -96,6 +101,8 @@ function BusinessDetail(){
             </div>
             )
             }
+            {addMenu && <AddMenuModal onClose={()=>setAddMenu(false)} restaurantId = {businessId} />}
+            {editMenu && <EditMenuModal onClose={()=>setEditMenu(false)} menuId={menuId} restaurantId={businessId} />}
         </>
     )
 }
