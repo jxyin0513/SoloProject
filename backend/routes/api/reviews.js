@@ -4,7 +4,7 @@ const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { Review } = require('../../db/models');
+const {User, Review } = require('../../db/models');
 
 const reviewValidator=[
     check('userId')
@@ -28,9 +28,12 @@ router.get('/:businessId/all',  asyncHandler(async(req, res)=>{
     const businessId = parseInt(req.params.businessId, 10)
     const reviews = await Review.findAll({
         where:{
-            businessId
-        }
+            businessId,
+
+        },
+        include:User
     });
+    console.log(reviews)
     return res.json(reviews)
 }))
 

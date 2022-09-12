@@ -1,6 +1,6 @@
 import React, { useEffect, useState} from "react";
 import {useDispatch, useSelector} from 'react-redux';
-import {getBusinessDetailThunk, deleteBusinessThunk} from "../../store/business";
+import {getBusinessesThunk, deleteBusinessThunk} from "../../store/business";
 import GetReviews from "../Review/getReviews";
 import AddReview from "../Review/AddReview";
 import { restoreUser } from "../../store/session";
@@ -20,19 +20,27 @@ function BusinessDetail(){
     const [isLoaded, setIsLoaded] = useState(false);
     const [addMenu, setAddMenu] = useState(false)
     const [editMenu, setEditMenu] = useState(false);
-    const [menuId, setMenuId] = useState(0)
+    const [menuId, setMenuId] = useState(0);
+
 
     const user = useSelector(state=>state.session.user)
     const business = useSelector(state=>state.allBusinesses[businessId])
-    const menus = useSelector(state=>state.menus)
+    const menus = Object.values(useSelector(state=>state.menus))
+    const reviews = Object.values(useSelector(state=>state.reviews));
+    let reviewAvg=0;
+    const r = reviews.forEach(review=>{reviewAvg+=review.rating})
+    reviewAvg = reviewAvg / reviews.length
+    const [menuNum, setMenuNum] = useState([0,3])
+    // const [menuSlide, setMenuSlide] = useState(menus)
     // const reviews = useSelector(state=>state.reviews)
+
     useEffect(()=>{
         dispatch(restoreUser()).then(()=>setIsLoaded(true))
-        dispatch(getBusinessDetailThunk(businessId))
+        dispatch(getBusinessesThunk())
         dispatch(getMenusThunk(businessId))
-        const header = document.getElementById("header-original");
-        console.log(header.value)
-        header.hidden=true;
+        // const header = document.getElementById("header-original");
+        // console.log(header.value)
+        // header.hidden=true;
 
     },[dispatch, businessId])
 
@@ -50,21 +58,24 @@ function BusinessDetail(){
         setEditButton(false)
         setReviewButton(true)
     }
+    function prevSlide(e){
+        if(menuNum[0]-4 < 0){
+            setMenuNum([0, 3])
+        }else{
+            setMenuNum([[menuNum[0]-4], menuNum[1]-4])
+        }
+    }
+
+    function nextSlide(e){
+        if(menuNum[1]+4 > menus.length-1){
+            setMenuNum([menus.length-4, menus.length-1])
+        }else{
+            setMenuNum([menuNum[0]+4, menuNum[1]+4])
+        }
+    }
+
     return (
         <>
-        {/* <div className="header">
-            <NavLink exact to="/"><img className='img' src="/images/1.jpg" alt='logo'></img></NavLink>
-            <div>
-                {user&&business&&user.id===business.ownerId &&
-                    <>
-                        <button className="edit" onClick={edit} >Edit Business</button>
-                        <button className="delete" onClick={deleteBusiness}>Delete Business</button>
-                    </>
-                }
-                {!user&&<LoginFormModal />}
-                {user&&<ProfileButton user={user}/>}
-            </div>
-        </div> */}
         {business&&(
 
             <div className="business-detail">
@@ -75,35 +86,58 @@ function BusinessDetail(){
                         <img className="image" src={business.coverImg} alt="businessImg">
 
                         </img>}
-                        <p className="restaurant-name">{business.name}</p>
+                        <div className="restaurant-intro">
+                            <div className="restaurant-name">{business.name}</div>
+                            <div className="reviews-intro-bar">
+                            <span class="fa fa-star checked"></span>
+                            <div className="restaurant-reviews">{reviewAvg}</div>
+                            <div className="restaurant-bar">{reviews.length} Reviews</div>
+                            </div>
+                        </div>
                         </div>
                         {/* {reviewButton&&<AddReview business={business} hide={()=>setReviewButton(false)} />} */}
                         {user&&user.id===business.ownerId &&
                             <div className="top-buttons">
                                 <button>Add Menu</button>
                                 <button onClick={review}>Write a review</button>
-                                <button className="edit" onClick={edit} >Edit Business</button>
+                                <button className="edit" onClick={edit} >Edit Business Info</button>
                                 <button className="delete" onClick={deleteBusiness}>Delete Business</button>
                             </div>}
+                        <div className="restaurant-infos">
                         <div className="menu-container">
                             <div className="menu-bar">
                                 <div className="menu-header">Menu</div>
                                 <i className="fa-solid fa-plus" id="add-menu"></i>
+                                <i className="fas fa-edit" id="edit-menu"></i>
                             </div>
-                            {/* {menus && (menus.map(menu=>(
-                                <div key={menu.id}>
-                                    <img src={menu.image_url} alt='i'></img>
-                                    <div>{menu.price}</div>
-                                    <div>{menu.name}</div>
-                                </div>
-                            )))} */}
 
+                            <div className="menu-slider">
+                                <i className="fa-solid fa-angle-left" id="left-arrow" onClick={prevSlide}></i>
+                                <i className="fa-solid fa-angle-right" id="right-arrow" onClick={nextSlide}></i>
+                            {menus && (menus.map((menu, index)=>{
+                                if(menuNum[0]<=index && menuNum[1]>=index){
+                                    console.log(menuNum[0]<=index && menuNum[1]>=index, menuNum[0], index)
+                                    return (
+                                        <div key={menu.id}>
+                                            <div className="image-shown">
+                                                <img className="menu-image" src={menu.image_url} alt='i'></img>
+                                                <div className="menu-price">$ {menu.price}</div>
+                                            </div>
+                                            <div className="menu-n">{menu.name}</div>
+                                        </div>
+                                        )
+                                    }
+                            }))}
+                            </div>
+                            <div className="reviews-header">Reviews</div>
+                            {!editButton&&<GetReviews businessId={businessId}  />}
                         </div>
                         <div className="restaurant-info">
                             <p>Phone Number: {business.phoneNumber} </p>
                             <p>Description: {business.description}</p>
                             <p>Address: {business.address },  {business.city},   {business.state}</p>
                             <p>Zip Code: {business.zipCode}</p>
+                        </div>
                         </div>
                         {/* <button onClick={review}>Write a review</button> */}
                         {reviewButton&&<AddReview business={business} hide={()=>setReviewButton(false)} />}
@@ -112,12 +146,10 @@ function BusinessDetail(){
                         {/* <span>{}</span>
                         <span>{Object.keys(reviews).length} Ratings</span> */}
                         {editButton&&<EditBusiness business={business} hide={()=>setEditButton(false)}/> }
-                        {!editButton&&<GetReviews businessId={businessId}  />}
+
                     </div>
 
                 </div>
-
-
 
 
             </div>

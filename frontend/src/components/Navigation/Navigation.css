@@ -6,6 +6,8 @@
     background-color:floralwhite;
     height: 70px;
     padding-top: 15px;
+    z-index: 1;
+
     /* padding: 7px 5%; */
 }
 
