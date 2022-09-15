@@ -25,7 +25,7 @@ function AllBusinesses(){
             <div className="all-businesses">
                 {Object.values(allBusinesses).map(business=>{
                     return (
-                        <ul className="each-business">
+                        <ul key={business.id} className="each-business">
                             <NavLink to={`/businesses/${business.id}`}>
                                 {business.logo.length>0&&<img className="business-logo" alt="logo" src={`${business.logo}`}></img>}
                                 <li key={business.id}>{business.name}</li>

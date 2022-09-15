@@ -1,3 +1,39 @@
 .restaurant-Search {
     display: inline;
+    border-radius: 5px;
+    margin-right: 30px;
+    height: 25px;
+}
+.results-container{
+    position: absolute;
+    z-index: 1;
+    background-color:white;
+    max-height: 300px;
+    max-width: 280px;
+    overflow: scroll;
+    border-radius: 5px;
+    padding: 5px 0 0 0;
+    border: 0.5px solid rgb(189, 186, 186);
+}
+.search-restaurants{
+    text-decoration: none;
+}
+.individual-result{
+    margin: 10px 0 0px 10px;
+}
+.search-outer{
+    border-bottom: 0.5px solid gray;
+}
+.search-outer:hover{
+    background-color: rgb(229, 224, 224);
+}
+.search-Bar{
+    display: inline-block;
+    position: relative;
+}
+.search-name, .search-detail{
+    margin: 0 3px 5px 3px;
+    padding: 0 10px 0 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(24, 24, 24);
 }

@@ -24,6 +24,7 @@ ul.each-business {
 
 html, body{
     height: 100%;
+    margin: 0;
 }
 .footer-container {
     display: flex;
