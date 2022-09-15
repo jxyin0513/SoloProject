@@ -28,7 +28,15 @@
     font-size: 12px;
     color:lightsteelblue;
 }
-#review-delete{
-    cursor: pointer;
+.review-edit-outer{
     margin: 0 10px;
+}
+.review-edit-outer > i{
+    cursor: pointer;
+    padding: 3px 3px;
+}
+.review-edit-outer > i:hover{
+    cursor: pointer;
+    padding: 3px 3px;
+    background-color: rgb(207, 202, 202);
 }

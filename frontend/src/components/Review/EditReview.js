@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from "react";
 import {useDispatch, useSelector} from 'react-redux';
-import { addReviewThunk } from "../../store/review";
-import './AddReview.css'
+import { editReviewThunk } from "../../store/review";
 
-function AddReview ({retaurantId, onClose}){
+function EditReview ({id, onClose}){
 
     const dispatch = useDispatch();
-    const [rating, setRating] = useState(1)
-    const [comment, setComment] = useState('');
+    const review = useSelector(state=>state.reviews[id])
+    const [rating, setRating] = useState(review.rating)
+    const [comment, setComment] = useState(review.comment);
     // const [coverImg, setCoverImg] = useState('')
     const [errors, setErrors] = useState([]);
     const user = useSelector(state=>state.session.user)
@@ -27,15 +27,11 @@ function AddReview ({retaurantId, onClose}){
         e.preventDefault();
 
         const review = {
-            userId: user.id,
-            businessId: retaurantId,
+            id,
             rating,
             comment
         }
-
-        // const addReview =
-
-        return dispatch(addReviewThunk(review, retaurantId))
+        return dispatch(editReviewThunk(review))
             .then(()=>onClose())
             .catch(async (res) => {
                 const data = await res.json();
@@ -47,14 +43,13 @@ function AddReview ({retaurantId, onClose}){
         // }
     }
     return (
-        <>
-            <div className="review-outer">
-            <form className="add-review" onSubmit={onSubmit}>
-                <ul>
+        <div className="review-outer">
+            <form className="edit-review" onSubmit={onSubmit}>
+                <div className="errors-handler-review">
                     {errors.length!==0&&errors.map(error=>
-                        <li className="errors">{error}</li>
+                        <div>{error}</div>
                     )}
-                </ul>
+                </div>
                 <label>rating
                     <input type="number" name="rating" value={rating} onChange={(e)=>setRating(e.target.value)}></input>
                 </label>
@@ -67,9 +62,7 @@ function AddReview ({retaurantId, onClose}){
                 <button type="submit" disabled={errors.length===0 ? false : true}>Submit</button>
                 <button onClick={onClose}>Cancel</button>
             </form>
-            </div>
-        </>
+        </div>
     )
 }
-
-export default AddReview;
+export default EditReview;

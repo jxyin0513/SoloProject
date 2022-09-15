@@ -8,24 +8,32 @@
     position: absolute;
     z-index: 1;
     background-color:white;
-    max-height: 200px;
+    max-height: 300px;
+    max-width: 280px;
     overflow: scroll;
     border-radius: 5px;
+    padding: 5px 0 0 0;
+    border: 0.5px solid rgb(189, 186, 186);
 }
 .search-restaurants{
     text-decoration: none;
 }
 .individual-result{
-    margin: 5px 0 0px 5px;
+    margin: 10px 0 0px 10px;
+}
+.search-outer{
+    border-bottom: 0.5px solid gray;
+}
+.search-outer:hover{
+    background-color: rgb(229, 224, 224);
 }
 .search-Bar{
     display: inline-block;
     position: relative;
 }
 .search-name, .search-detail{
-    margin: 3px;
-}
-.distinguish{
-    border: 0.5px solid gray;
-    margin-top: 3px;
+    margin: 0 3px 5px 3px;
+    padding: 0 10px 0 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(24, 24, 24);
 }

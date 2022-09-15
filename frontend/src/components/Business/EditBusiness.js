@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from "react";
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import { editBusinessThunk } from "../../store/business";
 import './EditBusiness.css'
 
-function EditBusiness({business, hide}){
+function EditBusiness({restaurantId, onClose}){
     const dispatch = useDispatch();
+    const business = useSelector(state=>state.allBusinesses[restaurantId])
     const[name, setName] = useState(business.name);
     const [phoneNumber, setPhoneNumber] = useState(business.phoneNumber);
     const [coverImg, setCoverImg] = useState(business.coverImg);
@@ -47,7 +48,7 @@ function EditBusiness({business, hide}){
     // if(editBusiness){
     //     hide()
     // }
-    return dispatch(editBusinessThunk(business)).then(()=>hide())
+    return dispatch(editBusinessThunk(business)).then(()=>onClose())
     .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
@@ -93,7 +94,7 @@ function EditBusiness({business, hide}){
                     <input type="text" name="zipCode" value={zipCode} onChange={e=>setZipCode(e.target.value)}></input>
                 </label>
                 <button type="submit" disabled={errors.length===0 ? false : true}>Submit</button>
-                <button onClick={hide}>Cancel</button>
+                <button onClick={onClose}>Cancel</button>
             </form>
             </div>
         </>

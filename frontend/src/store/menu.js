@@ -84,7 +84,7 @@ const menuReducer = (state=initialState, action)=>{
     let newState={...state}
     switch(action.type){
         case GET_MENUS:
-            // newState={};
+            newState={};
             action.menus.forEach(menu => {
                 newState[menu.id] = menu
             });

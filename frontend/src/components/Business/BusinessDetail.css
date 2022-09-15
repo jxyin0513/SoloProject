@@ -115,13 +115,26 @@ img.image{
     background-color:lightslategray;
     cursor: pointer;
 }
-#edit-menu{
-    padding: 3px;
+.menu-change > i{
+    padding: 5px;
 }
-#edit-menu:hover{
-    background-color:lightslategray;
+.menu-change > i:hover{
+    background-color:rgb(219, 213, 213);
     cursor: pointer;
 }
+.menu-change{
+    display: none;
+}
+.image-shown:hover .menu-change{
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px;
+    margin: 5px;
+    background-color: rgba(0, 0, 0, 0.4);;
+}
+
 .menu-bar{
     margin: 10px 0;
 }

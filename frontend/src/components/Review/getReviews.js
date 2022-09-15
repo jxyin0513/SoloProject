@@ -1,6 +1,7 @@
-import React, { useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import { getReviewsThunk, deleteReviewThunk } from "../../store/review";
+import EditReviewModal from "../Review/EditReviewModal";
 import './getReview.css';
 
 function GetReviews({businessId}){
@@ -8,6 +9,8 @@ function GetReviews({businessId}){
     const reviews = useSelector(state=>state.reviews);
     const user = useSelector(state=>state.session.user)
     const reviewsArr = Object.values(reviews)
+    const [editReview, setEditReview] = useState(false);
+    const [reviewId, setReviewId] = useState(0);
 
     useEffect(()=>{
         dispatch(getReviewsThunk(businessId))
@@ -16,6 +19,10 @@ function GetReviews({businessId}){
     async function onDelete(e){
         e.preventDefault();
         const deletedReview = await dispatch(deleteReviewThunk(e.target.id))
+    }
+    function onEdit(e){
+        setEditReview(true)
+        setReviewId(e.target.id)
     }
 
     return (
@@ -28,10 +35,14 @@ function GetReviews({businessId}){
                     <div className="review-comment">{review.comment}</div>
                     <div className="review-Updated">{review.updatedAt}</div>
                     {user&&user.id===review.userId&&(
-                        <i className="fa-solid fa-trash" id="review-delete" onClick={onDelete}></i>
+                        <div className="review-edit-outer">
+                            <i className="fas fa-edit" id={`${review.id}`} onClick={onEdit}></i>
+                            <i className="fa-solid fa-trash" id={`${review.id}`} onClick={onDelete}></i>
+                        </div>
                     )}
                 </div>
             )))}
+            {editReview && <EditReviewModal reviewId={reviewId} onClose={()=>setEditReview(false)} />}
             {/* // <div className="review-table">
 
             //     <table>

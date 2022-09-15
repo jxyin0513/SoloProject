@@ -23,6 +23,20 @@ const reviewValidator=[
         .withMessage('Please provide your comment to 10 to 255 characters'),
     handleValidationErrors
 ]
+const editReviewValidator=[
+    check('id')
+        .exists({ checkFalsy: true })
+        .withMessage('Please provide your ID'),
+    check('rating')
+        .exists({ checkFalsy: true })
+        .withMessage('Please provide your rating'),
+    check('comment')
+        .exists({ checkFalsy: true })
+        .withMessage('Please tell us about your experience')
+        .isLength({min: 10, max: 255 })
+        .withMessage('Please provide your comment to 10 to 255 characters'),
+    handleValidationErrors
+]
 
 router.get('/:businessId/all',  asyncHandler(async(req, res)=>{
     const businessId = parseInt(req.params.businessId, 10)
@@ -47,6 +61,13 @@ router.post('/', reviewValidator, asyncHandler(async(req, res)=>{
         coverImg
     })
     return res.json(review);
+}))
+
+router.put('/:id/edit',editReviewValidator, asyncHandler(async(req, res)=>{
+    const {id, rating, comment} = req.body
+    const review = await Review.findByPk(id);
+    const newReview = await review.update(req.body);
+    return res.json(newReview);
 }))
 
 router.post('/:reviewId/delete', asyncHandler(async(req, res)=>{

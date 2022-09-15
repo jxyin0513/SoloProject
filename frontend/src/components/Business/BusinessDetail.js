@@ -2,12 +2,13 @@ import React, { useEffect, useState} from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import {getBusinessesThunk, deleteBusinessThunk} from "../../store/business";
 import GetReviews from "../Review/getReviews";
-import AddReview from "../Review/AddReview";
 import { restoreUser } from "../../store/session";
 import { getMenusThunk } from "../../store/menu";
 import AddMenuModal from "../Menu/AddMenuModal";
 import EditMenuModal from "../Menu/EditMenuModal";
-import EditBusiness from "./EditBusiness";
+import AddReviewModal from "../Review/AddReviewModal";
+import EditBusinessModal from "./EditBusinessModal";
+import { deleteMenuThunk } from "../../store/menu";
 import { useParams, useHistory } from 'react-router-dom';
 import './BusinessDetail.css'
 
@@ -15,27 +16,29 @@ function BusinessDetail(){
     const dispatch = useDispatch();
     const history = useHistory();
     const {businessId} = useParams();
-    const [editButton, setEditButton] = useState(false);
-    const [reviewButton, setReviewButton] = useState(false);
-    const [isLoaded, setIsLoaded] = useState(false);
+    const [editBusiness, setEditBusiness] = useState(false);
+    // const [editReview, setEditReview] = useState(false);
+    // const [isLoaded, setIsLoaded] = useState(false);
+    const [addReview, setAddReview] = useState(false);
+    const [editReview, setEditReview] = useState(0);
+    const [reviewId, setReviewId] = useState(0);
     const [addMenu, setAddMenu] = useState(false)
     const [editMenu, setEditMenu] = useState(false);
     const [menuId, setMenuId] = useState(0);
-
 
     const user = useSelector(state=>state.session.user)
     const business = useSelector(state=>state.allBusinesses[businessId])
     const menus = Object.values(useSelector(state=>state.menus))
     const reviews = Object.values(useSelector(state=>state.reviews));
     let reviewAvg=0;
-    const r = reviews.forEach(review=>{reviewAvg+=review.rating})
+    reviews.forEach(review=>{reviewAvg+=review.rating})
     reviewAvg = reviewAvg / reviews.length
     const [menuNum, setMenuNum] = useState([0,3])
     // const [menuSlide, setMenuSlide] = useState(menus)
     // const reviews = useSelector(state=>state.reviews)
 
     useEffect(()=>{
-        dispatch(restoreUser()).then(()=>setIsLoaded(true))
+        dispatch(restoreUser())
         dispatch(getBusinessesThunk())
         dispatch(getMenusThunk(businessId))
         // const header = document.getElementById("header-original");
@@ -51,12 +54,11 @@ function BusinessDetail(){
         }
     }
     function edit(e){
-        setReviewButton(false);
-        setEditButton(true);
+        setEditBusiness(true);
     }
-    function review(e){
-        setEditButton(false)
-        setReviewButton(true)
+    function newReview(e){
+        setReviewId(e.target.id)
+        setAddReview(true)
     }
     function prevSlide(e){
         if(menuNum[0]-4 < 0){
@@ -73,6 +75,15 @@ function BusinessDetail(){
             setMenuNum([menuNum[0]+4, menuNum[1]+4])
         }
     }
+    function onEditMenu(e){
+
+        setEditMenu(true);
+        setMenuId(e.target.id)
+    }
+
+    async function onDeleteMenu(e){
+        await dispatch(deleteMenuThunk(menus[e.target.id]))
+    }
 
     return (
         <>
@@ -88,19 +99,20 @@ function BusinessDetail(){
                         </img>}
                         <div className="restaurant-intro">
                             <div className="restaurant-name">{business.name}</div>
+                            {reviews.length>0 &&
                             <div className="reviews-intro-bar">
-                            <span class="fa fa-star checked"></span>
-                            <div className="restaurant-reviews">{reviewAvg}</div>
-                            <div className="restaurant-bar">{reviews.length} Reviews</div>
-                            </div>
+                                <span class="fa fa-star checked"></span>
+                                <div className="restaurant-reviews">{reviewAvg}</div>
+                                <div className="restaurant-bar">{reviews.length} Reviews</div>
+                            </div>}
                         </div>
                         </div>
                         {/* {reviewButton&&<AddReview business={business} hide={()=>setReviewButton(false)} />} */}
                         {user&&user.id===business.ownerId &&
                             <div className="top-buttons">
-                                <button>Add Menu</button>
-                                <button onClick={review}>Write a review</button>
-                                <button className="edit" onClick={edit} >Edit Business Info</button>
+                                <button onClick={()=>setAddMenu(true)} className="add-menu-button">Add Menu</button>
+                                <button onClick={newReview}>Write a review</button>
+                                <button className="edit" id={`${business.id}`} onClick={edit} >Edit Business Info</button>
                                 <button className="delete" onClick={deleteBusiness}>Delete Business</button>
                             </div>}
                         <div className="restaurant-infos">
@@ -108,7 +120,6 @@ function BusinessDetail(){
                             <div className="menu-bar">
                                 <div className="menu-header">Menu</div>
                                 <i className="fa-solid fa-plus" id="add-menu"></i>
-                                <i className="fas fa-edit" id="edit-menu"></i>
                             </div>
 
                             <div className="menu-slider">
@@ -122,6 +133,10 @@ function BusinessDetail(){
                                             <div className="image-shown">
                                                 <img className="menu-image" src={menu.image_url} alt='i'></img>
                                                 <div className="menu-price">$ {menu.price}</div>
+                                                <div className="menu-change">
+                                                    <i className="fas fa-edit" onClick={onEditMenu} id={`${menu.id}`}></i>
+                                                    <i className="fa-solid fa-trash" onClick={onDeleteMenu} id={`${menu.id}`}></i>
+                                                </div>
                                             </div>
                                             <div className="menu-n">{menu.name}</div>
                                         </div>
@@ -130,7 +145,7 @@ function BusinessDetail(){
                             }))}
                             </div>
                             <div className="reviews-header">Reviews</div>
-                            {!editButton&&<GetReviews businessId={businessId}  />}
+                            <GetReviews businessId={businessId}  />
                         </div>
                         <div className="restaurant-info">
                             <p>Phone Number: {business.phoneNumber} </p>
@@ -140,12 +155,12 @@ function BusinessDetail(){
                         </div>
                         </div>
                         {/* <button onClick={review}>Write a review</button> */}
-                        {reviewButton&&<AddReview business={business} hide={()=>setReviewButton(false)} />}
+
                     </div>
                     <div className="edit-delete">
                         {/* <span>{}</span>
                         <span>{Object.keys(reviews).length} Ratings</span> */}
-                        {editButton&&<EditBusiness business={business} hide={()=>setEditButton(false)}/> }
+
 
                     </div>
 
@@ -155,6 +170,8 @@ function BusinessDetail(){
             </div>
             )
             }
+            {editBusiness&&<EditBusinessModal restaurantId={businessId} onClose={()=>setEditBusiness(false)}/> }
+            {addReview && <AddReviewModal restaurantId={businessId} onClose={()=>setAddReview(false)} />}
             {addMenu && <AddMenuModal onClose={()=>setAddMenu(false)} restaurantId = {businessId} />}
             {editMenu && <EditMenuModal onClose={()=>setEditMenu(false)} menuId={menuId} restaurantId={businessId} />}
         </>
