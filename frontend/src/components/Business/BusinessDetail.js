@@ -82,7 +82,8 @@ function BusinessDetail(){
     }
 
     async function onDeleteMenu(e){
-        await dispatch(deleteMenuThunk(menus[e.target.id]))
+
+        await dispatch(deleteMenuThunk(e.target.id))
     }
 
     return (
@@ -101,7 +102,7 @@ function BusinessDetail(){
                             <div className="restaurant-name">{business.name}</div>
                             {reviews.length>0 &&
                             <div className="reviews-intro-bar">
-                                <span class="fa fa-star checked"></span>
+                                <span className="fa fa-star checked"></span>
                                 <div className="restaurant-reviews">{reviewAvg}</div>
                                 <div className="restaurant-bar">{reviews.length} Reviews</div>
                             </div>}
@@ -127,7 +128,7 @@ function BusinessDetail(){
                                 <i className="fa-solid fa-angle-right" id="right-arrow" onClick={nextSlide}></i>
                             {menus && (menus.map((menu, index)=>{
                                 if(menuNum[0]<=index && menuNum[1]>=index){
-                                    console.log(menuNum[0]<=index && menuNum[1]>=index, menuNum[0], index)
+                                    // console.log(menuNum[0]<=index && menuNum[1]>=index, menuNum[0], index)
                                     return (
                                         <div key={menu.id}>
                                             <div className="image-shown">

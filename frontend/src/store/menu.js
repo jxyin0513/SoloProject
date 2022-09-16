@@ -44,6 +44,7 @@ export const createMenuThunk = (menu) => async(dispatch)=>{
     })
     if(response.ok){
         const data = await response.json();
+        console.log(data)
         dispatch(createMenu(data))
         return data;
     }else{
@@ -65,8 +66,9 @@ export const editMenuThunk = (menu) => async(dispatch)=>{
     }
 }
 
-export const deleteMenuThunk = (menu) => async(dispatch)=>{
-    const response = await csrfFetch(`/api/menus/${menu.id}`,{
+export const deleteMenuThunk = (id) => async(dispatch)=>{
+
+    const response = await csrfFetch(`/api/menus/${id}/delete`,{
         method: "DELETE",
     })
     if(response.ok){
@@ -91,11 +93,12 @@ const menuReducer = (state=initialState, action)=>{
             return newState;
 
         case CREATE_MENU:
-            newState[action.menu.id] = menu
+            console.log(action.menu.id)
+            newState[action.menu.id] = action.menu
             return newState;
 
         case EDIT_MENU:
-            newState[action.menu.id] = menu
+            newState[action.menu.id] = action.menu
             return newState;
 
         case DELETE_MENU:

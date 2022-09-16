@@ -1,0 +1,14 @@
+.edit-review-header{
+    border-bottom: 1px solid lightgray;
+    padding: 5px 0 10px 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.edit-review-form{
+    margin: 0 20px 0 10px;
+}
+.errors-handler-review{
+    height: 40px;
+}
+.edit-review-form > label{
+    display: block;
+}

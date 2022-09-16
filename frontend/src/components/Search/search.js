@@ -15,6 +15,7 @@ const Search = () => {
           if(restaurant.name.toLowerCase().startsWith(e.target.value.toLowerCase())){
             return true;
           }
+          return false;
         })
       }
       console.log(search)

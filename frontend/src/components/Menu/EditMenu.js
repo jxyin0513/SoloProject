@@ -7,6 +7,7 @@ function EditMenu({onClose, menuId, restaurantId}){
     const dispatch = useDispatch();
     const menu = useSelector(state=>state.menus[menuId])
     const [name, setName] = useState(menu.name)
+    const [price, setPrice] = useState(menu.price)
     const [image, setImage] = useState(menu.image_url)
     const [errors, setErrors] = useState([])
 
@@ -15,8 +16,10 @@ function EditMenu({onClose, menuId, restaurantId}){
         const menu = {
             id: menuId,
             restaurantId,
+            price,
             name,
-            image
+
+            image_url: image
         }
         const editMenu = await dispatch(editMenuThunk(menu))
         if(!editMenu){
@@ -38,6 +41,7 @@ function EditMenu({onClose, menuId, restaurantId}){
                     )}
                 </div>
                 <input type='text' name='name' value={name} placeholder="Menu name" onChange={e=>setName(e.target.value)}></input>
+                <input type='number' name="price" value={price} placeholder="menu price" onChange={e=>setPrice(e.target.value)}></input>
                 <input type='text' name="image_url" value={image} placeholder="Menu image URL" onChange={e=>setImage(e.target.value)}></input>
                 <button type="submit">submit</button>
             </form>

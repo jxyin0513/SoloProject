@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import { editReviewThunk } from "../../store/review";
+import './EditReview.css';
 
 function EditReview ({id, onClose}){
 
@@ -44,12 +45,16 @@ function EditReview ({id, onClose}){
     }
     return (
         <div className="review-outer">
-            <form className="edit-review" onSubmit={onSubmit}>
-                <div className="errors-handler-review">
-                    {errors.length!==0&&errors.map(error=>
-                        <div>{error}</div>
-                    )}
-                </div>
+            <div className="edit-review-header">
+                <div>Edit Review</div>
+            </div>
+            <div className="errors-handler-review">
+                {errors.length!==0&&errors.map(error=>
+                    <div>{error}</div>
+                )}
+            </div>
+            <form className="edit-review-form" onSubmit={onSubmit}>
+
                 <label>rating
                     <input type="number" name="rating" value={rating} onChange={(e)=>setRating(e.target.value)}></input>
                 </label>

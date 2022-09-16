@@ -2,8 +2,9 @@
     display: block;
 }
 .review-outer{
-    background-color: darkgray;
+    background-color: rgb(242, 242, 242);
     max-width: 300px;
+    height: 250px;
     border-radius: 15px;
 }
 .add-review{

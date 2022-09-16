@@ -50,11 +50,11 @@ function AddReview ({retaurantId, onClose}){
         <>
             <div className="review-outer">
             <form className="add-review" onSubmit={onSubmit}>
-                <ul>
+                <div className="errors-handler-review">
                     {errors.length!==0&&errors.map(error=>
-                        <li className="errors">{error}</li>
+                        <div>{error}</div>
                     )}
-                </ul>
+                </div>
                 <label>rating
                     <input type="number" name="rating" value={rating} onChange={(e)=>setRating(e.target.value)}></input>
                 </label>
