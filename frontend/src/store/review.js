@@ -5,15 +5,14 @@ const READ_REVIEW = '/get/reviews';
 const EDIT_REVIEW = './edit/review';
 const DELETE_REVIEW = '/delete/review'
 
-const addReview= (review, businessId)=>({
-    type: ADD_REVIEW,
-    review,
-    businessId
-})
-
 const getReview = (reviews)=>({
     type: READ_REVIEW,
     reviews
+})
+
+const addReview= (review)=>({
+    type: ADD_REVIEW,
+    review
 })
 
 const editReview = (review)=>({
@@ -26,29 +25,36 @@ const deleteReview= (reviewId)=>({
     reviewId
 })
 
-export const addReviewThunk =(review, businessId)=> async(dispatch)=>{
-    const response = await csrfFetch('/api/reviews',{
+export const getReviewsThunk =(businessId)=> async(dispatch)=>{
+    const response = await csrfFetch(`/api/reviews/${businessId}/all`)
+    if(response.ok){
+        const data = await response.json();
+        dispatch(getReview(data))
+        return null;
+    }else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+        return data.errors;
+        }
+    }
+}
+
+export const addReviewThunk =(review)=> async(dispatch)=>{
+    const response = await csrfFetch('/api/reviews/new',{
         method: "POST",
         body: JSON.stringify(review)
     })
     if(response.ok){
         const data = await response.json();
         console.log(data)
-        dispatch(addReview(data, businessId))
-        return data;
-    }else{
-        return false;
-    }
-}
-
-export const getReviewsThunk =(businessId)=> async(dispatch)=>{
-    const response = await csrfFetch(`/api/reviews/${businessId}/all`)
-    if(response.ok){
+        dispatch(addReview(data))
+        return null;
+    }else if (response.status < 500) {
         const data = await response.json();
-        dispatch(getReview(data))
-        return data;
-    }else{
-        return false;
+        console.log(data.errors)
+        if (data.errors) {
+        return data.errors;
+        }
     }
 }
 
@@ -59,8 +65,9 @@ export const editReviewThunk = (review) => async(dispatch)=>{
     })
     if(response.ok){
         const data = await response.json();
-        dispatch(editReview(data))
-        return data;
+        console.log(data)
+        dispatch(editReview(data.review))
+        return data
     }else{
         return false;
     }
@@ -73,9 +80,12 @@ export const deleteReviewThunk =(reviewId)=> async(dispatch)=>{
     if(response.ok){
         const data = await response.json();
         dispatch(deleteReview(reviewId))
-        return data;
-    }else{
-        return false;
+        return null;
+    }else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+        return data.errors;
+        }
     }
 }
 
@@ -87,15 +97,16 @@ const reviewsReducer = (state=initialState, action)=>{
 
     switch(action.type){
 
-        case ADD_REVIEW:
-            newState[action.review.id] = action.review
-            return newState;
-
         case READ_REVIEW:
             newState={}
             action.reviews.forEach(review=>{
                 newState[review.id] = review
             })
+            return newState;
+
+        case ADD_REVIEW:
+            newState[action.review.id] = action.review
+            // newState[action.review.review.id]['User'] = action.review.review.user
             return newState;
 
         case EDIT_REVIEW:

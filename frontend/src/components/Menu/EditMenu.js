@@ -21,12 +21,18 @@ function EditMenu({onClose, menuId, restaurantId}){
 
             image_url: image
         }
-        const editMenu = await dispatch(editMenuThunk(menu))
-        if(!editMenu){
-            onClose()
-        }else{
-            setErrors(editMenu)
-        }
+        return dispatch(editMenuThunk(menu))
+                .then(()=>onClose())
+                .catch(async (res) => {
+                    const data = await res.json();
+                    if (data.errors) setErrors(data.errors);
+                    return data;
+                });
+        // if(!editMenu){
+        //     onClose()
+        // }else{
+        //     setErrors(editMenu)
+        // }
     }
 
     return (
@@ -34,12 +40,12 @@ function EditMenu({onClose, menuId, restaurantId}){
             <div className="edit-menu-header">
                 <div>Edit menu</div>
             </div>
-            <form onSubmit={onSubmit} className='edit-menu-form'>
-                <div className="errors-handler-menu">
+            <div className="errors-handler-menu">
                     {errors.length!==0 && errors.map(error=>
-                        <div >{error}</div>
+                        <div >* {error}</div>
                     )}
                 </div>
+            <form onSubmit={onSubmit} className='edit-menu-form'>
                 <input type='text' name='name' value={name} placeholder="Menu name" onChange={e=>setName(e.target.value)}></input>
                 <input type='number' name="price" value={price} placeholder="menu price" onChange={e=>setPrice(e.target.value)}></input>
                 <input type='text' name="image_url" value={image} placeholder="Menu image URL" onChange={e=>setImage(e.target.value)}></input>

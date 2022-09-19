@@ -59,6 +59,7 @@ export const editMenuThunk = (menu) => async(dispatch)=>{
     })
     if(response.ok){
         const data = await response.json();
+        // console.log(data)
         dispatch(editMenu(data))
         return data;
     }else{
@@ -93,7 +94,6 @@ const menuReducer = (state=initialState, action)=>{
             return newState;
 
         case CREATE_MENU:
-            console.log(action.menu.id)
             newState[action.menu.id] = action.menu
             return newState;
 

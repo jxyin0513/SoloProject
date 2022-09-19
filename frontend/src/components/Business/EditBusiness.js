@@ -58,14 +58,16 @@ function EditBusiness({restaurantId, onClose}){
     }
 
     return (
-        <>
-            <div className="edit-outer">
-            <form className="edit-business" onSubmit={onSubmit}>
-                <ul>
+        <div className="edit-business-outer">
+            <div className="edit-business-header">
+                <div>Edit business</div>
+            </div>
+            <div className="errors-handler-business">
                     {errors.length!==0&&errors.map(error=>
-                        <li className="erros">{error}</li>
+                        <div>* {error}</div>
                     )}
-                </ul>
+            </div>
+            <form className="edit-business" onSubmit={onSubmit}>
                 <label>Name:
                     <input type="text" name="name"  value={name} onChange={e=>setName(e.target.value)}></input>
                 </label>
@@ -96,8 +98,8 @@ function EditBusiness({restaurantId, onClose}){
                 <button type="submit" disabled={errors.length===0 ? false : true}>Submit</button>
                 <button onClick={onClose}>Cancel</button>
             </form>
-            </div>
-        </>
+        </div>
+
     )
 }
 

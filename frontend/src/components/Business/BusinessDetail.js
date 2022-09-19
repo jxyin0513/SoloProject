@@ -57,7 +57,7 @@ function BusinessDetail(){
         setEditBusiness(true);
     }
     function newReview(e){
-        setReviewId(e.target.id)
+        // setReviewId(e.target.id)
         setAddReview(true)
     }
     function prevSlide(e){
