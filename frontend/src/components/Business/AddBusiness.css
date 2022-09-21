@@ -1,30 +1,13 @@
-.add-business > label{
+.add-business-form > label{
     display: block;
-    font-family:Arial, Helvetica, sans-serif;
     padding: 5px;
 }
-/* body{
-    background-color: darkgray;
-} */
-.add-business {
-    /* padding-left: 250px;
-    text-align: left; */
-    text-align: left;
-    margin: auto;
-    background-color:ghostwhite;
+.add-business-form{
+    margin: 10px 10px 10px 20px;
 }
-.add-background{
-    /* text-align: center;
-    padding-top: 100px; */
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.7);
+.add-business-container {
+    background-color:rgb(253, 250, 250);
+    border-radius: 15px;
 }
 button {
     color:white;
@@ -35,7 +18,15 @@ button {
     transition:all 0.3s ease 0s;
     margin: 10px;
 }
-
-.error{
-    color: crimson;
+.errors-handler-business{
+    color: red;
+    padding: 0 0 0 20px;
+}
+.business-header{
+    padding: 10px 15px;
+    border-bottom: 1px solid lightgray;
+}
+.business-header > div{
+    font-size: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

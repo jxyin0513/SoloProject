@@ -68,32 +68,32 @@ function EditBusiness({restaurantId, onClose}){
                     )}
             </div>
             <form className="edit-business" onSubmit={onSubmit}>
-                <label>Name:
-                    <input type="text" name="name"  value={name} onChange={e=>setName(e.target.value)}></input>
+                <label>
+                    <input type="text" name="name" placeholder="restaurant name" value={name} onChange={e=>setName(e.target.value)}></input>
                 </label>
-                <label>Phone Number:
-                    <input type="text" name="phoneNumber" value={phoneNumber} onChange={e=>setPhoneNumber(e.target.value)}></input>
+                <label>
+                    <input type="text" name="phoneNumber" placeholder="phone number" value={phoneNumber} onChange={e=>setPhoneNumber(e.target.value)}></input>
                 </label>
-                <label>Description
-                    <textarea name="description" value={description} rows="5" cols="20" placeholder="tell us about your business" onChange={e=>setDescription(e.target.value)}></textarea>
+                <label>
+                    <textarea name="description" value={description} placeholder='description' rows="5" cols="20" onChange={e=>setDescription(e.target.value)}></textarea>
                 </label>
-                <label>Image:
-                     <input type="text" name="coverImg" value={coverImg} onChange={e=>setCoverImg(e.target.value)}></input>
+                <label>
+                     <input type="text" name="coverImg" placeholder="cover image" value={coverImg} onChange={e=>setCoverImg(e.target.value)}></input>
                 </label>
-                <label>Logo:
-                        <input type="text" name="logo" value={logo} onChange={e=>setLogo(e.target.value)}></input>
+                <label>
+                        <input type="text" name="logo" placeholder="thumb nail" value={logo} onChange={e=>setLogo(e.target.value)}></input>
                     </label>
-                <label>Address:
-                    <input type="text" name="address" value={address} onChange={e=>setAddress(e.target.value)}></input>
+                <label>
+                    <input type="text" name="address" placeholder="address" value={address} onChange={e=>setAddress(e.target.value)}></input>
                 </label>
-                <label>City:
-                    <input type="text" name="city" value={city} onChange={e=>setCity(e.target.value)}></input>
+                <label>
+                    <input type="text" name="city" placeholder="city" value={city} onChange={e=>setCity(e.target.value)}></input>
                 </label>
-                <label>State:
-                    <input type="text" name="state" value={state} onChange={e=>setState(e.target.value)}></input>
+                <label>
+                    <input type="text" name="state" placeholder="state" value={state} onChange={e=>setState(e.target.value)}></input>
                 </label>
-                <label> Zip Code
-                    <input type="text" name="zipCode" value={zipCode} onChange={e=>setZipCode(e.target.value)}></input>
+                <label>
+                    <input type="text" name="zipCode" placeholder="zipcode" value={zipCode} onChange={e=>setZipCode(e.target.value)}></input>
                 </label>
                 <button type="submit" disabled={errors.length===0 ? false : true}>Submit</button>
                 <button onClick={onClose}>Cancel</button>

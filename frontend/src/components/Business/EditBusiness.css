@@ -16,10 +16,11 @@ label{
     margin: 10px;
 }
 .edit-business{
-    margin: 5px 30px 20px 20px;
+    margin: 5px 30px 20px 30px;
     /* padding: 10px; */
 }
 .edit-business-outer{
-    background-color: rgb(240, 238, 238);
+    background-color: rgb(255, 255, 255);
     border-radius: 15px;
+    width: 300px;
 }
