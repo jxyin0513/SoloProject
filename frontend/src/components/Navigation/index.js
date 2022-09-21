@@ -28,7 +28,7 @@ function Navigation ({ isLoaded}){
         sessionLinks = (
         <div>
             <Search />
-            <NavLink to="/demo-user"><button>Demo User</button></NavLink>
+            {/* <NavLink to="/demo-user"><button>Demo User</button></NavLink> */}
             <LoginFormModal />
             <NavLink to="/signup"><button>Sign Up</button></NavLink>
 

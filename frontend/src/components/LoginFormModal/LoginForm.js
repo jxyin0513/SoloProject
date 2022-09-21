@@ -1,5 +1,6 @@
 import React, {useState} from "react";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import { Redirect } from "react-router-dom";
 import { signInThunk } from "../../store/session";
 import './LoginForm.css';
 // import { Redirect } from "react-router-dom";
@@ -9,6 +10,11 @@ function LoginForm(){
     const [credential, setCredential] = useState("");
     const [password, setPassword]= useState("");
     const [errors, setErrors] = useState([])
+
+    const user = useSelector(state=>state.session.user)
+    if(user){
+       return <Redirect to="/" />
+    }
     // if(demo){
     //     console.log("here")
     //     const user={
@@ -20,8 +26,6 @@ function LoginForm(){
     // }
     async function onSubmit(e){
         e.preventDefault();
-        setErrors([]);
-
         const user={
             credential,
             password
@@ -37,12 +41,19 @@ function LoginForm(){
         if (data && data.errors) setErrors(data.errors);
       });
     }
+    async function onClick(){
+        const user={
+        credential: "Demo-lition",
+        password: "password"
+    }
+        await dispatch(signInThunk(user))
+}
     return (
-        <>
-            <form className="sign-in" onSubmit={onSubmit}>
-                <ul>
-                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-                </ul>
+        <div className="sign-in-container">
+            <div className="errors-handler-signin">
+                {errors.map((error, idx) => <div key={idx}>{error}</div>)}
+            </div>
+            <form className="sign-in-form" onSubmit={onSubmit}>
                 <label>Username or Email
                     <input required type="text" name="password" value={credential} onChange={e=>setCredential(e.target.value)}>
                     </input>
@@ -54,7 +65,10 @@ function LoginForm(){
                 </label>
                 <button type="submit">Log In</button>
             </form>
-        </>
+            <div className="demo-login-outer">
+                <div>Wanna Sign in As <button className="demo-login-button" onClick={onClick}>Demo User</button> ?</div>
+            </div>
+        </div>
     );
 }
 

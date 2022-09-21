@@ -1,3 +1,26 @@
-.sign-in > label{
+.sign-in-form > label{
     display: block;
 }
+.sign-in-form{
+    margin: 10px 10px 10px 15px;
+}
+.sign-in-container{
+    background-color: rgb(245, 244, 244);
+    border-radius: 10px;
+}
+.errors-handler-signin{
+    height: 40px;
+}
+.demo-login-outer{
+    border-top: 1px solid lightgray;
+    padding: 10px 10px 10px 15px;
+}
+.demo-login-button{
+    color: white;
+    padding:6px;
+    background-color:dimgray;
+    border-radius: 14px;
+    cursor: pointer;
+    transition:all 0.3s ease 0s;
+    margin: 5px;
+  }
