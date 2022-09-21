@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import { addReviewThunk } from "../../store/review";
 import './AddReview.css'
 
-function AddReview ({retaurantId, onClose}){
+function AddReview ({restaurantId, onClose}){
 
     const dispatch = useDispatch();
     const [rating, setRating] = useState(1)
@@ -11,64 +11,68 @@ function AddReview ({retaurantId, onClose}){
     // const [coverImg, setCoverImg] = useState('')
     const [errors, setErrors] = useState([]);
     const user = useSelector(state=>state.session.user)
+    // console.log(restaurantId)
 
-    useEffect(()=>{
-        const error=[]
-        if(rating>5 || rating<1){
-            error.push("Rating must be between 1-5.")
-        }
-        if(comment.length>255){
-            error.push("Please provide comment less than 255 character")
-        }
-        setErrors(error);
-    },[rating, comment])
+    // useEffect(()=>{
+    //     const error=[]
+    //     if(rating>5 || rating<1){
+    //         error.push("Rating must be between 1-5.")
+    //     }
+    //     if(comment.length>255){
+    //         error.push("Please provide comment less than 255 character")
+    //     }
+    //     setErrors(error);
+    // },[rating, comment])
 
     async function onSubmit(e){
         e.preventDefault();
 
         const review = {
             userId: user.id,
-            businessId: retaurantId,
+            businessId: restaurantId,
             rating,
             comment
         }
 
-        // const addReview =
+        return dispatch(addReviewThunk(review))
+                .then(()=>onClose())
+                .catch(async (res) => {
+                    const data = await res.json();
+                    console.log(data)
+                    if (data.errors) setErrors(data.errors);
+                });
 
-        return dispatch(addReviewThunk(review, retaurantId))
-            .then(()=>onClose())
-            .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) setErrors(data.errors);
-                return data;
-            });
+        // if(!addReview){
+        //     onClose()
+        // }else{
+        //     setErrors(addReview)
+        // }
         // if(addReview){
         //     hide();
         // }
     }
     return (
-        <>
-            <div className="review-outer">
-            <form className="add-review" onSubmit={onSubmit}>
-                <div className="errors-handler-review">
-                    {errors.length!==0&&errors.map(error=>
-                        <div>{error}</div>
+
+        <div className="review-outer">
+            <div className="add-review-header">
+                <div>Add new review</div>
+            </div>
+            <div className="errors-handler-review">
+                    {errors && errors.map(error=>
+                        <div>* {error}</div>
                     )}
                 </div>
-                <label>rating
-                    <input type="number" name="rating" value={rating} onChange={(e)=>setRating(e.target.value)}></input>
-                </label>
-                <label>Comment
-                    <textarea name="comment" value={comment} rows="3" cols="20" onChange={(e)=>setComment(e.target.value)}></textarea>
-                </label>
+            <form className="add-review-form" onSubmit={onSubmit}>
+                <input type="number" name="rating" placeholder="rating" value={rating} onChange={(e)=>setRating(e.target.value)}></input>
+                <textarea name="comment" value={comment} placeholder='write your comment' rows="3" cols="20" onChange={(e)=>setComment(e.target.value)}></textarea>
                 {/* <label>Image:
                     <input type="text" name="coverImg" value={coverImg} onChange={e=>setCoverImg(e.target.value)}></input>
                 </label> */}
-                <button type="submit" disabled={errors.length===0 ? false : true}>Submit</button>
+                <button type="submit">Submit</button>
                 <button onClick={onClose}>Cancel</button>
             </form>
-            </div>
-        </>
+        </div>
+
     )
 }
 

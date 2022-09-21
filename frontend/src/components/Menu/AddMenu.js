@@ -31,7 +31,7 @@ function AddMenu({onClose, restaurantId}){
             </div>
             <div className="errors-handler-menu">
                     {errors.length!==0&&errors.map(error=>
-                        <div className="error">{error}</div>
+                        <div className="error">* {error}</div>
                     )}
             </div>
             <form onSubmit={onSubmit} className='add-menu-form'>

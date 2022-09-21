@@ -29,6 +29,7 @@ function EditReview ({id, onClose}){
 
         const review = {
             id,
+            userId: user.id,
             rating,
             comment
         }
@@ -36,7 +37,7 @@ function EditReview ({id, onClose}){
             .then(()=>onClose())
             .catch(async (res) => {
                 const data = await res.json();
-                if (data && data.errors) setErrors(data.errors);
+                if (data.errors) setErrors(data.errors);
                 return data;
             });
         // if(addReview){
@@ -49,18 +50,14 @@ function EditReview ({id, onClose}){
                 <div>Edit Review</div>
             </div>
             <div className="errors-handler-review">
-                {errors.length!==0&&errors.map(error=>
+                {errors && (errors.map(error=>
                     <div>{error}</div>
-                )}
+                ))}
             </div>
             <form className="edit-review-form" onSubmit={onSubmit}>
 
-                <label>rating
-                    <input type="number" name="rating" value={rating} onChange={(e)=>setRating(e.target.value)}></input>
-                </label>
-                <label>Comment
-                    <textarea name="comment" value={comment} rows="3" cols="20" onChange={(e)=>setComment(e.target.value)}></textarea>
-                </label>
+                <input type="number" name="rating" placeholder="rating" value={rating} onChange={(e)=>setRating(e.target.value)}></input>
+                <textarea name="comment" value={comment} placeholder="write your comment" rows="3" cols="20" onChange={(e)=>setComment(e.target.value)}></textarea>
                 {/* <label>Image:
                     <input type="text" name="coverImg" value={coverImg} onChange={e=>setCoverImg(e.target.value)}></input>
                 </label> */}

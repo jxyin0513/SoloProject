@@ -3,7 +3,7 @@ const router = express.Router();
 const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-const { setTokenCookie, requireAuth } = require('../../utils/auth');
+// const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const {User, Review } = require('../../db/models');
 
 const reviewValidator=[
@@ -19,8 +19,8 @@ const reviewValidator=[
     check('comment')
         .exists({ checkFalsy: true })
         .withMessage('Please tell us about your experience')
-        .isLength({min: 10, max: 255 })
-        .withMessage('Please provide your comment to 10 to 255 characters'),
+        .isLength({min: 1, max: 255 })
+        .withMessage('Please provide your comment to 1 to 255 characters'),
     handleValidationErrors
 ]
 const editReviewValidator=[
@@ -47,27 +47,42 @@ router.get('/:businessId/all',  asyncHandler(async(req, res)=>{
         },
         include:User
     });
-    console.log(reviews)
     return res.json(reviews)
 }))
 
-router.post('/', reviewValidator, asyncHandler(async(req, res)=>{
+router.post('/new', reviewValidator, asyncHandler(async(req, res)=>{
     const {userId, businessId, coverImg, rating, comment} = req.body
-    const review = await Review.create({
+    const newReview = await Review.create({
         userId,
         businessId,
         rating,
         comment,
         coverImg
     })
+    const review = await Review.findOne({
+        where:{
+            id:newReview.id
+        },
+        include: User
+    })
+    const user = await User.findByPk(userId)
     return res.json(review);
 }))
 
 router.put('/:id/edit',editReviewValidator, asyncHandler(async(req, res)=>{
-    const {id, rating, comment} = req.body
-    const review = await Review.findByPk(id);
-    const newReview = await review.update(req.body);
-    return res.json(newReview);
+    const {id, userId, rating, comment} = req.body
+
+    const oldReview = await Review.findByPk(id);
+    const newReview = await oldReview.update(req.body);
+    const review = await Review.findOne({
+        where:{
+            id
+        },
+        include:User
+        }
+    )
+
+    return res.json({review});
 }))
 
 router.post('/:reviewId/delete', asyncHandler(async(req, res)=>{

@@ -23,15 +23,18 @@ const Search = () => {
     }
     return (
         <div className='search-Bar'>
-          <input
-            className='restaurant-Search'
-            type='text'
-            placeholder="Search your favorite restaurant"
-            size={40}
-            onChange={
-              filteredRestaurant
-              }
-             />
+          <form className='search-form'>
+            <i className="fa-solid fa-magnifying-glass"></i>
+            <input
+              className='restaurant-Search'
+              type='text'
+              placeholder="Search your favorite restaurant"
+              size={40}
+              onChange={
+                filteredRestaurant
+                }
+            ></input>
+            </form>
           <div className='results-container'>
             {enhancedSearch.map(result => (
               <div className='search-outer' key={result.id}>

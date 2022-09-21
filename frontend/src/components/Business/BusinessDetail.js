@@ -57,7 +57,7 @@ function BusinessDetail(){
         setEditBusiness(true);
     }
     function newReview(e){
-        setReviewId(e.target.id)
+        // setReviewId(e.target.id)
         setAddReview(true)
     }
     function prevSlide(e){
@@ -100,6 +100,12 @@ function BusinessDetail(){
                         </img>}
                         <div className="restaurant-intro">
                             <div className="restaurant-name">{business.name}</div>
+                            {user && user.id===business.ownerId && (
+                            <div className="ed-business">
+                                <i id={`${business.id}`} onClick={edit} className="fa-solid fa-pen-to-square"></i>
+                                <i onClick={deleteBusiness} className="fa-solid fa-trash"></i>
+                            </div>
+                            )}
                             {reviews.length>0 &&
                             <div className="reviews-intro-bar">
                                 <span className="fa fa-star checked"></span>
@@ -109,55 +115,70 @@ function BusinessDetail(){
                         </div>
                         </div>
                         {/* {reviewButton&&<AddReview business={business} hide={()=>setReviewButton(false)} />} */}
+                        <div className="top-buttons">
                         {user&&user.id===business.ownerId &&
-                            <div className="top-buttons">
-                                <button onClick={()=>setAddMenu(true)} className="add-menu-button">Add Menu</button>
-                                <button onClick={newReview}>Write a review</button>
-                                <button className="edit" id={`${business.id}`} onClick={edit} >Edit Business Info</button>
-                                <button className="delete" onClick={deleteBusiness}>Delete Business</button>
-                            </div>}
+
+                            <button onClick={()=>setAddMenu(true)} className="add-menu-button">Add Menu</button>
+                                // <button onClick={newReview}>Write a review</button>
+                                // {/* <button className="edit" id={`${business.id}`} onClick={edit} >Edit Business Info</button>
+                                // <button className="delete" onClick={deleteBusiness}>Delete Business</button> */}
+                            }
+                        {user && (
+                            <button onClick={newReview}>Write a review</button>
+                        )}
+                        </div>
+                        <div className="restaunrant-container">
                         <div className="restaurant-infos">
-                        <div className="menu-container">
-                            <div className="menu-bar">
-                                <div className="menu-header">Menu</div>
-                                <i className="fa-solid fa-plus" id="add-menu"></i>
+                            <div className="menu-container">
+                                <div className="menu-bar">
+                                    <div className="menu-header">Menu</div>
+                                    {user&&user.id===business.ownerId&&
+                                        <i className="fa-solid fa-plus" onClick={()=>setAddMenu(true)} id="add-menu"></i>
+                                    }
+                                </div>
+
+                                <div className="menu-slider">
+                                    {menus.length>0 &&
+                                    <div>
+                                        <i className="fa-solid fa-angle-left" id={menuNum[0]===0 ? "no-left-arrow" : "left-arrow"} onClick={prevSlide}></i>
+                                        <i className="fa-solid fa-angle-right" id={menuNum[1]===menus.length-1 ? "no-right-arrow" : "right-arrow"} onClick={nextSlide}></i>
+                                    </div>
+                                    }
+                                {menus && (menus.map((menu, index)=>{
+                                    if(menuNum[0]<=index && menuNum[1]>=index){
+                                        // console.log(menuNum[0]<=index && menuNum[1]>=index, menuNum[0], index)
+                                        return (
+                                            <div key={menu.id}>
+                                                <div className="image-shown">
+                                                    <img className="menu-image" src={menu.image_url} alt='i'></img>
+                                                    <div className="menu-price">$ {menu.price}</div>
+                                                    <div className="menu-change">
+                                                        <i className="fas fa-edit" onClick={onEditMenu} id={`${menu.id}`}></i>
+                                                        <i className="fa-solid fa-trash" onClick={onDeleteMenu} id={`${menu.id}`}></i>
+                                                    </div>
+                                                </div>
+                                                <div className="menu-n">{menu.name}</div>
+                                            </div>
+                                            )
+                                        }
+                                }))}
+                                </div>
+                                <div className="reviews-header">Reviews</div>
+                                <GetReviews businessId={businessId}  />
                             </div>
 
-                            <div className="menu-slider">
-                                <i className="fa-solid fa-angle-left" id="left-arrow" onClick={prevSlide}></i>
-                                <i className="fa-solid fa-angle-right" id="right-arrow" onClick={nextSlide}></i>
-                            {menus && (menus.map((menu, index)=>{
-                                if(menuNum[0]<=index && menuNum[1]>=index){
-                                    // console.log(menuNum[0]<=index && menuNum[1]>=index, menuNum[0], index)
-                                    return (
-                                        <div key={menu.id}>
-                                            <div className="image-shown">
-                                                <img className="menu-image" src={menu.image_url} alt='i'></img>
-                                                <div className="menu-price">$ {menu.price}</div>
-                                                <div className="menu-change">
-                                                    <i className="fas fa-edit" onClick={onEditMenu} id={`${menu.id}`}></i>
-                                                    <i className="fa-solid fa-trash" onClick={onDeleteMenu} id={`${menu.id}`}></i>
-                                                </div>
-                                            </div>
-                                            <div className="menu-n">{menu.name}</div>
-                                        </div>
-                                        )
-                                    }
-                            }))}
+                            <div className="restaurant-info">
+                                <p>Phone Number: {business.phoneNumber} </p>
+                                <p>Description: {business.description}</p>
+                                <p>Address: {business.address },  {business.city},   {business.state}</p>
+                                <p>Zip Code: {business.zipCode}</p>
                             </div>
-                            <div className="reviews-header">Reviews</div>
-                            <GetReviews businessId={businessId}  />
-                        </div>
-                        <div className="restaurant-info">
-                            <p>Phone Number: {business.phoneNumber} </p>
-                            <p>Description: {business.description}</p>
-                            <p>Address: {business.address },  {business.city},   {business.state}</p>
-                            <p>Zip Code: {business.zipCode}</p>
                         </div>
                         </div>
+                    </div>
                         {/* <button onClick={review}>Write a review</button> */}
 
-                    </div>
+
                     <div className="edit-delete">
                         {/* <span>{}</span>
                         <span>{Object.keys(reviews).length} Ratings</span> */}
