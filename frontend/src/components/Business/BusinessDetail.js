@@ -34,6 +34,7 @@ function BusinessDetail(){
     reviews.forEach(review=>{reviewAvg+=review.rating})
     reviewAvg = reviewAvg / reviews.length
     const [menuNum, setMenuNum] = useState([0,3])
+    console.log('-------')
     // const [menuSlide, setMenuSlide] = useState(menus)
     // const reviews = useSelector(state=>state.reviews)
 
