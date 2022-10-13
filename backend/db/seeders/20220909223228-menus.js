@@ -60,6 +60,54 @@ module.exports = {
           price: 16,
           createdAt: new Date(),
           updatedAt: new Date()
+        },
+        {
+          restaurantId:2,
+          name: 'Combo',
+          image_url: 'https://www.tacobell.com/images/23876_classic_combo_750x660.jpg',
+          price: 12,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          restaurantId:2,
+          name: 'Tacos combo',
+          image_url: 'https://www.tacobell.com/images/23865_chipotle_cheddar_chalupa_combo_750x660.jpg',
+          price: 9,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          restaurantId:4,
+          name:'Double Burger Combo',
+          image_url: 'https://cdn.sanity.io/images/czqk28jt/prod_bk/f4dc27eb7337f7cbd12d3ccd840e6a031fcba622-360x270.jpg',
+          price: 12,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          restaurantId: 5,
+          name: 'Mint Chip Choco',
+          image_url: 'https://www.baskinrobbinsathome.com/img/2022/mobile-freezer-aisle-favorites@2x.png',
+          price: 8,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          restaurantId: 7,
+          name: 'Chicken combo',
+          image_url: 'https://media.bizj.us/view/img/11579232/chick-fil-a-6-jv*1024xx4163-2342-0-169.jpg',
+          price: 18,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          restaurantId: 7,
+          name: 'Chicken Waffle',
+          image_url: 'http://d1fd34dzzl09j.cloudfront.net/Images/CFACOM/Stories%20Images/2019/12/most%20ordered/nuggetsmealheader.jpg',
+          price: 19,
+          createdAt: new Date(),
+          updatedAt: new Date()
         }
       ], {});
   },

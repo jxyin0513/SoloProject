@@ -17,12 +17,20 @@ function AddMenu({onClose, restaurantId}){
             price,
             image_url: image
         }
-        const newMenu = await dispatch(createMenuThunk(menu))
-        if(!newMenu){
-            onClose()
-        }else{
-            setErrors(newMenu)
-        }
+        return await dispatch(createMenuThunk(menu))
+                .then(()=>onClose())
+                .catch(async (res) => {
+                    const data = await res.json();
+                    console.log(data)
+                    if (data.errors) setErrors(data.errors);
+                    return data;
+                });
+        // if(!newMenu){
+        //     onClose()
+        // }else{
+        //     console.log(newMenu)
+        //     setErrors(newMenu)
+        // }
     }
     return (
         <div className="add-menu-container">
