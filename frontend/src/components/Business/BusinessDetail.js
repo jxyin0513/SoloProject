@@ -30,6 +30,7 @@ function BusinessDetail(){
     const business = useSelector(state=>state.allBusinesses[businessId])
     const menus = Object.values(useSelector(state=>state.menus))
     const reviews = Object.values(useSelector(state=>state.reviews));
+    console.log(menus)
     let reviewAvg=0;
     reviews.forEach(review=>{reviewAvg+=review.rating})
     reviewAvg = reviewAvg / reviews.length
