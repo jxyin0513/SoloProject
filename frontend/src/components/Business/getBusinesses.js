@@ -27,7 +27,7 @@ function AllBusinesses(){
                     return (
                         <ul key={business.id} className="each-business">
                             <NavLink to={`/businesses/${business.id}`}>
-                                {business.logo.length>0&&<img className="business-logo" alt="logo" src={`${business.logo}`}></img>}
+                                {business.logo.length>0&&<img className="business-logo" alt="logo" src={`${business.logo}`} onError={e=>{e.target.src='https://e7.pngegg.com/pngimages/716/758/png-clipart-graphics-restaurant-logo-restaurant-thumbnail.png'; e.onerror=null}} ></img>}
                                 <li key={business.id}>{business.name}</li>
                             </NavLink>
                             {/* <li key={business.id}>{business.name}</li>

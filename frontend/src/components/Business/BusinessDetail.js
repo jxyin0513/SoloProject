@@ -97,7 +97,8 @@ function BusinessDetail(){
                     <div className="business-info">
                         <div className="image-Outer">
                         {business.coverImg.length>0&&
-                        <img className="image" src={business.coverImg} alt="businessImg">
+                        <img className="image" src={business.coverImg} onError={e=>{e.target.src='https://www.digitalcitizen.life/wp-content/uploads/2020/10/photo_gallery.jpg'
+                                                                                    e.onerror=null}} alt="businessImg">
 
                         </img>}
                         <div className="restaurant-intro">
@@ -152,7 +153,7 @@ function BusinessDetail(){
                                         return (
                                             <div key={menu.id}>
                                                 <div className="image-shown">
-                                                    <img className="menu-image" src={menu.image_url} alt='i'></img>
+                                                    <img className="menu-image" src={menu.image_url} onError={e=>{e.target.src='https://www.happyeater.com/images/default-food-image.jpg'; e.onerror=null}} alt='i'></img>
                                                     <div className="menu-price">$ {menu.price}</div>
                                                     <div className="menu-change">
                                                         <i className="fas fa-edit" onClick={onEditMenu} id={`${menu.id}`}></i>
