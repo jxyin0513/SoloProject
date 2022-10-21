@@ -20,8 +20,8 @@ function BusinessDetail(){
     // const [editReview, setEditReview] = useState(false);
     // const [isLoaded, setIsLoaded] = useState(false);
     const [addReview, setAddReview] = useState(false);
-    const [editReview, setEditReview] = useState(0);
-    const [reviewId, setReviewId] = useState(0);
+    // const [editReview, setEditReview] = useState(0);
+    // const [reviewId, setReviewId] = useState(0);
     const [addMenu, setAddMenu] = useState(false)
     const [editMenu, setEditMenu] = useState(false);
     const [menuId, setMenuId] = useState(0);
@@ -30,7 +30,7 @@ function BusinessDetail(){
     const business = useSelector(state=>state.allBusinesses[businessId])
     const menus = Object.values(useSelector(state=>state.menus))
     const reviews = Object.values(useSelector(state=>state.reviews));
-    console.log(menus)
+    // console.log(menus)
     let reviewAvg=0;
     reviews.forEach(review=>{reviewAvg+=review.rating})
     reviewAvg = reviewAvg / reviews.length
@@ -49,6 +49,9 @@ function BusinessDetail(){
 
     },[dispatch, businessId])
 
+    // useEffect(()=>{
+    //     dispatch(getMenusThunk(businessId))
+    // },[dispatch,menus])
     async function deleteBusiness(e){
         const deleteBusiness =  await dispatch(deleteBusinessThunk(businessId))
         if(deleteBusiness){

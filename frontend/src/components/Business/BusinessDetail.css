@@ -132,11 +132,12 @@ img.image{
 }
 
 #add-menu{
-    padding: 3px;
+    padding: 5px;
 }
 #add-menu:hover{
-    background-color:lightslategray;
+    background-color:rgb(198, 199, 199);
     cursor: pointer;
+    border-radius: 2px;
 }
 .menu-change > i{
     padding: 5px;
