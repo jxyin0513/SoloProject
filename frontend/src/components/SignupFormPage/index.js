@@ -6,7 +6,7 @@ import "./SignupForm.css"
 
 function SignupFormPage(){
     const dispatch = useDispatch();
-    const history = useHistory();
+    // const history = useHistory();
     const sessionUser = useSelector(state=>state.session.user)
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("");
@@ -37,39 +37,35 @@ function SignupFormPage(){
             });
         }
 
-        return setErrors(['Confirm Password field must be the same as the Password field']);
-    }
-    function cancelButton(){
-        history.push('/');
+        // return setErrors(['Confirm Password field must be the same as the Password field']);
     }
     return (
         <>
-            <div className="signup-background">
+            <div className="signup-Outer">
                 <form className="sign-up" onSubmit={onSubmit}>
-                    <ul>
-                        {errors.map((error, idx) => <li className="error" key={idx}>{error}</li>)}
-                    </ul>
-                    <label>Username
-                        <input required type="text" name="username" value={username} onChange={e=>setUsername(e.target.value)}>
+                    <div>
+                        {errors.map((error, idx) => <li className="error" key={idx}>*{error}</li>)}
+                    </div>
+                    <label>Username:
+                        <input required type="text" placeholder="Username" name="username" value={username} onChange={e=>setUsername(e.target.value)}>
                         </input>
                     </label>
 
-                    <label>Email
-                        <input required type="text" name="email" value={email} onChange={e=>setEmail(e.target.value)}>
+                    <label>Email:
+                        <input required type="text" placeholder="Email" name="email" value={email} onChange={e=>setEmail(e.target.value)}>
                         </input>
                     </label>
 
-                    <label>Password
-                        <input required type="password" name="password" value={password} onChange={e=>setPassword(e.target.value)}>
+                    <label>Password:
+                        <input required type="password" placeholder="Password" name="password" value={password} onChange={e=>setPassword(e.target.value)}>
                         </input>
                     </label>
 
-                    <label>Confirm Password
-                        <input required type="password" name="confirmPassword" value={confirmPassword} onChange={e=>setConfirmPassword(e.target.value)}>
+                    <label>Confirm Password:
+                        <input required type="password" placeholder="Confirm Password" name="confirmPassword" value={confirmPassword} onChange={e=>setConfirmPassword(e.target.value)}>
                         </input>
                     </label>
                     <button type="submit">Sign Up</button>
-                    <button onClick={cancelButton}>Cancel</button>
                 </form>
             </div>
         </>
