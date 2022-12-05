@@ -39,9 +39,6 @@ function SignupFormPage(){
 
         return setErrors(['Confirm Password field must be the same as the Password field']);
     }
-    function cancelButton(){
-        history.push('/');
-    }
     return (
         <>
             <div className="signup-background">
@@ -69,7 +66,6 @@ function SignupFormPage(){
                         </input>
                     </label>
                     <button type="submit">Sign Up</button>
-                    <button onClick={cancelButton}>Cancel</button>
                 </form>
             </div>
         </>
