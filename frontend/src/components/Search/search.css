@@ -31,9 +31,11 @@
 }
 .search-outer{
     border-bottom: 0.5px solid gray;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
 }
 .search-outer:hover{
-    background-color: rgb(229, 224, 224);
+    background-color: rgb(247, 242, 242);
 }
 .search-Bar{
     display: inline-block;
