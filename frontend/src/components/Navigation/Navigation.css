@@ -2,13 +2,11 @@
 .header{
     display:flex;
     justify-content:space-between;
-    align-items:flex-start;
+    align-items:center;
     background-color:floralwhite;
     height: 70px;
-    padding-top: 15px;
+    padding: 0px 0 0 20px;
     z-index: 1;
-
-    /* padding: 7px 5%; */
 }
 
 button.profile{

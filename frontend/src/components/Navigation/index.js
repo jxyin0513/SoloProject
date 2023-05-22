@@ -15,7 +15,6 @@ function Navigation ({ isLoaded}){
     if (sessionUser) {
         sessionLinks = (
           <div>
-            <Search />
             {/* <NavLink to="/create-business" >
               <button className='list-business'>List your business</button>
             </NavLink> */}
@@ -28,7 +27,6 @@ function Navigation ({ isLoaded}){
     else {
         sessionLinks = (
         <div>
-            <Search />
             {/* <NavLink to="/demo-user"><button>Demo User</button></NavLink> */}
             <LoginFormModal />
             <SignUpModal />
@@ -39,12 +37,11 @@ function Navigation ({ isLoaded}){
     }
     return (
       <header>
-
           <div id='header-original' className='header'>
             <NavLink exact to="/"><img className='img' src="/images/1.jpg" alt='logo'></img></NavLink>
+            <Search />
             {isLoaded && sessionLinks}
           </div>
-
       </header>
       );
 

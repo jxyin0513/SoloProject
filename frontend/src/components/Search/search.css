@@ -1,9 +1,9 @@
 .restaurant-Search {
     display: inline;
     border-radius: 15px;
-    margin-right: 30px;
     height: 30px;
     padding: 0 0 0 30px;
+    text-align: center;
 }
 .results-container{
     position: absolute;
