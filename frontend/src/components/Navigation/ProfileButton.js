@@ -28,7 +28,7 @@ function ProfileButton({user}){
         dispatch(sessionActions.logOutUser());
     };
     return (
-        <>
+        <div className="profile-Outer">
           <button className="profile" onClick={openMenu}>
             <i className="fas fa-user-circle" />
           </button>
@@ -43,7 +43,7 @@ function ProfileButton({user}){
               </div>
             </div>
           )}
-        </>
+        </div>
       );
 }
 

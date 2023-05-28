@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useState} from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import { addBusinessThunk } from "../../store/business";
 import {useHistory} from 'react-router-dom';
@@ -52,7 +52,8 @@ function AddBusiness({onClose}){
     // const newBusiness = await dispatch(addBusinessThunk(business, owner))
 
     return dispatch(addBusinessThunk(business, owner))
-    .then(()=>{
+    .then((res)=>{
+        history.push(`/businesses/${res.id}`)
         onClose()})
     .catch(async (res) => {
         const data = await res.json();
@@ -80,7 +81,7 @@ function AddBusiness({onClose}){
                 </div>
                 <div className="errors-handler-business">
                     {errors.length!==0&&errors.map(error=>
-                        <div >{error}</div>
+                        <div >* {error}</div>
                     )}
                 </div>
                 <form className="add-business-form" onSubmit={onSubmit}>

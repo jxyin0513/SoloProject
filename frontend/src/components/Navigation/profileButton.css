@@ -1,6 +1,12 @@
 .profile-dropdown{
-    position: relative;
+    position: absolute;
     z-index: 1;
     display: flex;
     justify-content: flex-end;
+    right: 10px;
+    width: 100px;
+}
+.profile-Outer{
+    display: inline-block;
+    position: relative;
 }
