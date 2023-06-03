@@ -9,7 +9,6 @@ function EditReview ({id, onClose}){
     const review = useSelector(state=>state.reviews[id])
     const [rating, setRating] = useState(review.rating)
     const [comment, setComment] = useState(review.comment);
-    // const [coverImg, setCoverImg] = useState('')
     const [errors, setErrors] = useState([]);
     const user = useSelector(state=>state.session.user)
 
@@ -40,9 +39,6 @@ function EditReview ({id, onClose}){
                 if (data.errors) setErrors(data.errors);
                 return data;
             });
-        // if(addReview){
-        //     hide();
-        // }
     }
     return (
         <div className="review-outer">

@@ -8,7 +8,7 @@ import './getBusinesses.css';
 
 function AllBusinesses(){
     const dispatch = useDispatch();
-    const user = useSelector(state=>state.session.user)
+    // const user = useSelector(state=>state.session.user)
     const allBusinesses = useSelector(state=>state.allBusinesses);
 
     useEffect(()=>{

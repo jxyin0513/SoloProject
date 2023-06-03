@@ -68,12 +68,13 @@
     max-width: 250px;
     border: 0.5px solid lightgray;
     height: fit-content;
-    margin: 15px 10px;
+    margin: 15px 0 15px 40px;
     padding: 10px;
 }
 .restaurant-infos{
     padding-left: 40px;
     display: flex;
+    margin: 10px 0 40px 0;
     /* margin: 0 auto; */
 }
 .restaunrant-container{
@@ -123,7 +124,9 @@ img.image{
 .image-Outer{
     position: relative;
 }
-
+.menu-container{
+    margin: 0 40px 0 0;
+}
 .menu-header{
     display: inline-block;
 }

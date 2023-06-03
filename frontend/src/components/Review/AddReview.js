@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import { addReviewThunk } from "../../store/review";
 import './AddReview.css'
@@ -8,21 +8,9 @@ function AddReview ({restaurantId, onClose}){
     const dispatch = useDispatch();
     const [rating, setRating] = useState(1)
     const [comment, setComment] = useState('');
-    // const [coverImg, setCoverImg] = useState('')
     const [errors, setErrors] = useState([]);
     const user = useSelector(state=>state.session.user)
-    // console.log(restaurantId)
 
-    // useEffect(()=>{
-    //     const error=[]
-    //     if(rating>5 || rating<1){
-    //         error.push("Rating must be between 1-5.")
-    //     }
-    //     if(comment.length>255){
-    //         error.push("Please provide comment less than 255 character")
-    //     }
-    //     setErrors(error);
-    // },[rating, comment])
 
     async function onSubmit(e){
         e.preventDefault();
@@ -38,18 +26,9 @@ function AddReview ({restaurantId, onClose}){
                 .then(()=>onClose())
                 .catch(async (res) => {
                     const data = await res.json();
-                    console.log(data)
                     if (data.errors) setErrors(data.errors);
                 });
 
-        // if(!addReview){
-        //     onClose()
-        // }else{
-        //     setErrors(addReview)
-        // }
-        // if(addReview){
-        //     hide();
-        // }
     }
     return (
 

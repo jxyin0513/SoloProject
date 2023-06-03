@@ -18,7 +18,7 @@ function GetReviews({businessId}){
 
     async function onDelete(e){
         e.preventDefault();
-        const deletedReview = await dispatch(deleteReviewThunk(e.target.id))
+        return dispatch(deleteReviewThunk(e.target.id))
     }
     function onEdit(e){
         setEditReview(true)
