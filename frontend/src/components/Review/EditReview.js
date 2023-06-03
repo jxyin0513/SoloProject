@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import { editReviewThunk } from "../../store/review";
 import './EditReview.css';
@@ -12,16 +12,16 @@ function EditReview ({id, onClose}){
     const [errors, setErrors] = useState([]);
     const user = useSelector(state=>state.session.user)
 
-    useEffect(()=>{
-        const error=[]
-        if(rating>5 || rating<1){
-            error.push("Rating must be between 1-5.")
-        }
-        if(comment.length>255){
-            error.push("Please provide comment less than 255 character")
-        }
-        setErrors(error);
-    },[rating, comment])
+    // useEffect(()=>{
+    //     const error=[]
+    //     if(rating>5 || rating<1){
+    //         error.push("Rating must be between 1-5.")
+    //     }
+    //     if(comment.length>255){
+    //         error.push("Please provide comment less than 255 character")
+    //     }
+    //     setErrors(error);
+    // },[rating, comment])
 
     async function onSubmit(e){
         e.preventDefault();
@@ -47,7 +47,7 @@ function EditReview ({id, onClose}){
             </div>
             <div className="errors-handler-review">
                 {errors && (errors.map(error=>
-                    <div>{error}</div>
+                    <div>* {error}</div>
                 ))}
             </div>
             <form className="edit-review-form" onSubmit={onSubmit}>

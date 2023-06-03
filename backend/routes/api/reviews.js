@@ -15,7 +15,9 @@ const reviewValidator=[
         .withMessage('Please provide ID of business you want to review on'),
     check('rating')
         .exists({ checkFalsy: true })
-        .withMessage('Please provide your rating'),
+        .withMessage('Please provide your rating')
+        .isInt({min:1, max:5})
+        .withMessage('Rating must be between 1 and 5.'),
     check('comment')
         .exists({ checkFalsy: true })
         .withMessage('Please tell us about your experience')
@@ -29,7 +31,9 @@ const editReviewValidator=[
         .withMessage('Please provide your ID'),
     check('rating')
         .exists({ checkFalsy: true })
-        .withMessage('Please provide your rating'),
+        .withMessage('Please provide your rating')
+        .isInt({min:1, max:5})
+        .withMessage('Rating must be between 1 and 5.'),
     check('comment')
         .exists({ checkFalsy: true })
         .withMessage('Please tell us about your experience')
