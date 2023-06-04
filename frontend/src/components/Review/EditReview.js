@@ -29,7 +29,6 @@ function EditReview ({id, onClose}){
                 const data = await res.json();
                 setErrors(data.errors)
             })
-
     }
     return (
         <div className="review-outer">

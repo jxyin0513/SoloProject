@@ -60,7 +60,7 @@ router.delete('/:businessId/delete', asyncHandler(async (req, res)=>{
     const businessId = parseInt(req.params.businessId,10);
     const deleteBusiness = await Business.findByPk(businessId);
     await deleteBusiness.destroy();
-    return res.json(deleteBusiness)
+    return res.json(deleteBusiness);
 }))
 
 router.post('/create-business', businessValidators, asyncHandler( async(req, res)=>{

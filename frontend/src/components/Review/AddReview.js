@@ -28,6 +28,7 @@ function AddReview ({restaurantId, onClose}){
                 const data = await res.json();
                 setErrors(data.errors)
             })
+
     }
     return (
 
