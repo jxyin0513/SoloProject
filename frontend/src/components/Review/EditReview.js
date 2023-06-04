@@ -23,11 +23,11 @@ function EditReview ({id, onClose}){
             comment
         }
         return dispatch(editReviewThunk(review))
-                .then(()=>{onClose()})
-                .catch(async (res)=>{
-                    const data = await res.json();
-                    setErrors(data.errors)
-                })
+            .then(()=>{onClose()})
+            .catch(async (res)=>{
+                const data = await res.json();
+                setErrors(data.errors)
+            })
     }
     return (
         <div className="review-outer">

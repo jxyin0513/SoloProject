@@ -22,7 +22,7 @@ const editReview = (review)=>({
 
 const deleteReview= (review)=>({
     type: DELETE_REVIEW,
-    review
+    review,
 })
 
 export const getReviewsThunk =(businessId)=> async(dispatch)=>{
@@ -55,7 +55,7 @@ export const addReviewThunk =(review)=> async(dispatch)=>{
 
 export const editReviewThunk = (review) => async(dispatch)=>{
     const response = await csrfFetch(`/api/reviews/${review.id}/edit`,{
-        method:"PUT",
+        method: "PUT",
         body: JSON.stringify(review)
     })
     if(response.ok){
@@ -69,10 +69,11 @@ export const editReviewThunk = (review) => async(dispatch)=>{
 
 export const deleteReviewThunk =(reviewId)=> async(dispatch)=>{
     const response = await csrfFetch(`/api/reviews/${reviewId}/delete`,{
-        method:"DELETE"
+        method: "DELETE"
     })
     if(response.ok){
         const data = await response.json();
+
         dispatch(deleteReview(data))
         return data;
     }else{
@@ -97,7 +98,6 @@ const reviewsReducer = (state=initialState, action)=>{
 
         case ADD_REVIEW:
             newState[action.review.id] = action.review
-            // newState[action.review.review.id]['User'] = action.review.review.user
             return newState;
 
         case EDIT_REVIEW:

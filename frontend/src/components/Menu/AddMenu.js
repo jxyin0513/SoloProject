@@ -25,12 +25,6 @@ function AddMenu({onClose, restaurantId}){
                     if (data.errors) setErrors(data.errors);
                     return data;
                 });
-        // if(!newMenu){
-        //     onClose()
-        // }else{
-        //     console.log(newMenu)
-        //     setErrors(newMenu)
-        // }
     }
     return (
         <div className="add-menu-container">

@@ -44,6 +44,7 @@ function AddBusiness({onClose}){
         if (data && data.errors) setErrors(data.errors);
         return data;
     });
+
 }
 
     return (

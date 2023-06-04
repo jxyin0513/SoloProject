@@ -81,8 +81,6 @@ router.post('/create-business', businessValidators, asyncHandler( async(req, res
     return res.json(newBusiness)
 }))
 
-// router.post()
-
 
 
 

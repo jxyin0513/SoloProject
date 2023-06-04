@@ -68,7 +68,7 @@ export const getBusinessDetailThunk =(businessId)=>async dispatch=>{
 
 export const editBusinessThunk =(business) => async dispatch=>{
     const response = await csrfFetch(`/api/businesses/${business.id}/edit`,{
-        method: "PUT",
+        method:"PUT",
         body: JSON.stringify(business)
     })
     if(response.ok){
@@ -82,7 +82,7 @@ export const editBusinessThunk =(business) => async dispatch=>{
 
 export const deleteBusinessThunk = (businessId)=> async dispatch=>{
     const response = await csrfFetch(`/api/businesses/${businessId}/delete`,{
-        method: "DELETE",
+        method:"DELETE",
     })
     if(response.ok){
         const data = await response.json();

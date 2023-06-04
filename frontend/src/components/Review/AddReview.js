@@ -23,11 +23,11 @@ function AddReview ({restaurantId, onClose}){
         }
 
         return dispatch(addReviewThunk(review))
-                .then(()=>(onClose()))
-                .catch(async (res)=>{
-                    const data = await res.json();
-                    setErrors(data.errors)
-                })
+            .then(()=>(onClose()))
+            .catch(async (res)=>{
+                const data = await res.json();
+                setErrors(data.errors)
+            })
     }
     return (
 
