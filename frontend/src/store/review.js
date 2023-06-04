@@ -60,7 +60,7 @@ export const editReviewThunk = (review) => async(dispatch)=>{
     })
     if(response.ok){
         const data = await response.json();
-        dispatch(editReview(data))
+        dispatch(editReview(data));
         return data;
     }else {
         return false;

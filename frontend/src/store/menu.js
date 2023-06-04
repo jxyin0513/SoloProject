@@ -59,7 +59,7 @@ export const editMenuThunk = (menu) => async(dispatch)=>{
     })
     if(response.ok){
         const data = await response.json();
-        dispatch(editMenu(data))
+        dispatch(editMenu(data));
         return data;
     }else{
         return false;

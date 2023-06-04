@@ -46,7 +46,7 @@ router.get('/', asyncHandler( async (req, res)=>{
 router.get('/:businessId', asyncHandler(async (req, res)=>{
     const id = parseInt(req.params.businessId, 10);
     const business = await Business.findByPk(id)
-    return res.json(business)
+    return res.json(business);
 }))
 
 router.put('/:businessId/edit', businessValidators, asyncHandler(async (req, res)=>{
@@ -78,7 +78,7 @@ router.post('/create-business', businessValidators, asyncHandler( async(req, res
         state,
         zipCode
     })
-    return res.json(newBusiness)
+    return res.json(newBusiness);
 }))
 
 

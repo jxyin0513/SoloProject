@@ -22,6 +22,7 @@ function EditReview ({id, onClose}){
             rating,
             comment
         }
+
         return dispatch(editReviewThunk(review))
             .then(()=>{onClose()})
             .catch(async (res)=>{
