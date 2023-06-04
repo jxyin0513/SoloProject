@@ -63,7 +63,7 @@ export const editReviewThunk = (review) => async(dispatch)=>{
         dispatch(editReview(data))
         return data;
     }else {
-        return false;
+        return false
     }
 }
 
