@@ -76,7 +76,7 @@ export const editBusinessThunk =(business) => async dispatch=>{
         dispatch(editBusiness(data))
         return data;
     }else{
-        return false
+        return false;
     }
 }
 

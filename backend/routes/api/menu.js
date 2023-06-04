@@ -59,7 +59,7 @@ router.delete('/:menuId/delete', asyncHandler(async (req, res)=>{
     const id = parseInt(req.params.menuId,10);
     const menu = await Menu.findByPk(id);
     await menu.destroy();
-    return res.json(menu)
+    return res.json(menu);
 }))
 
 module.exports = router

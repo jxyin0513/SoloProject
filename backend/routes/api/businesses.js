@@ -53,7 +53,7 @@ router.put('/:businessId/edit', businessValidators, asyncHandler(async (req, res
     const id = parseInt(req.params.businessId, 10)
     const business = await Business.findByPk(id);
     const newBusiness = await business.update(req.body);
-    return res.json(newBusiness)
+    return res.json(newBusiness);
 }))
 
 router.delete('/:businessId/delete', asyncHandler(async (req, res)=>{
