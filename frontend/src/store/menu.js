@@ -62,7 +62,7 @@ export const editMenuThunk = (menu) => async(dispatch)=>{
         dispatch(editMenu(data))
         return data;
     }else{
-        return false
+        return false;
     }
 }
 

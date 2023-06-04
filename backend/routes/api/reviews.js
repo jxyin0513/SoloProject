@@ -69,7 +69,7 @@ router.post('/new', reviewValidator, asyncHandler(async(req, res)=>{
         },
         include: User
     })
-    return res.json(review);
+    return res.json(review)
 }))
 
 router.put('/:id/edit',editReviewValidator, asyncHandler(async(req, res)=>{

@@ -52,7 +52,7 @@ router.put('/:menuId/edit', MenuValidator, asyncHandler(async (req, res)=>{
     const id = parseInt(req.params.menuId, 10)
     const menu = await Menu.findByPk(id);
     const newMenu = await menu.update(req.body);
-    return res.json(newMenu);
+    return res.json(newMenu)
 }))
 
 router.delete('/:menuId/delete', asyncHandler(async (req, res)=>{
