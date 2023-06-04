@@ -49,20 +49,18 @@ router.get('/:businessId', asyncHandler(async (req, res)=>{
     return res.json(business)
 }))
 
-router.post('/:businessId/edit', businessValidators, asyncHandler(async (req, res)=>{
+router.put('/:businessId/edit', businessValidators, asyncHandler(async (req, res)=>{
     const id = parseInt(req.params.businessId, 10)
     const business = await Business.findByPk(id);
     const newBusiness = await business.update(req.body);
     return res.json(newBusiness)
 }))
 
-router.post('/:businessId/delete', asyncHandler(async (req, res)=>{
+router.delete('/:businessId/delete', asyncHandler(async (req, res)=>{
     const businessId = parseInt(req.params.businessId,10);
     const deleteBusiness = await Business.findByPk(businessId);
-
     await deleteBusiness.destroy();
-
-    return res.json(businessId)
+    return res.json(deleteBusiness)
 }))
 
 router.post('/create-business', businessValidators, asyncHandler( async(req, res)=>{

@@ -18,7 +18,9 @@ const MenuValidator = [
         .withMessage('Menu must be less than 15 characters.'),
     check('price')
         .exists({ checkFalsy: true })
-        .withMessage('Please provide menu price'),
+        .withMessage('Please provide menu price')
+        .isInt()
+        .withMessage('Please provide proper price tag.'),
     check('image_url')
         .exists({ checkFalsy: true })
         .withMessage('Please upload your image'),

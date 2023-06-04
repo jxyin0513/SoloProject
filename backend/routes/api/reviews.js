@@ -69,13 +69,12 @@ router.post('/new', reviewValidator, asyncHandler(async(req, res)=>{
         },
         include: User
     })
-    const user = await User.findByPk(userId)
+    // const user = await User.findByPk(userId)
     return res.json(review);
 }))
 
 router.put('/:id/edit',editReviewValidator, asyncHandler(async(req, res)=>{
-    const {id, userId, rating, comment} = req.body
-
+    const id = parseInt(req.params.id, 10)
     const oldReview = await Review.findByPk(id);
     const newReview = await oldReview.update(req.body);
     const review = await Review.findOne({
@@ -86,14 +85,14 @@ router.put('/:id/edit',editReviewValidator, asyncHandler(async(req, res)=>{
         }
     )
 
-    return res.json({review});
+    return res.json(review);
 }))
 
-router.post('/:reviewId/delete', asyncHandler(async(req, res)=>{
+router.delete('/:reviewId/delete', asyncHandler(async(req, res)=>{
     const id = parseInt(req.params.reviewId, 10);
     const review = await Review.findByPk(id)
     await review.destroy();
-    return res.json(id);
+    return res.json(review);
 }))
 
 module.exports= router;
