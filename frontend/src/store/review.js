@@ -20,9 +20,9 @@ const editReview = (review)=>({
     review
 })
 
-const deleteReview= (reviewId)=>({
+const deleteReview= (review)=>({
     type: DELETE_REVIEW,
-    reviewId
+    review
 })
 
 export const getReviewsThunk =(businessId)=> async(dispatch)=>{
@@ -46,15 +46,10 @@ export const addReviewThunk =(review)=> async(dispatch)=>{
     })
     if(response.ok){
         const data = await response.json();
-        console.log(data)
         dispatch(addReview(data))
-        return null;
-    }else if (response.status < 500) {
-        const data = await response.json();
-        console.log(data.errors)
-        if (data.errors) {
-        return data.errors;
-        }
+        return data;
+    }else {
+        return false;
     }
 }
 
@@ -65,27 +60,23 @@ export const editReviewThunk = (review) => async(dispatch)=>{
     })
     if(response.ok){
         const data = await response.json();
-        console.log(data)
-        dispatch(editReview(data.review))
-        return data
-    }else{
+        dispatch(editReview(data))
+        return data;
+    }else {
         return false;
     }
 }
 
 export const deleteReviewThunk =(reviewId)=> async(dispatch)=>{
     const response = await csrfFetch(`/api/reviews/${reviewId}/delete`,{
-        method:"POST"
+        method:"DELETE"
     })
     if(response.ok){
         const data = await response.json();
-        dispatch(deleteReview(reviewId))
-        return null;
-    }else if (response.status < 500) {
-        const data = await response.json();
-        if (data.errors) {
-        return data.errors;
-        }
+        dispatch(deleteReview(data))
+        return data;
+    }else{
+        return false;
     }
 }
 
@@ -114,7 +105,7 @@ const reviewsReducer = (state=initialState, action)=>{
             return newState;
 
         case DELETE_REVIEW:
-            delete newState[action.reviewId];
+            delete newState[action.review.id];
             return newState;
 
         default:

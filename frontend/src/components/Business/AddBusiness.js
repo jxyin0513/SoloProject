@@ -19,21 +19,6 @@ function AddBusiness({onClose}){
     const [zipCode, setZipCode] = useState('');
     const [errors, setErrors]=useState([])
 
-    // if(!owner){
-    //     return <Redirect to="/" />
-    // }
-
-    // useEffect(()=>{
-    //     const error=[]
-    //     if(description.length>=255){
-    //         error.push("Description must be less than 255 characters")
-    //     }
-    //     if(zipCode.length>5){
-    //         error.push("Please provide a valid code.")
-    //     }
-    //     setErrors(error);
-    // },[description, zipCode])
-
     async function onSubmit(e){
         e.preventDefault();
 
@@ -49,7 +34,6 @@ function AddBusiness({onClose}){
             state,
             zipCode
         }
-    // const newBusiness = await dispatch(addBusinessThunk(business, owner))
 
     return dispatch(addBusinessThunk(business, owner))
     .then((res)=>{
@@ -62,18 +46,6 @@ function AddBusiness({onClose}){
     });
 }
 
-    // function reset(){
-    //     setName('');
-    //     setDescription('');
-    //     setCoverImg('');
-    //     setAddress('');
-    //     setLogo('')
-    //     setCity('');
-    //     setState('')
-    //     setPhoneNumber('');
-    //     setZipCode('');
-    //     setErrors([])
-    // }
     return (
             <div className="add-business-container">
                 <div className="business-header">

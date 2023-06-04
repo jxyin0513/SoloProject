@@ -23,12 +23,11 @@ function AddReview ({restaurantId, onClose}){
         }
 
         return dispatch(addReviewThunk(review))
-                .then(()=>onClose())
-                .catch(async (res) => {
+                .then(()=>(onClose()))
+                .catch(async (res)=>{
                     const data = await res.json();
-                    if (data.errors) setErrors(data.errors);
-                });
-
+                    setErrors(data.errors)
+                })
     }
     return (
 
@@ -44,9 +43,6 @@ function AddReview ({restaurantId, onClose}){
             <form className="add-review-form" onSubmit={onSubmit}>
                 <input type="number" name="rating" placeholder="rating" value={rating} onChange={(e)=>setRating(e.target.value)}></input>
                 <textarea name="comment" value={comment} placeholder='write your comment' rows="3" cols="20" onChange={(e)=>setComment(e.target.value)}></textarea>
-                {/* <label>Image:
-                    <input type="text" name="coverImg" value={coverImg} onChange={e=>setCoverImg(e.target.value)}></input>
-                </label> */}
                 <button type="submit">Submit</button>
                 <button onClick={onClose}>Cancel</button>
             </form>
