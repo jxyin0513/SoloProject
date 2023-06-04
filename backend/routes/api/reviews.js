@@ -84,7 +84,7 @@ router.put('/:id/edit',editReviewValidator, asyncHandler(async(req, res)=>{
         include:User
         }
     )
-    return res.json(review);
+    return res.json(review)
 }))
 
 router.delete('/:reviewId/delete', asyncHandler(async(req, res)=>{

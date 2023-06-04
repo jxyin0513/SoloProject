@@ -45,7 +45,7 @@ router.post('/new', MenuValidator, asyncHandler(async (req, res)=>{
         price,
         image_url
     })
-    return res.json(menu);
+    return res.json(menu)
 }))
 
 router.put('/:menuId/edit', MenuValidator, asyncHandler(async (req, res)=>{

@@ -73,7 +73,7 @@ export const editBusinessThunk =(business) => async dispatch=>{
     })
     if(response.ok){
         const data = await response.json();
-        dispatch(editBusiness(data));
+        dispatch(editBusiness(data))
         return data;
     }else{
         return false;
