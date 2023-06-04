@@ -62,7 +62,7 @@ export const getBusinessDetailThunk =(businessId)=>async dispatch=>{
         dispatch(getBusinessDetail(data))
         return data;
     }else{
-        return false
+        return false;
     }
 }
 
