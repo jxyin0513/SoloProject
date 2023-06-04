@@ -21,7 +21,6 @@ function AddReview ({restaurantId, onClose}){
             rating,
             comment
         }
-
         return dispatch(addReviewThunk(review))
             .then(()=>(onClose()))
             .catch(async (res)=>{

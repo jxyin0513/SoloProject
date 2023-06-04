@@ -51,7 +51,7 @@ router.get('/:businessId/all',  asyncHandler(async(req, res)=>{
         },
         include:User
     });
-    return res.json(reviews)
+    return res.json(reviews);
 }))
 
 router.post('/new', reviewValidator, asyncHandler(async(req, res)=>{
@@ -83,7 +83,7 @@ router.put('/:id/edit',editReviewValidator, asyncHandler(async(req, res)=>{
         },
         include:User
         }
-    )
+    );
     return res.json(review);
 }))
 

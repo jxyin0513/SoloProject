@@ -48,7 +48,7 @@ export const createMenuThunk = (menu) => async(dispatch)=>{
         dispatch(createMenu(data))
         return data;
     }else{
-        return false;
+        return false
     }
 }
 
@@ -59,7 +59,6 @@ export const editMenuThunk = (menu) => async(dispatch)=>{
     })
     if(response.ok){
         const data = await response.json();
-        // console.log(data)
         dispatch(editMenu(data))
         return data;
     }else{

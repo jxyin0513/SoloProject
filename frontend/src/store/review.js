@@ -63,13 +63,13 @@ export const editReviewThunk = (review) => async(dispatch)=>{
         dispatch(editReview(data))
         return data;
     }else {
-        return false;
+        return false
     }
 }
 
 export const deleteReviewThunk =(reviewId)=> async(dispatch)=>{
     const response = await csrfFetch(`/api/reviews/${reviewId}/delete`,{
-        method: "DELETE"
+        method: "DELETE",
     })
     if(response.ok){
         const data = await response.json();
