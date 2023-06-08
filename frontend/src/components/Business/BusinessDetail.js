@@ -2,7 +2,7 @@ import React, { useEffect, useState} from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import {getBusinessesThunk, deleteBusinessThunk} from "../../store/business";
 import GetReviews from "../Review/getReviews";
-import { restoreUser } from "../../store/session";
+// import { restoreUser } from "../../store/session";
 import { getMenusThunk } from "../../store/menu";
 import AddMenuModal from "../Menu/AddMenuModal";
 import EditMenuModal from "../Menu/EditMenuModal";
@@ -17,11 +17,8 @@ function BusinessDetail(){
     const history = useHistory();
     const {businessId} = useParams();
     const [editBusiness, setEditBusiness] = useState(false);
-    // const [editReview, setEditReview] = useState(false);
     // const [isLoaded, setIsLoaded] = useState(false);
     const [addReview, setAddReview] = useState(false);
-    // const [editReview, setEditReview] = useState(0);
-    // const [reviewId, setReviewId] = useState(0);
     const [addMenu, setAddMenu] = useState(false)
     const [editMenu, setEditMenu] = useState(false);
     const [menuId, setMenuId] = useState(0);
@@ -30,28 +27,19 @@ function BusinessDetail(){
     const business = useSelector(state=>state.allBusinesses[businessId])
     const menus = Object.values(useSelector(state=>state.menus))
     const reviews = Object.values(useSelector(state=>state.reviews));
-    // console.log(menus)
+
     let reviewAvg=0;
     reviews.forEach(review=>{reviewAvg+=review.rating})
     reviewAvg = reviewAvg / reviews.length
     const [menuNum, setMenuNum] = useState([0,3])
-    // console.log('-------')
-    // const [menuSlide, setMenuSlide] = useState(menus)
-    // const reviews = useSelector(state=>state.reviews)
 
     useEffect(()=>{
-        dispatch(restoreUser())
+        // dispatch(restoreUser())
         dispatch(getBusinessesThunk())
         dispatch(getMenusThunk(businessId))
-        // const header = document.getElementById("header-original");
-        // console.log(header.value)
-        // header.hidden=true;
 
     },[dispatch, businessId])
 
-    // useEffect(()=>{
-    //     dispatch(getMenusThunk(businessId))
-    // },[dispatch,menus])
     async function deleteBusiness(e){
         const deleteBusiness =  await dispatch(deleteBusinessThunk(businessId))
         if(deleteBusiness){
@@ -166,6 +154,8 @@ function BusinessDetail(){
                                                 <div className="menu-n">{menu.name}</div>
                                             </div>
                                             )
+                                        }else{
+                                            return false
                                         }
                                 }))}
                                 </div>

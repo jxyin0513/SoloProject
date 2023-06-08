@@ -25,26 +25,13 @@ function AllBusinesses(){
             <div className="all-businesses">
                 {Object.values(allBusinesses).map(business=>{
                     return (
-                        <ul key={business.id} className="each-business">
+                        <div key={business.id} className="each-business">
                             <NavLink to={`/businesses/${business.id}`}>
-                                {business.logo.length>0&&<img className="business-logo" alt="logo" src={`${business.logo}`} onError={e=>{e.target.src='https://e7.pngegg.com/pngimages/716/758/png-clipart-graphics-restaurant-logo-restaurant-thumbnail.png'; e.onerror=null}} ></img>}
-                                <li key={business.id}>{business.name}</li>
+                                {business.logo.length>0&&
+                                <img className="business-logo" alt="logo" src={`${business.logo}`} onError={e=>{e.target.src='https://e7.pngegg.com/pngimages/716/758/png-clipart-graphics-restaurant-logo-restaurant-thumbnail.png'; e.onerror=null}} ></img>}
+                                <div key={business.id}>{business.name}</div>
                             </NavLink>
-                            {/* <li key={business.id}>{business.name}</li>
-                            <li>{business.phoneNumber}</li> */}
-                            {/* <NavLink to={`/businesses/${business.id}`}>
-                                <button className={business} id={business.id} >Detail</button>
-                            </NavLink> */}
-
-
-                            {/* <Route path={`/businesses/:businessId`}>
-                                <BusinessDetail />
-                            </Route> */}
-
-
-
-
-                        </ul>
+                        </div>
                     )
                 })}
 

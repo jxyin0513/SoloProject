@@ -1,11 +1,11 @@
-ul.each-business {
+.each-business {
     display: inline-block;
-    padding: 25px;
-    margin: 25px;
-    background-color:floralwhite;
+    padding: 20px 25px;
+    margin: 25px 30px;
+    background-color:rgba(251, 237, 208, 0.929);
     border-radius: 15px;
 }
-.each-business  li{
+.each-business  div{
     display: flex;
     justify-content: center;
     font-family: Arial, Helvetica, sans-serif;

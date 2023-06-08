@@ -28,11 +28,6 @@ function EditMenu({onClose, menuId, restaurantId}){
                     if (data.errors) setErrors(data.errors);
                     return data;
                 });
-        // if(!editMenu){
-        //     onClose()
-        // }else{
-        //     setErrors(editMenu)
-        // }
     }
 
     return (

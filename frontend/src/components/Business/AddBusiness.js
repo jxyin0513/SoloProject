@@ -52,7 +52,7 @@ function AddBusiness({onClose}){
                     <div>List your new business</div>
                 </div>
                 <div className="errors-handler-business">
-                    {errors.length!==0&&errors.map(error=>
+                    {errors && errors.map(error=>
                         <div >* {error}</div>
                     )}
                 </div>
