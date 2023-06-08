@@ -34,7 +34,6 @@ function BusinessDetail(){
     const [menuNum, setMenuNum] = useState([0,3])
 
     useEffect(()=>{
-        // dispatch(restoreUser())
         dispatch(getBusinessesThunk())
         dispatch(getMenusThunk(businessId))
 

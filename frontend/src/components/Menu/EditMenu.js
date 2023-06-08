@@ -27,7 +27,7 @@ function EditMenu({onClose, menuId, restaurantId}){
                     const data = await res.json();
                     if (data.errors) setErrors(data.errors);
                     return data;
-                });
+                })
     }
 
     return (

@@ -24,7 +24,7 @@ function AddMenu({onClose, restaurantId}){
                     console.log(data)
                     if (data.errors) setErrors(data.errors);
                     return data;
-                });
+                })
     }
     return (
         <div className="add-menu-container">

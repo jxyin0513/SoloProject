@@ -43,7 +43,7 @@ function AddBusiness({onClose}){
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
         return data;
-    })
+    });
 }
 
     return (
