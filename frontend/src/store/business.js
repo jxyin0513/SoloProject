@@ -1,19 +1,18 @@
 import { csrfFetch } from "./csrf";
 
 const ADD_BUSINESS = '/business/add'
-const READ_BUSINESS = '/business/read'
+const READ_BUSINESSES = '/business/all'
 const READ_BUSINESS_DETAIL = 'business/detail';
 const EDIT_BUSINESS ='/business/edit'
 const DELETE_BUSINESS ='/business/delete'
 
-const addBusiness = (business, owner)=>({
+const addBusiness = (business)=>({
     type: ADD_BUSINESS,
-    business,
-    owner
+    business
 })
 
 const getBusinesses = (businesses)=>({
-    type: READ_BUSINESS,
+    type: READ_BUSINESSES,
     businesses
 })
 
@@ -31,14 +30,14 @@ const removeBusiness= (businessId)=>({
     businessId
 })
 
-export const addBusinessThunk = (business, owner)=> async dispatch=>{
+export const addBusinessThunk = (business)=> async dispatch=>{
     const response = await csrfFetch("/api/businesses/create-business",{
         method: "POST",
         body: JSON.stringify(business)
     })
     if(response.ok){
         const data = await response.json();
-        dispatch(addBusiness(data, owner))
+        dispatch(addBusiness(data))
         return data;
     }else{
         return false;
@@ -46,7 +45,7 @@ export const addBusinessThunk = (business, owner)=> async dispatch=>{
 }
 
 export const getBusinessesThunk =()=>async dispatch=>{
-    const response = await csrfFetch("/api/businesses/")
+    const response = await csrfFetch("/api/businesses/all")
     if(response.ok){
         const data = await response.json();
         dispatch(getBusinesses(data))
@@ -101,7 +100,7 @@ const businessesReducer = (state=initialState, action)=>{
     switch(action.type){
         case ADD_BUSINESS:
             newState[action.business.id]= action.business
-            newState[action.business.id].user= action.owner
+            // newState[action.business.id].user= action.owner
             return newState;
 
         case READ_BUSINESS_DETAIL:
@@ -109,7 +108,7 @@ const businessesReducer = (state=initialState, action)=>{
             newState[action.business.id] = action.business
             return newState;
 
-        case READ_BUSINESS:
+        case READ_BUSINESSES:
             action.businesses.forEach(business=>{
                 newState[business.id]= business
             })

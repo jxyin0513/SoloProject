@@ -6,7 +6,7 @@ import './AddBusiness.css'
 
 function AddBusiness({onClose}){
     const dispatch = useDispatch();
-    const owner = useSelector(state=>state.session.user);
+    const user = useSelector(state=>state.session.user);
     const[name, setName] = useState('');
     const history = useHistory();
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -23,7 +23,7 @@ function AddBusiness({onClose}){
         e.preventDefault();
 
         const business = {
-            owner,
+            ownerId: user.id,
             name,
             phoneNumber: phoneNumber.trim(),
             description,
@@ -35,7 +35,7 @@ function AddBusiness({onClose}){
             zipCode
         }
 
-    return dispatch(addBusinessThunk(business, owner))
+    return dispatch(addBusinessThunk(business))
     .then((res)=>{
         history.push(`/businesses/${res.id}`)
         onClose()})
