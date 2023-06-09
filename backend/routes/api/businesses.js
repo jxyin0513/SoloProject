@@ -37,7 +37,7 @@ const businessValidators = [
     handleValidationErrors
 ]
 
-router.get('/', asyncHandler( async (req, res)=>{
+router.get('/all', asyncHandler( async (req, res)=>{
     const businesses = await Business.findAll();
     return res.json(businesses)
 
@@ -64,10 +64,10 @@ router.delete('/:businessId/delete', asyncHandler(async (req, res)=>{
 }))
 
 router.post('/create-business', businessValidators, asyncHandler( async(req, res)=>{
-    const {owner, name, phoneNumber, description, coverImg, logo, address, city, state, zipCode} = req.body;
+    const {ownerId, name, phoneNumber, description, coverImg, logo, address, city, state, zipCode} = req.body;
 
     const newBusiness = await Business.create({
-        ownerId: owner.id,
+        ownerId,
         name,
         phoneNumber,
         description,
