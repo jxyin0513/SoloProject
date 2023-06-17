@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector} from 'react-redux';
 import './search.css'
 
 const Search = () => {
@@ -18,7 +18,6 @@ const Search = () => {
           return false;
         })
       }
-      console.log(search)
       setEnhancedSearch(search)
     }
     return (

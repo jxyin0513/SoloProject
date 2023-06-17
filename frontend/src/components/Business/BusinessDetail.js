@@ -2,7 +2,6 @@ import React, { useEffect, useState} from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import {getBusinessesThunk, deleteBusinessThunk} from "../../store/business";
 import GetReviews from "../Review/getReviews";
-// import { restoreUser } from "../../store/session";
 import { getMenusThunk } from "../../store/menu";
 import AddMenuModal from "../Menu/AddMenuModal";
 import EditMenuModal from "../Menu/EditMenuModal";
@@ -17,12 +16,10 @@ function BusinessDetail(){
     const history = useHistory();
     const {businessId} = useParams();
     const [editBusiness, setEditBusiness] = useState(false);
-    // const [isLoaded, setIsLoaded] = useState(false);
     const [addReview, setAddReview] = useState(false);
     const [addMenu, setAddMenu] = useState(false)
     const [editMenu, setEditMenu] = useState(false);
     const [menuId, setMenuId] = useState(0);
-
     const user = useSelector(state=>state.session.user)
     const business = useSelector(state=>state.allBusinesses[businessId])
     const menus = Object.values(useSelector(state=>state.menus))
@@ -36,7 +33,6 @@ function BusinessDetail(){
     useEffect(()=>{
         dispatch(getBusinessesThunk())
         dispatch(getMenusThunk(businessId))
-
     },[dispatch, businessId])
 
     async function deleteBusiness(e){
