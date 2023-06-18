@@ -15,7 +15,6 @@ function EditReview ({id, onClose}){
 
     async function onSubmit(e){
         e.preventDefault();
-
         const review = {
             id,
             userId: user.id,
