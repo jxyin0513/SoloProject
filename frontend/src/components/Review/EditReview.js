@@ -22,7 +22,6 @@ function EditReview ({id, onClose}){
             rating,
             comment
         }
-
         return dispatch(editReviewThunk(review))
             .then(()=>{onClose()})
             .catch(async (res)=>{
@@ -41,10 +40,9 @@ function EditReview ({id, onClose}){
                 ))}
             </div>
             <form className="edit-review-form" onSubmit={onSubmit}>
-
                 <input type="number" name="rating" placeholder="rating" value={rating} onChange={(e)=>setRating(e.target.value)}></input>
                 <textarea name="comment" value={comment} placeholder="write your comment" rows="3" cols="20" onChange={(e)=>setComment(e.target.value)}></textarea>
-                <button type="submit" disabled={errors.length===0 ? false : true}>Submit</button>
+                <button type="submit">Submit</button>
                 <button onClick={onClose}>Cancel</button>
             </form>
         </div>

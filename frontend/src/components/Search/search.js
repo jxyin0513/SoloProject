@@ -4,7 +4,6 @@ import { useSelector} from 'react-redux';
 import './search.css'
 
 const Search = () => {
-    // const dispatch = useDispatch()
     const [enhancedSearch, setEnhancedSearch] = useState([])
     const restaurants = Object.values(useSelector(state=>state.allBusinesses))
     let search = []

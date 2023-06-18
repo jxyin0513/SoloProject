@@ -103,14 +103,10 @@ function BusinessDetail(){
                             </div>}
                         </div>
                         </div>
-                        {/* {reviewButton&&<AddReview business={business} hide={()=>setReviewButton(false)} />} */}
                         <div className="top-buttons">
                         {user&&user.id===business.ownerId &&
 
                             <button onClick={()=>setAddMenu(true)} className="add-menu-button">Add Menu</button>
-                                // <button onClick={newReview}>Write a review</button>
-                                // {/* <button className="edit" id={`${business.id}`} onClick={edit} >Edit Business Info</button>
-                                // <button className="delete" onClick={deleteBusiness}>Delete Business</button> */}
                             }
                         {user && (
                             <button onClick={newReview}>Write a review</button>
