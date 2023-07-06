@@ -14,8 +14,9 @@ const Search = () => {
         search = restaurants.filter(restaurant=>{
           if(restaurant.name.toLowerCase().startsWith(e.target.value.toLowerCase())){
             return true;
+          }else{
+            return false;
           }
-          return false;
         })
       }
       setEnhancedSearch(search)
@@ -28,13 +29,13 @@ const Search = () => {
               className='restaurant-Search'
               type='text'
               placeholder="Search your favorite restaurant"
-              size={40}
+              size={45}
               onChange={
                 filteredRestaurant
                 }
             ></input>
             </form>
-          <div className='results-container'>
+          {enhancedSearch.length>0 && (<div className='results-container'>
             {enhancedSearch.map(result => (
               <div className='search-outer' key={result.id}>
                 <NavLink className='search-restaurants' onClick={()=>setEnhancedSearch([])} to={`/businesses/${result.id}`}>
@@ -45,7 +46,7 @@ const Search = () => {
                 </NavLink>
               </div>
             ))}
-          </div>
+          </div>)}
         </div>
       )
     };
