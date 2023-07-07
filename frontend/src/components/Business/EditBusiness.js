@@ -20,7 +20,6 @@ function EditBusiness({restaurantId, onClose}){
 
     useEffect(()=>{
         const error = []
-
         if(description.length>=255){
             error.push("Description must be less than 255 characters")
         }

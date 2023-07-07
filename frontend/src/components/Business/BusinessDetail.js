@@ -8,6 +8,7 @@ import EditMenuModal from "../Menu/EditMenuModal";
 import AddReviewModal from "../Review/AddReviewModal";
 import EditBusinessModal from "./EditBusinessModal";
 import { deleteMenuThunk } from "../../store/menu";
+// import LoginFormModal from '../LoginFormModal';
 import { useParams, useHistory } from 'react-router-dom';
 import './BusinessDetail.css'
 
@@ -104,7 +105,6 @@ function BusinessDetail(){
                         </div>
                         <div className="top-buttons">
                         {user&&user.id===business.ownerId &&
-
                             <button onClick={()=>setAddMenu(true)} className="add-menu-button">Add Menu</button>
                             }
                         {user && (
