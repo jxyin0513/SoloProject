@@ -28,6 +28,7 @@ function EditReview ({id, onClose}){
                 setErrors(data.errors)
             })
     }
+
     return (
         <div className="review-outer">
             <div className="edit-review-header">
