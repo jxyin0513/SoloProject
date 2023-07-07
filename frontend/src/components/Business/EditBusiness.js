@@ -44,9 +44,6 @@ function EditBusiness({restaurantId, onClose}){
             zipCode
         }
     // const editBusiness = await dispatch(editBusinessThunk(business))
-    // if(editBusiness){
-    //     hide()
-    // }
     return dispatch(editBusinessThunk(business)).then(()=>onClose())
     .catch(async (res) => {
         const data = await res.json();

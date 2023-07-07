@@ -107,6 +107,7 @@ function BusinessDetail(){
                         {user&&user.id===business.ownerId &&
                             <button onClick={()=>setAddMenu(true)} className="add-menu-button">Add Menu</button>
                             }
+
                         {user && (
                             <button onClick={newReview}>Write a review</button>
                         )}

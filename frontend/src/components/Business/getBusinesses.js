@@ -10,6 +10,7 @@ function AllBusinesses(){
     const dispatch = useDispatch();
     const allBusinesses = useSelector(state=>state.allBusinesses);
 
+
     useEffect(()=>{
         dispatch(getBusinessesThunk())
     },[dispatch])
