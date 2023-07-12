@@ -71,7 +71,7 @@ function EditBusiness({restaurantId, onClose}){
                     <input type="text" name="phoneNumber" placeholder="phone number" value={phoneNumber} onChange={e=>setPhoneNumber(e.target.value)}></input>
                 </label>
                 <label>
-                    <textarea name="description" value={description} placeholder='description' rows="5" cols="20" onChange={e=>setDescription(e.target.value)}></textarea>
+                    <textarea name="description" value={description} placeholder='description' rows="5" cols="30" onChange={e=>setDescription(e.target.value)}></textarea>
                 </label>
                 <label>
                      <input type="text" name="coverImg" placeholder="cover image" value={coverImg} onChange={e=>setCoverImg(e.target.value)}></input>

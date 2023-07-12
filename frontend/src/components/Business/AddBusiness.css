@@ -20,8 +20,8 @@ button {
 }
 .errors-handler-business{
     color: red;
-    padding: 0 0 0 20px;
-    height: 80px;
+    padding: 5px 0 0px 10px;
+    height: 100px;
 }
 .business-header{
     padding: 10px 15px;

@@ -64,7 +64,7 @@ function AddBusiness({onClose}){
                         <input type="text" name="phoneNumber" value={phoneNumber} placeholder="ex: 000-000-0000" onChange={e=>setPhoneNumber(e.target.value)}></input>
                     </label>
                     <label>
-                        <textarea name="description" rows="5" cols="35" value={description} placeholder="Tell us about your business" onChange={e=>setDescription(e.target.value)}></textarea>
+                        <textarea name="description" rows="3" cols="30" value={description} placeholder="Tell us about your business" onChange={e=>setDescription(e.target.value)}></textarea>
                     </label>
                     <label>
                         <input type="text" name="coverImg" value={coverImg} placeholder="URL of image" onChange={e=>setCoverImg(e.target.value)}></input>

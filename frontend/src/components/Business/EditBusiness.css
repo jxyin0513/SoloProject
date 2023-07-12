@@ -11,11 +11,10 @@
 label{
     font-family:Arial, Helvetica, sans-serif;
 }
-.errors-handler-business {
+/* .errors-handler-business {
     color: red;
     margin: 10px;
-    /* height: 30px; */
-}
+} */
 .edit-business{
     margin: 5px 30px 20px 30px;
     /* padding: 10px; */
