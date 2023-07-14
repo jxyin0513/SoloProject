@@ -64,13 +64,11 @@ function BusinessDetail(){
         }
     }
     function onEditMenu(e){
-
         setEditMenu(true);
         setMenuId(e.target.id)
     }
 
     async function onDeleteMenu(e){
-
         await dispatch(deleteMenuThunk(e.target.id))
     }
 
@@ -165,12 +163,9 @@ function BusinessDetail(){
                     </div>
                         {/* <button onClick={review}>Write a review</button> */}
 
-
                     <div className="edit-delete">
                         {/* <span>{}</span>
                         <span>{Object.keys(reviews).length} Ratings</span> */}
-
-
                     </div>
 
                 </div>
