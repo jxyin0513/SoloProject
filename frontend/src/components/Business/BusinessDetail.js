@@ -83,7 +83,6 @@ function BusinessDetail(){
                         {business.coverImg.length>0&&
                         <img className="image" src={business.coverImg} onError={e=>{e.target.src='https://www.digitalcitizen.life/wp-content/uploads/2020/10/photo_gallery.jpg'
                                                                                     e.onerror=null}} alt="businessImg">
-
                         </img>}
                         <div className="restaurant-intro">
                             <div className="restaurant-name">{business.name}</div>
@@ -161,13 +160,6 @@ function BusinessDetail(){
                         </div>
                         </div>
                     </div>
-                        {/* <button onClick={review}>Write a review</button> */}
-
-                    <div className="edit-delete">
-                        {/* <span>{}</span>
-                        <span>{Object.keys(reviews).length} Ratings</span> */}
-                    </div>
-
                 </div>
 
 

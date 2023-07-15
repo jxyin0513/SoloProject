@@ -4,13 +4,11 @@ import { addReviewThunk } from "../../store/review";
 import './AddReview.css'
 
 function AddReview ({restaurantId, onClose}){
-
     const dispatch = useDispatch();
     const [rating, setRating] = useState(1)
     const [comment, setComment] = useState('');
     const [errors, setErrors] = useState([]);
     const user = useSelector(state=>state.session.user)
-
 
     async function onSubmit(e){
         e.preventDefault();

@@ -16,7 +16,6 @@ function EditBusiness({restaurantId, onClose}){
     const [description, setDescription] = useState(business.description);
     const [zipCode, setZipCode] = useState(business.zipCode);
     const [errors, setErrors] = useState([])
-    const id= business.id
 
     useEffect(()=>{
         const error = []
@@ -31,8 +30,8 @@ function EditBusiness({restaurantId, onClose}){
 
     async function onSubmit(e){
         e.preventDefault();
-        const business = {
-            id,
+        const editedBusiness = {
+            id:business.id,
             name,
             phoneNumber: phoneNumber.trim(),
             coverImg,
@@ -43,8 +42,7 @@ function EditBusiness({restaurantId, onClose}){
             description,
             zipCode
         }
-    // const editBusiness = await dispatch(editBusinessThunk(business))
-    return dispatch(editBusinessThunk(business)).then(()=>onClose())
+    return dispatch(editBusinessThunk(editedBusiness)).then(()=>onClose())
     .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
