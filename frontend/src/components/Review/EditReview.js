@@ -4,14 +4,12 @@ import { editReviewThunk } from "../../store/review";
 import './EditReview.css';
 
 function EditReview ({id, onClose}){
-
     const dispatch = useDispatch();
     const review = useSelector(state=>state.reviews[id])
     const [rating, setRating] = useState(review.rating)
     const [comment, setComment] = useState(review.comment);
     const [errors, setErrors] = useState([]);
     const user = useSelector(state=>state.session.user)
-
 
     async function onSubmit(e){
         e.preventDefault();

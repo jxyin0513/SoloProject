@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import { editBusinessThunk } from "../../store/business";
 import './EditBusiness.css'
@@ -16,17 +16,6 @@ function EditBusiness({restaurantId, onClose}){
     const [description, setDescription] = useState(business.description);
     const [zipCode, setZipCode] = useState(business.zipCode);
     const [errors, setErrors] = useState([])
-
-    useEffect(()=>{
-        const error = []
-        if(description.length>=255){
-            error.push("Description must be less than 255 characters")
-        }
-        if(zipCode.length>5){
-            error.push("Please provide a valid code.")
-        }
-        setErrors(error);
-    },[description, zipCode])
 
     async function onSubmit(e){
         e.preventDefault();
@@ -69,7 +58,7 @@ function EditBusiness({restaurantId, onClose}){
                     <input type="text" name="phoneNumber" placeholder="phone number" value={phoneNumber} onChange={e=>setPhoneNumber(e.target.value)}></input>
                 </label>
                 <label>
-                    <textarea name="description" value={description} placeholder='description' rows="5" cols="30" onChange={e=>setDescription(e.target.value)}></textarea>
+                    <textarea name="description" value={description} placeholder='description' rows="3" cols="30" onChange={e=>setDescription(e.target.value)}></textarea>
                 </label>
                 <label>
                      <input type="text" name="coverImg" placeholder="cover image" value={coverImg} onChange={e=>setCoverImg(e.target.value)}></input>
@@ -89,7 +78,7 @@ function EditBusiness({restaurantId, onClose}){
                 <label>
                     <input type="text" name="zipCode" placeholder="zipcode" value={zipCode} onChange={e=>setZipCode(e.target.value)}></input>
                 </label>
-                <button type="submit" disabled={errors.length===0 ? false : true}>Submit</button>
+                <button type="submit">Submit</button>
                 <button onClick={onClose}>Cancel</button>
             </form>
         </div>
