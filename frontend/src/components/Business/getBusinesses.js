@@ -1,15 +1,12 @@
 import React, { useEffect} from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import { getBusinessesThunk } from "../../store/business";
-// import BusinessDetail from "./BusinessDetail";
-// import {Route} from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import './getBusinesses.css';
 
 function AllBusinesses(){
     const dispatch = useDispatch();
     const allBusinesses = useSelector(state=>state.allBusinesses);
-
 
     useEffect(()=>{
         dispatch(getBusinessesThunk())

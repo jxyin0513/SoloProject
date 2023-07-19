@@ -49,7 +49,7 @@ function AddBusiness({onClose}){
     return (
             <div className="add-business-container">
                 <div className="business-header">
-                    <div>List your new business</div>
+                    <div>List new business</div>
                 </div>
                 <div className="errors-handler-business">
                     {errors && errors.map(error=>
