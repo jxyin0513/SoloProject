@@ -45,6 +45,7 @@ function EditMenu({onClose, menuId, restaurantId}){
                 <input type='text' name="image_url" value={image} placeholder="Menu image URL" onChange={e=>setImage(e.target.value)}></input>
                 <button type="submit">submit</button>
             </form>
+
         </div>
     )
 }

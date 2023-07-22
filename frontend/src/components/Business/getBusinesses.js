@@ -27,6 +27,7 @@ function AllBusinesses(){
                         </div>
                     )
                 })}
+
             </div>
             )}
         </>

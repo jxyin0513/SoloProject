@@ -9,6 +9,7 @@ function AddMenu({onClose, restaurantId}){
     const [price, setPrice] = useState(0)
     const [image, setImage] = useState('')
     const [errors, setErrors] = useState([])
+
     async function onSubmit(e){
         e.preventDefault();
         const menu = {

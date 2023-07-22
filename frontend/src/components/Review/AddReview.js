@@ -12,7 +12,6 @@ function AddReview ({restaurantId, onClose}){
 
     async function onSubmit(e){
         e.preventDefault();
-
         const review = {
             userId: user.id,
             businessId: restaurantId,
