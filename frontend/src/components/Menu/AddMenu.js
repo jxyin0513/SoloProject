@@ -29,7 +29,7 @@ function AddMenu({onClose, restaurantId}){
     return (
         <div className="add-menu-container">
             <div className="add-menu-bar">
-                <div>Add new menu</div>
+                <div>Add menu</div>
             </div>
             <div className="errors-handler-menu">
                     {errors.length!==0&&errors.map(error=>

@@ -18,7 +18,6 @@ function EditMenu({onClose, menuId, restaurantId}){
             restaurantId,
             price,
             name,
-
             image_url: image
         }
         return dispatch(editMenuThunk(menu))

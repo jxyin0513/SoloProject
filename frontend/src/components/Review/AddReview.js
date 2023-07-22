@@ -45,7 +45,6 @@ function AddReview ({restaurantId, onClose}){
                 <button onClick={onClose}>Cancel</button>
             </form>
         </div>
-
     )
 }
 
