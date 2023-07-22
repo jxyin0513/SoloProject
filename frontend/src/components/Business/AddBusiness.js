@@ -86,7 +86,6 @@ function AddBusiness({onClose}){
                     </label>
                     <button type="submit">Add Business</button>
                 </form>
-
             </div>
     )
 }

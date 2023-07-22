@@ -12,6 +12,7 @@ function AddMenu({onClose, restaurantId}){
 
     async function onSubmit(e){
         e.preventDefault();
+
         const menu = {
             restaurantId,
             name,

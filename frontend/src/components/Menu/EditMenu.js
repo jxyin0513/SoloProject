@@ -13,6 +13,7 @@ function EditMenu({onClose, menuId, restaurantId}){
 
     async function onSubmit(e){
         e.preventDefault();
+
         const menu = {
             id: menuId,
             restaurantId,
