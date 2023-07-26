@@ -26,7 +26,7 @@ function GetReviews({businessId}){
 
     return (
         <div>
-            {reviews&&(reviews.map(review=>(
+            {reviews &&(reviews.map(review=>(
                 <div key={review.id}>
                     <img alt="user" className="user-image" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"></img>
                     <div className="review-user">{review.User.username}</div>
