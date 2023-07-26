@@ -6,7 +6,7 @@ import './getBusinesses.css';
 
 function AllBusinesses(){
     const dispatch = useDispatch();
-    const allBusinesses = useSelector(state=>state.allBusinesses);
+    const allBusinesses = Object.values(useSelector(state=>state.allBusinesses));
 
     useEffect(()=>{
         dispatch(getBusinessesThunk())
@@ -16,7 +16,7 @@ function AllBusinesses(){
         <>
         {allBusinesses&&(
             <div className="all-businesses">
-                {Object.values(allBusinesses).map(business=>{
+                {allBusinesses.map(business=>{
                     return (
                         <div key={business.id} className="each-business">
                             <NavLink to={`/businesses/${business.id}`}>

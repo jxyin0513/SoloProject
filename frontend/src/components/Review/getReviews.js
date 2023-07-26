@@ -6,9 +6,8 @@ import './getReview.css';
 
 function GetReviews({businessId}){
     const dispatch = useDispatch();
-    const reviews = useSelector(state=>state.reviews);
-    const user = useSelector(state=>state.session.user)
-    const reviewsArr = Object.values(reviews)
+    const reviews = Object.values(useSelector(state=>state.reviews));
+    const user = useSelector(state=>state.session.user);
     const [editReview, setEditReview] = useState(false);
     const [reviewId, setReviewId] = useState(0);
 
@@ -27,7 +26,7 @@ function GetReviews({businessId}){
 
     return (
         <div>
-            {reviewsArr&&(reviewsArr.map(review=>(
+            {reviews&&(reviews.map(review=>(
                 <div key={review.id}>
                     <img alt="user" className="user-image" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"></img>
                     <div className="review-user">{review.User.username}</div>

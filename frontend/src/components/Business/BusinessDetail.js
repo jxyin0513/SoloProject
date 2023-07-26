@@ -118,7 +118,6 @@ function BusinessDetail(){
                                         <i className="fa-solid fa-plus" onClick={()=>setAddMenu(true)} id="add-menu"></i>
                                     }
                                 </div>
-
                                 <div className="menu-slider">
                                     {menus.length>0 &&
                                     <div>
@@ -161,8 +160,6 @@ function BusinessDetail(){
                         </div>
                     </div>
                 </div>
-
-
             </div>
             )
             }
