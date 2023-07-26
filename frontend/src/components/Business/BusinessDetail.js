@@ -149,6 +149,7 @@ function BusinessDetail(){
                                 <div className="reviews-header">Reviews</div>
                                 <GetReviews businessId={businessId}  />
                             </div>
+
                             <div className="restaurant-info">
                                 <p>Phone Number: {business.phoneNumber} </p>
                                 <p>Description: {business.description}</p>

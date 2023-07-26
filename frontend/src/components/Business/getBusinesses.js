@@ -6,7 +6,7 @@ import './getBusinesses.css';
 
 function AllBusinesses(){
     const dispatch = useDispatch();
-    const allBusinesses = Object.values(useSelector(state=>state.allBusinesses))
+    const allBusinesses = Object.values(useSelector(state=>state.allBusinesses));
 
     useEffect(()=>{
         dispatch(getBusinessesThunk())
