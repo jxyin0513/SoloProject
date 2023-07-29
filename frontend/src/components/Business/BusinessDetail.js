@@ -49,7 +49,7 @@ function BusinessDetail(){
         setAddReview(true)
     }
     function prevSlide(e){
-        if(menuNum[0]-4 < 0){
+        if(menuNum[0]-4 <= 0){
             setMenuNum([0, 3])
         }else{
             setMenuNum([[menuNum[0]-4], menuNum[1]-4])
@@ -57,10 +57,12 @@ function BusinessDetail(){
     }
 
     function nextSlide(e){
-        if(menuNum[1]+4 > menus.length-1){
-            setMenuNum([menus.length-4, menus.length-1])
-        }else{
-            setMenuNum([menuNum[0]+4, menuNum[1]+4])
+        if(menuNum[1] >= menuNum[0]+3){
+            if(menuNum[1]+4 > menus.length-1){
+                setMenuNum([menuNum[0]+4, menus.length-1])
+            }else{
+                setMenuNum([menuNum[0]+4, menuNum[1]+4])
+            }
         }
     }
     function onEditMenu(e){
@@ -75,7 +77,6 @@ function BusinessDetail(){
     return (
         <>
         {business&&(
-
             <div className="business-detail">
                 <div className="form-table">
                     <div className="business-info">
@@ -127,7 +128,7 @@ function BusinessDetail(){
                                     }
                                 {menus && (menus.map((menu, index)=>{
                                     if(menuNum[0]<=index && menuNum[1]>=index){
-                                        // console.log(menuNum[0]<=index && menuNum[1]>=index, menuNum[0], index)
+                                        // console.log(menuNum)
                                         return (
                                             <div key={menu.id}>
                                                 <div className="image-shown">
