@@ -12,13 +12,13 @@ function AddReview ({restaurantId, onClose}){
 
     async function onSubmit(e){
         e.preventDefault();
+
         const review = {
             userId: user.id,
             businessId: restaurantId,
             rating,
             comment
         }
-
         return dispatch(addReviewThunk(review))
             .then(()=>(onClose()))
             .catch(async (res)=>{

@@ -202,6 +202,15 @@ img.image{
     align-items: center;
     /* padding-left: 40px; */
     /* overflow: scroll; */
+    /* transition: 1s;
+    transform: translateX(em); */
+}
+.menu-Slide{
+    position: relative;
+    display: flex;
+    align-items: center;
+    transition: 1s;
+    transform: translateX();
 }
 #left-arrow{
     position: absolute;

@@ -128,7 +128,6 @@ function BusinessDetail(){
                                     }
                                 {menus && (menus.map((menu, index)=>{
                                     if(menuNum[0]<=index && menuNum[1]>=index){
-                                        // console.log(menuNum)
                                         return (
                                             <div key={menu.id}>
                                                 <div className="image-shown">
