@@ -6,9 +6,9 @@ import './EditMenu.css'
 function EditMenu({onClose, menuId, restaurantId}){
     const dispatch = useDispatch();
     const menu = useSelector(state=>state.menus[menuId])
-    const [name, setName] = useState(menu.name)
-    const [price, setPrice] = useState(menu.price)
-    const [image, setImage] = useState(menu.image_url)
+    const [name, setName] = useState(menu.name);
+    const [price, setPrice] = useState(menu.price);
+    const [image, setImage] = useState(menu.image_url);
     const [errors, setErrors] = useState([])
 
     async function onSubmit(e){
@@ -46,7 +46,6 @@ function EditMenu({onClose, menuId, restaurantId}){
                 <input type='text' name="image_url" value={image} placeholder="Menu image URL" onChange={e=>setImage(e.target.value)}></input>
                 <button type="submit">submit</button>
             </form>
-
         </div>
     )
 }

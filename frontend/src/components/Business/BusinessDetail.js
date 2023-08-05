@@ -29,7 +29,7 @@ function BusinessDetail(){
     let reviewAvg=0;
     reviews.forEach(review=>{reviewAvg+=review.rating})
     reviewAvg = reviewAvg / reviews.length
-    const [menuNum, setMenuNum] = useState([0,3])
+    const [menuNum, setMenuNum] = useState([0,3]);
 
     useEffect(()=>{
         dispatch(getBusinessesThunk())

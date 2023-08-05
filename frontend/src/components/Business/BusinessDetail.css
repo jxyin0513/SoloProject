@@ -200,8 +200,6 @@ img.image{
     display: flex;
     /* justify-content: center; */
     align-items: center;
-    /* padding-left: 40px; */
-    /* overflow: scroll; */
     /* transition: 1s;
     transform: translateX(em); */
 }
