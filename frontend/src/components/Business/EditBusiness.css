@@ -4,7 +4,7 @@
 }
 .edit-business-header{
     border-bottom: 1px solid lightgray;
-    padding: 10px 15px 10px 15px;
+    padding: 10px 18px 10px 18px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 20px;
 }
@@ -12,12 +12,11 @@ label{
     font-family:Arial, Helvetica, sans-serif;
 }
 .edit-business{
-    margin: 10px 10px 10px 20px;
-
+    margin: 0px 15px 10px 25px;
 }
 .edit-business-outer{
     background-color: rgb(255, 255, 255);
     border-radius: 15px;
-    width: 300px;
-    height: 550px;
+    width: 320px;
+    height: 570px;
 }

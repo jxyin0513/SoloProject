@@ -9,14 +9,14 @@ const { Business } = require('../../db/models');
 const businessValidators = [
     check('name')
         .exists({ checkFalsy: true })
-        .withMessage('Please provide a value for your business name')
+        .withMessage('Please provide your business name')
         .isLength({ max: 50 })
-        .withMessage('Name must not be more than 50 characters long'),
+        .withMessage('Name must be less than 50 characters'),
     check('phoneNumber')
         .exists({ checkFalsy: true })
         .withMessage('Please provide business phone number.')
         .matches(/^[0-9]{3}(-)?[0-9]{3}(-)?[0-9]{4}/, 'g')
-        .withMessage('Please follow correct format for phone number.'),
+        .withMessage('Please follow correct phone number.'),
     check('description')
         .isLength({ max: 255 })
         .withMessage('Shorten your description by 255 characters.'),
