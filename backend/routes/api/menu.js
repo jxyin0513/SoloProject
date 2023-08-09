@@ -13,7 +13,7 @@ const MenuValidator = [
         .withMessage('Please provide restaurant ID.'),
     check('name')
         .exists({ checkFalsy: true })
-        .withMessage('Please provide name of the menu')
+        .withMessage('Please provide the menu name')
         .isLength({ max: 15 })
         .withMessage('Menu must be less than 15 characters.'),
     check('price')

@@ -10,7 +10,7 @@
 .errors-handler-review{
     height: 60px;
     color: red;
-    padding: 5px 10px 0 10px;
+    padding: 5px 0 0 10px;
 }
 .edit-review-form > input, .edit-review-form>textarea{
     display: block;

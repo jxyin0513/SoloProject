@@ -21,8 +21,8 @@ const reviewValidator=[
     check('comment')
         .exists({ checkFalsy: true })
         .withMessage('Please tell us about your experience')
-        .isLength({min: 1, max: 255 })
-        .withMessage('Please provide your comment to 1 to 255 characters'),
+        .isLength({max: 255 })
+        .withMessage('Please provide your comment within 255 characters'),
     handleValidationErrors
 ]
 const editReviewValidator=[
@@ -37,8 +37,8 @@ const editReviewValidator=[
     check('comment')
         .exists({ checkFalsy: true })
         .withMessage('Please tell us about your experience')
-        .isLength({min: 10, max: 255 })
-        .withMessage('Please provide your comment to 10 to 255 characters'),
+        .isLength({max: 255 })
+        .withMessage('Please provide your comment within 255 characters'),
     handleValidationErrors
 ]
 
