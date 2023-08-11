@@ -19,6 +19,7 @@ function EditBusiness({restaurantId, onClose}){
 
     async function onSubmit(e){
         e.preventDefault();
+
         const editedBusiness = {
             id:business.id,
             name,

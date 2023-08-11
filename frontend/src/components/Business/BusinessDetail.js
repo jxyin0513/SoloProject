@@ -45,6 +45,9 @@ function BusinessDetail(){
     function edit(e){
         setEditBusiness(true);
     }
+    function newMenu(e){
+        setAddMenu(true)
+    }
     function newReview(e){
         setAddReview(true)
     }
@@ -102,10 +105,9 @@ function BusinessDetail(){
                         </div>
                         </div>
                         <div className="top-buttons">
-                        {user&&user.id===business.ownerId &&
-                            <button onClick={()=>setAddMenu(true)} className="add-menu-button">Add Menu</button>
+                        {user &&
+                            <button onClick={newMenu} className="add-menu-button">Add Menu</button>
                             }
-
                         {user && (
                             <button onClick={newReview}>Write a review</button>
                         )}

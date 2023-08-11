@@ -38,9 +38,9 @@ const Search = () => {
             {enhancedSearch.map(result => (
               <div className='search-outer' key={result.id}>
                 <NavLink className='search-restaurants' onClick={()=>setEnhancedSearch([])} to={`/businesses/${result.id}`}>
-                  <div className='individual-result'>
-                    <div className='search-name'>Name: {result.name}</div>
-                    <div className='search-detail'>Street Address: {result.address} | Phone: {result.phoneNumber}</div>
+                  <div className='individual-result' >
+                    <div className='search-name' >Name: {result.name}</div>
+                    <div className='search-detail' >Street Address: {result.address} | Phone: {result.phoneNumber}</div>
                   </div>
                 </NavLink>
               </div>
