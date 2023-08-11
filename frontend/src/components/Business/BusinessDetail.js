@@ -8,7 +8,7 @@ import EditMenuModal from "../Menu/EditMenuModal";
 import AddReviewModal from "../Review/AddReviewModal";
 import EditBusinessModal from "./EditBusinessModal";
 import { deleteMenuThunk } from "../../store/menu";
-// import LoginFormModal from '../LoginFormModal';
+// import LoginForm from "../LoginFormModal/LoginForm";
 import { useParams, useHistory } from 'react-router-dom';
 import './BusinessDetail.css'
 
