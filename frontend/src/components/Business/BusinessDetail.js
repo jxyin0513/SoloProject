@@ -46,7 +46,9 @@ function BusinessDetail(){
         setEditBusiness(true);
     }
     function newMenu(e){
+
         setAddMenu(true)
+
     }
     function newReview(e){
         setAddReview(true)
@@ -58,7 +60,6 @@ function BusinessDetail(){
             setMenuNum([[menuNum[0]-4], menuNum[1]-4])
         }
     }
-
     function nextSlide(e){
         if(menuNum[1] >= menuNum[0]+3){
             if(menuNum[1]+4 > menus.length-1){
@@ -168,6 +169,7 @@ function BusinessDetail(){
             {addReview && <AddReviewModal restaurantId={businessId} onClose={()=>setAddReview(false)} />}
             {addMenu && <AddMenuModal onClose={()=>setAddMenu(false)} restaurantId = {businessId} />}
             {editMenu && <EditMenuModal onClose={()=>setEditMenu(false)} menuId={menuId} restaurantId={businessId} />}
+            {/* {checkLog && <LoginForm />} */}
         </>
     )
 }

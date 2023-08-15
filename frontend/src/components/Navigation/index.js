@@ -15,9 +15,6 @@ function Navigation ({ isLoaded}){
     if (sessionUser) {
         sessionLinks = (
           <div>
-            {/* <NavLink to="/create-business" >
-              <button className='list-business'>List your business</button>
-            </NavLink> */}
             <AddBusinessModal />
             {/* <span>Welcome {sessionUser.username}</span> */}
             <ProfileButton user={sessionUser} />

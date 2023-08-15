@@ -15,25 +15,14 @@ function LoginForm(){
     if(user){
        return <Redirect to="/" />
     }
-    // if(demo){
-    //     console.log("here")
-    //     const user={
-    //         credential: "Demo-lition",
-    //         password: "password"
-    //     }
-    //     dispatch(signInThunk(user))
-    //     return <Redirect to="/" />
-    // }
+
     async function onSubmit(e){
         e.preventDefault();
         const user={
             credential,
             password
         }
-        // const logIn = await dispatch(signInThunk(user))
-        // console.log(logIn.ok)
-        // const err = await logIn.json()
-        // console.log(err)
+
         return dispatch(signInThunk(user))
       .catch(async (res) => {
         const data = await res.json();
