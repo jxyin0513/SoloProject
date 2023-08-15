@@ -91,7 +91,6 @@ button:hover{
 }
 .business-button{
     display: flex;
-    /* justify-content:flex-end; */
 }
 .top-buttons{
     padding-bottom: 10px;

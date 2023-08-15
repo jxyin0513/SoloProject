@@ -18,6 +18,7 @@ function Navigation ({ isLoaded}){
             <AddBusinessModal />
             {/* <span>Welcome {sessionUser.username}</span> */}
             <ProfileButton user={sessionUser} />
+
           </div>
     );}
     else {
