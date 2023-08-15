@@ -169,7 +169,6 @@ function BusinessDetail(){
             {addReview && <AddReviewModal restaurantId={businessId} onClose={()=>setAddReview(false)} />}
             {addMenu && <AddMenuModal onClose={()=>setAddMenu(false)} restaurantId = {businessId} />}
             {editMenu && <EditMenuModal onClose={()=>setEditMenu(false)} menuId={menuId} restaurantId={businessId} />}
-            {/* {checkLog && <LoginForm />} */}
         </>
     )
 }
