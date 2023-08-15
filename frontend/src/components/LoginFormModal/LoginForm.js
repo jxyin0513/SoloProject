@@ -16,6 +16,7 @@ function LoginForm(){
     if(user){
        return <Redirect to="/" />
     }
+
     async function onSubmit(e){
         e.preventDefault();
         const user={
