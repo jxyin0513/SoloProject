@@ -135,7 +135,6 @@ function BusinessDetail(){
                                             <div key={menu.id}>
                                                 <div className="image-shown">
                                                     <img className="menu-image" src={menu.image_url} onError={e=>{e.target.src='https://www.happyeater.com/images/default-food-image.jpg'; e.onerror=null}} alt='i'></img>
-
                                                     <div className="menu-price">$ {menu.price}</div>
                                                     <div className="menu-change">
                                                         <i className="fas fa-edit" onClick={onEditMenu} id={`${menu.id}`}></i>
