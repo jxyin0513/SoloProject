@@ -83,7 +83,6 @@ function EditBusiness({restaurantId, onClose}){
                 <button onClick={onClose}>Cancel</button>
             </form>
         </div>
-
     )
 }
 
