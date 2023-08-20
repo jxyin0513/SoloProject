@@ -45,7 +45,6 @@ function EditReview ({id, onClose}){
                 <button onClick={onClose}>Cancel</button>
             </form>
         </div>
-
     )
 }
 export default EditReview;

@@ -70,7 +70,7 @@ function BusinessDetail(){
         }
     }
     function onEditMenu(e){
-        setEditMenu(true);
+        setEditMenu(true)
         setMenuId(e.target.id)
     }
 
