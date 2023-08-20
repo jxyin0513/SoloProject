@@ -9,7 +9,7 @@ function EditReview ({id, onClose}){
     const [rating, setRating] = useState(review.rating)
     const [comment, setComment] = useState(review.comment);
     const [errors, setErrors] = useState([]);
-    const user = useSelector(state=>state.session.user);
+    const user = useSelector(state=>state.session.user)
 
     async function onSubmit(e){
         e.preventDefault();

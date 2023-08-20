@@ -104,12 +104,7 @@ button:hover{
     grid-template-columns: 1fr 1fr; */
 
 }
-/* .business-info{
-
-
-} */
 .edit-delete{
-    /* grid-area: fix; */
     font-weight: bolder;
 }
 

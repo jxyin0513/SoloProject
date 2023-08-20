@@ -71,7 +71,7 @@ function BusinessDetail(){
     }
     function onEditMenu(e){
         setEditMenu(true);
-        setMenuId(e.target.id)
+        setMenuId(e.target.id);
     }
 
     async function onDeleteMenu(e){
