@@ -69,7 +69,6 @@ function GetReviews({businessId}){
             //         </tbody>
             //     </table>
             // </div> */}
-
         </div>
     )
 }

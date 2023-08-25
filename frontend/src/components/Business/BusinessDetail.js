@@ -46,9 +46,7 @@ function BusinessDetail(){
         setEditBusiness(true);
     }
     function newMenu(e){
-
         setAddMenu(true)
-
     }
     function newReview(e){
         setAddReview(true)
