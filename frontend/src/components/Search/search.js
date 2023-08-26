@@ -7,6 +7,7 @@ const Search = () => {
     const [enhancedSearch, setEnhancedSearch] = useState([])
     const restaurants = Object.values(useSelector(state=>state.allBusinesses))
     let search = []
+
     const filteredRestaurant = (e)=>{
       if(e.target.value){
         search = restaurants.filter(restaurant=>{
