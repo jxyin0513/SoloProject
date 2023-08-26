@@ -4,13 +4,14 @@
     height: 32px;
     padding: 0 0 0 30px;
     text-align: center;
+    /* font-size: 30px; */
 }
 .results-container{
     position: absolute;
     z-index: 1;
     background-color:white;
     max-height: 350px;
-    width: 330px;
+    width: 350px;
     overflow: scroll;
     border-radius: 10px;
     padding: 5px 0 0 0;
