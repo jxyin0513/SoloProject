@@ -6,7 +6,7 @@ import './search.css'
 const Search = () => {
     const [enhancedSearch, setEnhancedSearch] = useState([])
     const restaurants = Object.values(useSelector(state=>state.allBusinesses))
-    let search = []
+    let search = [];
 
     const filteredRestaurant = (e)=>{
       if(e.target.value){

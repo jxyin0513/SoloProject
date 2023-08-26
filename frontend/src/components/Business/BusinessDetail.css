@@ -11,7 +11,6 @@
     background-color: rgba(0, 0, 0, 0.4);
 }
 .restaurant-name {
-    /* position: absolute; */
     display: inline;
     bottom: 2px;
     width: 100%;
