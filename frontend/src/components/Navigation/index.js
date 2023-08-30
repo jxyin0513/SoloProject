@@ -25,6 +25,7 @@ function Navigation ({ isLoaded}){
         <div>
             <LoginFormModal />
             <SignUpModal />
+
         </div>
         );
     }
