@@ -9,7 +9,7 @@ function EditMenu({onClose, menuId, restaurantId}){
     const [name, setName] = useState(menu.name);
     const [price, setPrice] = useState(menu.price);
     const [image, setImage] = useState(menu.image_url);
-    const [errors, setErrors] = useState([]);
+    const [errors, setErrors] = useState([])
 
     async function onSubmit(e){
         e.preventDefault();

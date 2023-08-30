@@ -34,7 +34,6 @@ const Search = () => {
         setSearchResult(search)
         setShowSearch(true)
       }
-
     }
     return (
         <div className='search-Bar'>
