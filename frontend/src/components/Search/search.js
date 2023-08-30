@@ -1,12 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector} from 'react-redux';
 import './search.css'
 
 const Search = () => {
-    const [enhancedSearch, setEnhancedSearch] = useState([])
+    const [searchResult, setSearchResult] = useState([])
+    const [showSearch, setShowSearch] = useState(false)
     const restaurants = Object.values(useSelector(state=>state.allBusinesses))
     let search = [];
+
+    useEffect(() => {
+      if (!showSearch) return;
+
+      const closeMenu = () => {
+        setShowSearch(false);
+      };
+
+      document.addEventListener('click', closeMenu);
+      return () => document.removeEventListener("click", closeMenu);
+  }, [showSearch]);
 
     const filteredRestaurant = (e)=>{
       if(e.target.value){
@@ -18,7 +30,10 @@ const Search = () => {
           }
         })
       }
-      setEnhancedSearch(search)
+      if(search.length>0){
+        setSearchResult(search)
+        setShowSearch(true)
+      }
     }
     return (
         <div className='search-Bar'>
@@ -34,10 +49,10 @@ const Search = () => {
                 }
             ></input>
             </form>
-          {enhancedSearch.length>0 && (<div className='results-container'>
-            {enhancedSearch.map(result => (
+          {showSearch && searchResult.length>0 && (<div className='results-container'>
+            {searchResult.map(result => (
               <div className='search-outer' key={result.id}>
-                <NavLink className='search-restaurants' onClick={()=>setEnhancedSearch([])} to={`/businesses/${result.id}`}>
+                <NavLink className='search-restaurants' onClick={()=>setSearchResult([])} to={`/businesses/${result.id}`}>
                   <div className='individual-result' >
                     <div className='search-name' >Name: {result.name}</div>
                     <div className='search-detail' >Street Address: {result.address} | Phone: {result.phoneNumber}</div>

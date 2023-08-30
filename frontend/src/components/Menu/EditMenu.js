@@ -21,6 +21,7 @@ function EditMenu({onClose, menuId, restaurantId}){
             name,
             image_url: image
         }
+
         return dispatch(editMenuThunk(menu))
                 .then(()=>onClose())
                 .catch(async (res) => {

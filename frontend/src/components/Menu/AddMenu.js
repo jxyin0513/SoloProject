@@ -19,6 +19,7 @@ function AddMenu({onClose, restaurantId}){
             price,
             image_url: image
         }
+
         return await dispatch(createMenuThunk(menu))
                 .then(()=>onClose())
                 .catch(async (res) => {
@@ -28,6 +29,7 @@ function AddMenu({onClose, restaurantId}){
                     return data;
                 })
     }
+
     return (
         <div className="add-menu-container">
             <div className="add-menu-bar">

@@ -23,11 +23,8 @@ function Navigation ({ isLoaded}){
     else {
         sessionLinks = (
         <div>
-            {/* <NavLink to="/demo-user"><button>Demo User</button></NavLink> */}
             <LoginFormModal />
             <SignUpModal />
-            {/* <NavLink to="/signup"><button>Sign Up</button></NavLink> */}
-
         </div>
         );
     }
