@@ -41,6 +41,9 @@ function GetReviews({businessId}){
                     )}
                 </div>
             )))}
+            {reviews.length===0 &&
+                <div className="no-reviews">0 reviews</div>
+            }
             {editReview && <EditReviewModal reviewId={reviewId} onClose={()=>setEditReview(false)} />}
             {/* // <div className="review-table">
 

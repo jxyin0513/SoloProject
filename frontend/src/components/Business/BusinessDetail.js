@@ -146,6 +146,9 @@ function BusinessDetail(){
                                             return false
                                         }
                                 }))}
+                                {menus.length===0&&
+                                    <div className="no-menus">No menus available</div>
+                                }
                                 </div>
                                 <div className="reviews-header">Reviews</div>
                                 <GetReviews businessId={businessId}  />
