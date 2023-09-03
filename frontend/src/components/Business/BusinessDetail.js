@@ -20,6 +20,7 @@ function BusinessDetail(){
     const [addReview, setAddReview] = useState(false);
     const [addMenu, setAddMenu] = useState(false)
     const [editMenu, setEditMenu] = useState(false);
+    // const [reqLog, setReqLog] = useState(false);
     const [menuId, setMenuId] = useState(0);
     const user = useSelector(state=>state.session.user)
     const business = useSelector(state=>state.allBusinesses[businessId])
@@ -46,10 +47,14 @@ function BusinessDetail(){
         setEditBusiness(true);
     }
     function newMenu(e){
-        setAddMenu(true)
+        if(user){
+            setAddMenu(true)
+        }
     }
     function newReview(e){
-        setAddReview(true)
+        if(user){
+            setAddReview(true)
+        }
     }
     function prevSlide(e){
         if(menuNum[0]-4 <= 0){

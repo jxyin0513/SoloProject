@@ -16,7 +16,6 @@ function Navigation ({ isLoaded}){
         sessionLinks = (
           <div>
             <AddBusinessModal />
-            {/* <span>Welcome {sessionUser.username}</span> */}
             <ProfileButton user={sessionUser} />
           </div>
     );}

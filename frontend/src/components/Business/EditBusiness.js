@@ -32,13 +32,13 @@ function EditBusiness({restaurantId, onClose}){
             description,
             zipCode
         }
+
     return dispatch(editBusinessThunk(editedBusiness)).then(()=>onClose())
     .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
         return data;
     });
-
     }
 
     return (
