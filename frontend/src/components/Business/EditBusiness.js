@@ -65,8 +65,8 @@ function EditBusiness({restaurantId, onClose}){
                      <input type="text" name="coverImg" placeholder="cover image" value={coverImg} onChange={e=>setCoverImg(e.target.value)}></input>
                 </label>
                 <label>
-                        <input type="text" name="logo" placeholder="thumb nail" value={logo} onChange={e=>setLogo(e.target.value)}></input>
-                    </label>
+                    <input type="text" name="logo" placeholder="thumb nail" value={logo} onChange={e=>setLogo(e.target.value)}></input>
+                </label>
                 <label>
                     <input type="text" name="address" placeholder="address" value={address} onChange={e=>setAddress(e.target.value)}></input>
                 </label>

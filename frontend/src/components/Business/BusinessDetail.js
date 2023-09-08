@@ -121,7 +121,7 @@ function BusinessDetail(){
                             <div className="menu-container">
                                 <div className="menu-bar">
                                     <div className="menu-header">Menu</div>
-                                    {user&&user.id===business.ownerId&&
+                                    {user &&
                                         <i className="fa-solid fa-plus" onClick={()=>setAddMenu(true)} id="add-menu"></i>
                                     }
                                 </div>
@@ -155,7 +155,10 @@ function BusinessDetail(){
                                     <div className="no-menus">No menus available</div>
                                 }
                                 </div>
-                                <div className="reviews-header">Reviews</div>
+                                <div className="reviews-header">
+                                    <div>Reviews</div>
+                                    {user && <i className="fa-solid fa-plus" onClick={()=>setAddReview(true)} id="add-review"></i>}
+                                </div>
                                 <GetReviews businessId={businessId}  />
                             </div>
                             <div className="restaurant-info">

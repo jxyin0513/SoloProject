@@ -258,11 +258,26 @@ img.image{
     background-color: rgba(255, 255, 255, 0.354);
 }
 .reviews-header{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 25px;
-    font-weight: 550;
     width: 800px;
     margin: 20px 0;
     border-bottom: 1px lightgray solid;
     padding: 0 0 10px 0;
+}
+.reviews-header > div{
+    display: inline;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 25px;
+    font-weight: 550;
+}
+.reviews-header > i{
+    display: inline-block;
+    margin: 0 0 0 15px;
+}
+#add-review{
+    padding: 5px;
+}
+#add-review:hover{
+    background-color:rgb(198, 199, 199);
+    cursor: pointer;
+    border-radius: 2px;
 }
