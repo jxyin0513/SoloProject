@@ -111,10 +111,10 @@ function BusinessDetail(){
                         <div className="top-buttons">
                         {user &&
                             <button onClick={newMenu} className="add-menu-button">Add Menu</button>
-                            }
-                        {user && (
+                        }
+                        {user &&
                             <button onClick={newReview}>Write a review</button>
-                        )}
+                        }
                         </div>
                         <div className="restaunrant-container">
                         <div className="restaurant-infos">
@@ -174,6 +174,10 @@ function BusinessDetail(){
             </div>
             )
             }
+            {/* {reqLog&&(
+                <Modal onClose={() => setReqLog(false)}>
+                    <LoginForm />
+                </Modal>)} */}
             {editBusiness&&<EditBusinessModal restaurantId={businessId} onClose={()=>setEditBusiness(false)}/> }
             {addReview && <AddReviewModal restaurantId={businessId} onClose={()=>setAddReview(false)} />}
             {addMenu && <AddMenuModal onClose={()=>setAddMenu(false)} restaurantId = {businessId} />}

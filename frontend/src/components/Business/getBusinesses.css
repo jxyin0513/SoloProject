@@ -1,7 +1,7 @@
 .each-business {
     display: inline-block;
-    padding: 20px 25px;
-    margin: 25px 30px;
+    padding: 20px;
+    margin: 25px;
     background-color:rgba(251, 237, 208, 0.929);
     border-radius: 15px;
 }
