@@ -109,12 +109,12 @@ function BusinessDetail(){
                         </div>
                         </div>
                         <div className="top-buttons">
-                        {user &&
+                        {user && (
                             <button onClick={newMenu} className="add-menu-button">Add Menu</button>
-                        }
-                        {user &&
+                        )}
+                        {user && (
                             <button onClick={newReview}>Write a review</button>
-                        }
+                        )}
                         </div>
                         <div className="restaunrant-container">
                         <div className="restaurant-infos">
