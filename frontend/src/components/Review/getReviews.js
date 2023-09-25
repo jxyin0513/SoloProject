@@ -21,7 +21,7 @@ function GetReviews({businessId}){
     }
     function onEdit(e){
         setEditReview(true)
-        setReviewId(e.target.id);
+        setReviewId(e.target.id)
     }
 
     return (
