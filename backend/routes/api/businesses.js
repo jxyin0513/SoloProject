@@ -3,7 +3,7 @@ const router = express.Router();
 const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-const { setTokenCookie, requireAuth } = require('../../utils/auth');
+// const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { Business } = require('../../db/models');
 
 const businessValidators = [
@@ -16,10 +16,10 @@ const businessValidators = [
         .exists({ checkFalsy: true })
         .withMessage('Please provide business phone number.')
         .matches(/^[0-9]{3}(-)?[0-9]{3}(-)?[0-9]{4}/, 'g')
-        .withMessage('Please follow correct phone number.'),
+        .withMessage('Please follow correct phone number format.'),
     check('description')
-        .isLength({ max: 255 })
-        .withMessage('Shorten your description by 255 characters.'),
+        .isLength({min:1, max: 255 })
+        .withMessage('Please write your description under 255 characters.'),
     check('address')
         .exists({ checkFalsy: true })
         .withMessage('Please provide your address'),
@@ -31,7 +31,7 @@ const businessValidators = [
         .withMessage('Please provide your state'),
     check('zipCode')
         .exists({ checkFalsy: true })
-        .withMessage('Zip Code must be included')
+        .withMessage('Zip code must be included')
         .matches(/^[0-9a-zA-Z]{5}/, 'g')
         .withMessage("Please provide correct zip code,"),
     handleValidationErrors
