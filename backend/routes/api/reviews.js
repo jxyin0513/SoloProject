@@ -17,7 +17,7 @@ const reviewValidator=[
         .exists({ checkFalsy: true })
         .withMessage('Please provide your rating')
         .isInt({min:1, max:5})
-        .withMessage('Rating must be between 1 and 5.'),
+        .withMessage('Rating must be between 1 and 5'),
     check('comment')
         .exists({ checkFalsy: true })
         .withMessage('Please tell us about your experience')

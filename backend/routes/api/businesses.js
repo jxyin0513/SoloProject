@@ -14,12 +14,12 @@ const businessValidators = [
         .withMessage('Name must be less than 50 characters'),
     check('phoneNumber')
         .exists({ checkFalsy: true })
-        .withMessage('Please provide business phone number.')
+        .withMessage('Please provide business phone number')
         .matches(/^[0-9]{3}(-)?[0-9]{3}(-)?[0-9]{4}/, 'g')
-        .withMessage('Please follow correct phone number format.'),
+        .withMessage('Please follow correct phone number format'),
     check('description')
         .isLength({min:1, max: 255 })
-        .withMessage('Please write your description under 255 characters.'),
+        .withMessage('Please write your description under 255 characters'),
     check('address')
         .exists({ checkFalsy: true })
         .withMessage('Please provide your address'),
@@ -33,7 +33,7 @@ const businessValidators = [
         .exists({ checkFalsy: true })
         .withMessage('Zip code must be included')
         .matches(/^[0-9a-zA-Z]{5}/, 'g')
-        .withMessage("Please provide correct zip code,"),
+        .withMessage("Please provide correct zip code"),
     handleValidationErrors
 ]
 

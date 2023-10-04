@@ -43,7 +43,7 @@ const Search = () => {
               className='restaurant-Search'
               type='text'
               placeholder="Search your favorite restaurant"
-              size={50}
+              size={55}
               onChange={
                 filteredRestaurant
                 }
