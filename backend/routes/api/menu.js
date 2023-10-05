@@ -6,6 +6,9 @@ const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { Menu } = require('../../db/models');
 const { route } = require('./businesses');
+const multer = require('multer');
+const upload = multer({dest:'uploads/'});
+const {uploadFile} = require('../../aws/s3.js')
 
 const MenuValidator = [
     check('restaurantId')
@@ -37,7 +40,7 @@ router.get('/:restaurantId', asyncHandler(async (req, res)=>{
     return res.json(menus)
 }))
 
-router.post('/new', MenuValidator, asyncHandler(async (req, res)=>{
+router.post('/new', MenuValidator, upload.single('image'), asyncHandler(async (req, res)=>{
     const {restaurantId, name, price, image_url} = req.body
     const menu = await Menu.create({
         restaurantId,
