@@ -13,14 +13,13 @@ function AddMenu({onClose, restaurantId}){
     async function onSubmit(e){
         e.preventDefault();
 
-        const menu = {
-            restaurantId,
-            name,
-            price,
-            image_url: image
-        }
+        const formData = new FormData();
+        formData.append("restaurantId", restaurantId);
+        formData.append("name", name);
+        formData.append("price", price);
+        formData.append("image", image);
 
-        return await dispatch(createMenuThunk(menu))
+        return await dispatch(createMenuThunk(formData))
                 .then(()=>onClose())
                 .catch(async (res) => {
                     const data = await res.json();
