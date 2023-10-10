@@ -10,6 +10,11 @@ function AddMenu({onClose, restaurantId}){
     const [image, setImage] = useState('')
     const [errors, setErrors] = useState([])
 
+    function updateImage(e){
+        const file = e.target.files[0]
+        setImage(file)
+    }
+
     async function onSubmit(e){
         e.preventDefault();
 
@@ -42,7 +47,7 @@ function AddMenu({onClose, restaurantId}){
             <form onSubmit={onSubmit} className='add-menu-form'>
                 <input type='text' name='name' placeholder="name" onChange={e=>setName(e.target.value)}></input>
                 <input type='number' name="price" placeholder="price" onChange={e=>setPrice(e.target.value)}></input>
-                <input type='text' name="image_url" placeholder="image url" onChange={e=>setImage(e.target.value)}></input>
+                <input type='file' name="image_url" onChange={updateImage}></input>
                 <button type="submit">submit</button>
             </form>
         </div>
