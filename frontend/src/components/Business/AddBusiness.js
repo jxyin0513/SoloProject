@@ -19,23 +19,27 @@ function AddBusiness({onClose}){
     const [zipCode, setZipCode] = useState('');
     const [errors, setErrors]=useState([])
 
+    function updateImage(e){
+        const file = e.target.files[0];
+        setCoverImg(file)
+    }
+
     async function onSubmit(e){
         e.preventDefault();
 
-        const business = {
-            ownerId: user.id,
-            name,
-            phoneNumber: phoneNumber.trim(),
-            description,
-            logo,
-            coverImg,
-            address,
-            city,
-            state,
-            zipCode
-        }
+        const formData = new FormData();
+        formData.append("ownerId", user.id);
+        formData.append("name", name);
+        formData.append("phoneNumber", phoneNumber.trim());
+        formData.append("description", description);
+        formData.append("logo", logo);
+        formData.append("coverImg", coverImg);
+        formData.append("address", address);
+        formData.append("city", city);
+        formData.append("state", state);
+        formData.append("zipCode", zipCode);
 
-    return dispatch(addBusinessThunk(business))
+    return dispatch(addBusinessThunk(formData))
     .then((res)=>{
         history.push(`/businesses/${res.id}`)
         onClose()})
@@ -67,10 +71,10 @@ function AddBusiness({onClose}){
                         <textarea name="description" rows="3" cols="30" value={description} placeholder="Tell us about your business" onChange={e=>setDescription(e.target.value)}></textarea>
                     </label>
                     <label>
-                        <input type="text" name="coverImg" value={coverImg} placeholder="URL of image" onChange={e=>setCoverImg(e.target.value)}></input>
+                        <input type="file" name="coverImg" onChange={updateImage}></input>
                     </label>
                     <label>
-                        <input type="text" name="logo" value={logo} placeholder="URL of thumb nail" onChange={e=>setLogo(e.target.value)}></input>
+                        <input type="file" name="image" onChange={updateImage}></input>
                     </label>
                     <label>
                         <input type="text" name="address" value={address} placeholder='address' onChange={e=>setAddress(e.target.value)}></input>

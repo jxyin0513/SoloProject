@@ -19,15 +19,14 @@ function EditMenu({onClose, menuId, restaurantId}){
     async function onSubmit(e){
         e.preventDefault();
 
-        const menu = {
-            id: menuId,
-            restaurantId,
-            price,
-            name,
-            image_url: image
-        }
+        const formData = new FormData();
+        formData.append("id", menuId);
+        formData.append("restaurantId", restaurantId);
+        formData.append("price", price);
+        formData.append("name", name);
+        formData.append("image_url", image);
 
-        return dispatch(editMenuThunk(menu))
+        return dispatch(editMenuThunk(formData))
                 .then(()=>onClose())
                 .catch(async (res) => {
                     const data = await res.json();

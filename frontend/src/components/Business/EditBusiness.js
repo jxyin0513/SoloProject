@@ -17,23 +17,27 @@ function EditBusiness({restaurantId, onClose}){
     const [zipCode, setZipCode] = useState(business.zipCode);
     const [errors, setErrors] = useState([])
 
+    function updateImage(e){
+        const file = e.target.files[0];
+        setCoverImg(file)
+    }
+
     async function onSubmit(e){
         e.preventDefault();
 
-        const editedBusiness = {
-            id:business.id,
-            name,
-            phoneNumber: phoneNumber.trim(),
-            coverImg,
-            logo,
-            address,
-            city,
-            state,
-            description,
-            zipCode
-        }
+        const formData = new FormData();
+        formData.append("ownerId", user.id);
+        formData.append("name", name);
+        formData.append("phoneNumber", phoneNumber.trim());
+        formData.append("description", description);
+        formData.append("logo", logo);
+        formData.append("coverImg", coverImg);
+        formData.append("address", address);
+        formData.append("city", city);
+        formData.append("state", state);
+        formData.append("zipCode", zipCode);
 
-    return dispatch(editBusinessThunk(editedBusiness)).then(()=>onClose())
+    return dispatch(editBusinessThunk(formData)).then(()=>onClose())
     .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
@@ -62,10 +66,10 @@ function EditBusiness({restaurantId, onClose}){
                     <textarea name="description" value={description} placeholder='description' rows="3" cols="30" onChange={e=>setDescription(e.target.value)}></textarea>
                 </label>
                 <label>
-                     <input type="text" name="coverImg" placeholder="cover image" value={coverImg} onChange={e=>setCoverImg(e.target.value)}></input>
+                     <input type="file" name="image" onChange={updateImage}></input>
                 </label>
                 <label>
-                    <input type="text" name="logo" placeholder="thumb nail" value={logo} onChange={e=>setLogo(e.target.value)}></input>
+                    <input type="text" name="logo" onChange={updateImage}></input>
                 </label>
                 <label>
                     <input type="text" name="address" placeholder="address" value={address} onChange={e=>setAddress(e.target.value)}></input>

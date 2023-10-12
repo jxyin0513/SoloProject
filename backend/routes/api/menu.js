@@ -40,7 +40,7 @@ router.get('/:restaurantId', asyncHandler(async (req, res)=>{
     return res.json(menus)
 }))
 
-router.post('/new', MenuValidator, singleMulterUpload('image'), asyncHandler(async (req, res)=>{
+router.post('/new', MenuValidator, singleMulterUpload('image_url'), asyncHandler(async (req, res)=>{
     const {restaurantId, name, price} = req.body
     const profileImageUrl = await singlePublicFileUpload(req.file);
     const menu = await Menu.create({
