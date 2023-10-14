@@ -33,7 +33,7 @@ function AddBusiness({onClose}){
         formData.append("phoneNumber", phoneNumber.trim());
         formData.append("description", description);
         formData.append("logo", logo);
-        formData.append("coverImg", coverImg);
+        formData.append("image_url", coverImg);
         formData.append("address", address);
         formData.append("city", city);
         formData.append("state", state);

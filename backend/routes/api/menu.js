@@ -52,9 +52,10 @@ router.post('/new', MenuValidator, singleMulterUpload('image_url'), asyncHandler
     return res.json(menu);
 }))
 
-router.put('/:menuId/edit', MenuValidator, asyncHandler(async (req, res)=>{
+router.put('/:menuId/edit', MenuValidator, singleMulterUpload('image_url'), asyncHandler(async (req, res)=>{
     const id = parseInt(req.params.menuId, 10)
     const menu = await Menu.findByPk(id);
+    const profileImageUrl = await singlePublicFileUpload(req.file);
     const newMenu = await menu.update(req.body);
     return res.json(newMenu);
 }))

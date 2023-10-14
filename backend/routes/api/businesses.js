@@ -5,6 +5,7 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 // const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { Business } = require('../../db/models');
+const {singlePublicFileUpload, singleMulterUpload} = require('../../aws/s3')
 
 const businessValidators = [
     check('name')

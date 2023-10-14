@@ -22,7 +22,7 @@ function AddMenu({onClose, restaurantId}){
         formData.append("restaurantId", restaurantId);
         formData.append("name", name);
         formData.append("price", price);
-        formData.append("image", image);
+        formData.append("image_url", image);
 
         return await dispatch(createMenuThunk(formData))
                 .then(()=>onClose())
