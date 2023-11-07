@@ -54,9 +54,15 @@ router.post('/new', MenuValidator, singleMulterUpload('image_url'), asyncHandler
 
 router.put('/:menuId/edit', MenuValidator, singleMulterUpload('image_url'), asyncHandler(async (req, res)=>{
     const id = parseInt(req.params.menuId, 10)
+    const {restaurantId, name, price} = req.body
     const menu = await Menu.findByPk(id);
     const profileImageUrl = await singlePublicFileUpload(req.file);
-    const newMenu = await menu.update(req.body);
+    const newMenu = await menu.update({
+        restaurantId,
+        name,
+        price,
+        image_url: profileImageUrl
+    });
     return res.json(newMenu);
 }))
 

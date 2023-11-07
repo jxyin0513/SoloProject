@@ -10,7 +10,7 @@ function AddBusiness({onClose}){
     const[name, setName] = useState('');
     const history = useHistory();
     const [phoneNumber, setPhoneNumber] = useState('');
-    const [logo, setLogo] = useState('')
+    // const [logo, setLogo] = useState('')
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
@@ -32,7 +32,7 @@ function AddBusiness({onClose}){
         formData.append("name", name);
         formData.append("phoneNumber", phoneNumber.trim());
         formData.append("description", description);
-        formData.append("logo", logo);
+        // formData.append("logo", logo);
         formData.append("image_url", coverImg);
         formData.append("address", address);
         formData.append("city", city);
@@ -73,9 +73,9 @@ function AddBusiness({onClose}){
                     <label>
                         <input type="file" name="coverImg" onChange={updateImage}></input>
                     </label>
-                    <label>
+                    {/* <label>
                         <input type="file" name="image" onChange={updateImage}></input>
-                    </label>
+                    </label> */}
                     <label>
                         <input type="text" name="address" value={address} placeholder='address' onChange={e=>setAddress(e.target.value)}></input>
                     </label>

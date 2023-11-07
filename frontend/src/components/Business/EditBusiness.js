@@ -9,7 +9,7 @@ function EditBusiness({restaurantId, onClose}){
     const[name, setName] = useState(business.name);
     const [phoneNumber, setPhoneNumber] = useState(business.phoneNumber);
     const [coverImg, setCoverImg] = useState(business.coverImg);
-    const [logo, setLogo] = useState(business.logo)
+    // const [logo, setLogo] = useState(business.logo)
     const [address, setAddress] = useState(business.address);
     const [city, setCity] = useState(business.city);
     const [state, setState] = useState(business.state);
@@ -26,11 +26,11 @@ function EditBusiness({restaurantId, onClose}){
         e.preventDefault();
 
         const formData = new FormData();
-        formData.append("ownerId", user.id);
+        formData.append("ownerId", business.ownerId);
         formData.append("name", name);
         formData.append("phoneNumber", phoneNumber.trim());
         formData.append("description", description);
-        formData.append("logo", logo);
+        // formData.append("logo", logo);
         formData.append("image_url", coverImg);
         formData.append("address", address);
         formData.append("city", city);
@@ -68,9 +68,9 @@ function EditBusiness({restaurantId, onClose}){
                 <label>
                      <input type="file" name="image" onChange={updateImage}></input>
                 </label>
-                <label>
+                {/* <label>
                     <input type="text" name="logo" onChange={updateImage}></input>
-                </label>
+                </label> */}
                 <label>
                     <input type="text" name="address" placeholder="address" value={address} onChange={e=>setAddress(e.target.value)}></input>
                 </label>
