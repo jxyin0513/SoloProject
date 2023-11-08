@@ -50,7 +50,7 @@ router.get('/:businessId', asyncHandler(async (req, res)=>{
     return res.json(business);
 }))
 
-router.put('/:businessId/edit', businessValidators, asyncHandler(async (req, res)=>{
+router.put('/:businessId/edit',singleMulterUpload('image_url'), businessValidators, asyncHandler(async (req, res)=>{
     const id = parseInt(req.params.businessId, 10)
     const business = await Business.findByPk(id);
     const newBusiness = await business.update(req.body);
@@ -64,16 +64,15 @@ router.delete('/:businessId/delete', asyncHandler(async (req, res)=>{
     return res.json(deleteBusiness)
 }))
 
-router.post('/create-business', businessValidators, asyncHandler( async(req, res)=>{
-    const {ownerId, name, phoneNumber, description, coverImg, logo, address, city, state, zipCode} = req.body;
-
+router.post('/create-business',singleMulterUpload('image_url'), businessValidators, asyncHandler( async(req, res)=>{
+    const {ownerId, name, phoneNumber, description, address, city, state, zipCode} = req.body;
+    const profileImageUrl = await singlePublicFileUpload(req.file);
     const newBusiness = await Business.create({
         ownerId,
         name,
         phoneNumber,
         description,
-        coverImg,
-        logo,
+        coverImg: profileImageUrl,
         address,
         city,
         state,

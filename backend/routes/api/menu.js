@@ -24,7 +24,7 @@ const MenuValidator = [
         .withMessage('Please provide menu price')
         .isInt()
         .withMessage('Please provide proper price tag'),
-    check('image_url')
+    check('image')
         .exists({ checkFalsy: true })
         .withMessage('Please upload your image'),
     handleValidationErrors
@@ -40,8 +40,9 @@ router.get('/:restaurantId', asyncHandler(async (req, res)=>{
     return res.json(menus)
 }))
 
-router.post('/new', MenuValidator, singleMulterUpload('image_url'), asyncHandler(async (req, res)=>{
+router.post('/new',singleMulterUpload("image"), MenuValidator,   asyncHandler(async (req, res)=>{
     const {restaurantId, name, price} = req.body
+    console.log(name, restaurantId)
     const profileImageUrl = await singlePublicFileUpload(req.file);
     const menu = await Menu.create({
         restaurantId,
@@ -52,7 +53,7 @@ router.post('/new', MenuValidator, singleMulterUpload('image_url'), asyncHandler
     return res.json(menu);
 }))
 
-router.put('/:menuId/edit', MenuValidator, singleMulterUpload('image_url'), asyncHandler(async (req, res)=>{
+router.put('/:menuId/edit', singleMulterUpload('image'), MenuValidator, asyncHandler(async (req, res)=>{
     const id = parseInt(req.params.menuId, 10)
     const {restaurantId, name, price} = req.body
     const menu = await Menu.findByPk(id);

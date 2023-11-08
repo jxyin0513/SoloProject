@@ -1,10 +1,10 @@
-require('dotenv').config()
+// require('dotenv').config()
 // const S3 = require('aws-sdk/clients/s3');
 const AWS = require("aws-sdk");
 const multer = require('multer');
 
-const NAME_OF_BUCKET = process.env.aws_bucket_name
-// const region = process.env.aws_bucket_region
+const NAME_OF_BUCKET = "jxyinyelp"
+const region = process.env.aws_bucket_region
 // const AWS_ACCESS_KEY_ID = process.env.AWS_ACCESS_KEY_ID
 // const AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY
 
