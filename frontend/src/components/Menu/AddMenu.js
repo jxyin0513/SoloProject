@@ -22,13 +22,12 @@ function AddMenu({onClose, restaurantId}){
         formData.append("restaurantId", restaurantId);
         formData.append("name", name);
         formData.append("price", price);
-        formData.append("image_url", image);
-
+        formData.append("image", image);
+        console.log(formData)
         return await dispatch(createMenuThunk(formData))
                 .then(()=>onClose())
                 .catch(async (res) => {
                     const data = await res.json();
-                    console.log(data)
                     if (data.errors) setErrors(data.errors);
                     return data;
                 })
@@ -47,7 +46,7 @@ function AddMenu({onClose, restaurantId}){
             <form onSubmit={onSubmit} className='add-menu-form'>
                 <input type='text' name='name' placeholder="name" onChange={e=>setName(e.target.value)}></input>
                 <input type='number' name="price" placeholder="price" onChange={e=>setPrice(e.target.value)}></input>
-                <input type='file' name="image_url" onChange={updateImage}></input>
+                <input type='file' name="image" onChange={updateImage}></input>
                 <button type="submit">submit</button>
             </form>
         </div>

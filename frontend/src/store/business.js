@@ -33,7 +33,10 @@ const removeBusiness= (businessId)=>({
 export const addBusinessThunk = (business)=> async dispatch=>{
     const response = await csrfFetch("/api/businesses/create-business",{
         method: "POST",
-        body: JSON.stringify(business)
+        headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        body: business
     })
     if(response.ok){
         const data = await response.json();
@@ -68,7 +71,10 @@ export const getBusinessDetailThunk =(businessId)=>async dispatch=>{
 export const editBusinessThunk =(business) => async dispatch=>{
     const response = await csrfFetch(`/api/businesses/${business.id}/edit`,{
         method: "PUT",
-        body: JSON.stringify(business)
+        headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        body: business
     })
     if(response.ok){
         const data = await response.json();
