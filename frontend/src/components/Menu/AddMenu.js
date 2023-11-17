@@ -19,11 +19,12 @@ function AddMenu({onClose, restaurantId}){
         e.preventDefault();
 
         const formData = new FormData();
+        formData.append("image", image);
         formData.append("restaurantId", restaurantId);
         formData.append("name", name);
         formData.append("price", price);
-        formData.append("image", image);
-        console.log(formData)
+
+        // console.log(formData)
         return await dispatch(createMenuThunk(formData))
                 .then(()=>onClose())
                 .catch(async (res) => {

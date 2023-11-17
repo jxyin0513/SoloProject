@@ -38,7 +38,7 @@ export const getMenusThunk = (id) => async(dispatch)=>{
 }
 
 export const createMenuThunk = (menu) => async(dispatch)=>{
-    console.log(menu)
+    // console.log(menu)
     const response = await csrfFetch(`/api/menus/new`,{
         method: "POST",
         headers: {
