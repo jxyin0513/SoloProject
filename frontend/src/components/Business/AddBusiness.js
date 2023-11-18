@@ -33,7 +33,7 @@ function AddBusiness({onClose}){
         formData.append("phoneNumber", phoneNumber.trim());
         formData.append("description", description);
         // formData.append("logo", logo);
-        formData.append("image_url", coverImg);
+        formData.append("image", coverImg);
         formData.append("address", address);
         formData.append("city", city);
         formData.append("state", state);
@@ -71,7 +71,7 @@ function AddBusiness({onClose}){
                         <textarea name="description" rows="3" cols="30" value={description} placeholder="Tell us about your business" onChange={e=>setDescription(e.target.value)}></textarea>
                     </label>
                     <label>
-                        <input type="file" name="coverImg" onChange={updateImage}></input>
+                        <input type="file" name="image" onChange={updateImage}></input>
                     </label>
                     {/* <label>
                         <input type="file" name="image" onChange={updateImage}></input>
