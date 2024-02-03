@@ -72,7 +72,7 @@ router.post('/new', reviewValidator, asyncHandler(async(req, res)=>{
     return res.json(review);
 }))
 
-router.put('/:id/edit',editReviewValidator, asyncHandler(async(req, res)=>{
+router.put('/:id/edit', editReviewValidator, asyncHandler(async(req, res)=>{
     const id = parseInt(req.params.id, 10)
     const oldReview = await Review.findByPk(id);
     const newReview = await oldReview.update(req.body);
