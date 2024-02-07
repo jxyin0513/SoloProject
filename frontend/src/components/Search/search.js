@@ -12,7 +12,9 @@ const Search = () => {
     useEffect(() => {
       if (!showSearch) return;
 
+      // const search = document.getElementById("search-Trial")
       const closeMenu = () => {
+        // search.setAttribute("value", "")
         setShowSearch(false);
       };
 
@@ -33,6 +35,8 @@ const Search = () => {
       if(search.length>0){
         setSearchResult(search)
         setShowSearch(true)
+      }else{
+        setShowSearch(false)
       }
     }
     return (
@@ -42,6 +46,7 @@ const Search = () => {
             <input
               className='restaurant-Search'
               type='text'
+              id='search-Trial'
               placeholder="Search your favorite restaurant"
               size={55}
               onChange={
