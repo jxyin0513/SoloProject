@@ -1,4 +1,5 @@
-import React, { useEffect, useState} from "react";
+import React, {useMemo, useEffect, useState} from "react";
+import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
 import {useDispatch, useSelector} from 'react-redux';
 import {getBusinessesThunk, deleteBusinessThunk} from "../../store/business";
 import GetReviews from "../Review/getReviews";
@@ -15,6 +16,10 @@ import './BusinessDetail.css'
 function BusinessDetail(){
     const dispatch = useDispatch();
     const history = useHistory();
+    const { isLoaded } = useLoadScript({
+        googleMapsApiKey: process.env.GOOGLE_MAP_APIKEYS,
+      });
+    const center = useMemo(() => ({ lat: 18.52043, lng: 73.856743 }), []);
     const {businessId} = useParams();
     const [editBusiness, setEditBusiness] = useState(false);
     const [addReview, setAddReview] = useState(false);
@@ -166,6 +171,19 @@ function BusinessDetail(){
                                 <p>Description: {business.description}</p>
                                 <p>Address: {business.address },  {business.city},   {business.state}</p>
                                 <p>Zip Code: {business.zipCode}</p>
+                            </div>
+                            <div className="map-Outer">
+                                {!isLoaded ? (
+                                    <h1>Loading...</h1>
+                                ) : (
+                                    <GoogleMap
+                                    mapContainerClassName="map-container"
+                                    center={center}
+                                    zoom={10}
+                                    >
+                                        <Marker position={{ lat: 18.52043, lng: 73.856743 }} />
+                                    </GoogleMap>
+                                )}
                             </div>
                         </div>
                         </div>
