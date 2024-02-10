@@ -172,7 +172,7 @@ function BusinessDetail(){
                                 <p>Address: {business.address },  {business.city},   {business.state}</p>
                                 <p>Zip Code: {business.zipCode}</p>
                             </div>
-                            <div className="map-Container">
+                            <div className="map-Outer">
                                 {!isLoaded ? (
                                     <h1>Loading...</h1>
                                 ) : (

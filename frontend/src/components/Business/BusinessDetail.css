@@ -281,3 +281,11 @@ img.image{
     cursor: pointer;
     border-radius: 2px;
 }
+.map-Outer{
+    height: 100px;
+    width: 100%;
+}
+.map-container{
+    height: 100%;
+    width: 100%;
+}
