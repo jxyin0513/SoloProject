@@ -16,8 +16,9 @@ import './BusinessDetail.css'
 function BusinessDetail(){
     const dispatch = useDispatch();
     const history = useHistory();
+    console.log(process.env)
     const { isLoaded } = useLoadScript({
-        googleMapsApiKey: process.env.GOOGLE_MAP_APIKEYS,
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
       });
     const center = useMemo(() => ({ lat: 18.52043, lng: 73.856743 }), []);
     const {businessId} = useParams();
@@ -166,25 +167,28 @@ function BusinessDetail(){
                                 </div>
                                 <GetReviews businessId={businessId}  />
                             </div>
-                            <div className="restaurant-info">
-                                <p>Phone Number: {business.phoneNumber} </p>
-                                <p>Description: {business.description}</p>
-                                <p>Address: {business.address },  {business.city},   {business.state}</p>
-                                <p>Zip Code: {business.zipCode}</p>
-                            </div>
-                            <div className="map-Outer">
-                                {!isLoaded ? (
-                                    <h1>Loading...</h1>
-                                ) : (
-                                    <GoogleMap
-                                    mapContainerClassName="map-container"
-                                    center={center}
-                                    zoom={10}
-                                    >
-                                        <Marker position={{ lat: 18.52043, lng: 73.856743 }} />
-                                    </GoogleMap>
-                                )}
-                            </div>
+                            <div>
+                                <div className="restaurant-info">
+                                    <p>Phone Number: {business.phoneNumber} </p>
+                                    <p>Description: {business.description}</p>
+                                    <p>Address: {business.address },  {business.city},   {business.state}</p>
+                                    <p>Zip Code: {business.zipCode}</p>
+                                </div>
+                                <div className="map-Outer">
+                                    {!isLoaded ? (
+                                        <h1>Loading...</h1>
+                                    ) : (
+                                        <GoogleMap
+                                        mapContainerClassName="map-container"
+                                        center={center}
+                                        zoom={10}
+                                        >
+                                            <Marker position={{ lat: 18.52043, lng: 73.856743 }} />
+                                        </GoogleMap>
+                                    )}
+                                </div>
+                                </div>
+
                         </div>
                         </div>
                     </div>
