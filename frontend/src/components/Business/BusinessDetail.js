@@ -17,12 +17,14 @@ import './BusinessDetail.css'
 function BusinessDetail(){
     const dispatch = useDispatch();
     const history = useHistory();
+    let center;
     const {businessId} = useParams();
     const business = useSelector(state=>state.allBusinesses[businessId])
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
       });
-
+    const [latitude, setLatitude] = useState(0)
+    const [longitude, setLongitude] = useState(0)
     setDefaults({
         key: process.env.REACT_APP_GOOGLE_API_KEY, // Your API key here.
         language: "en", // Default language for responses.
@@ -31,11 +33,13 @@ function BusinessDetail(){
     fromAddress(`${business?.address}`)
       .then(({ results }) => {
         const { lat, lng } = results[0].geometry.location;
-        console.log(lat, lng);
+        // console.log(lat, lng);
+        setLatitude(lat)
+        setLongitude(lng)
       })
       .catch(console.error);
 
-      const center = useMemo(() => ({ lat: 40.7128, lng: 74.0060 }), []);
+    center = useMemo(() => ({ lat: latitude, lng: longitude }), [latitude, longitude]);
     const [editBusiness, setEditBusiness] = useState(false);
     const [addReview, setAddReview] = useState(false);
     const [addMenu, setAddMenu] = useState(false)
@@ -196,7 +200,7 @@ function BusinessDetail(){
                                         center={center}
                                         zoom={10}
                                         >
-                                            <Marker position={{ lat: 18.52043, lng: 73.856743 }} />
+                                            <Marker position={{ lat: latitude, lng: longitude }} />
                                         </GoogleMap>
                                     )}
                                 </div>
