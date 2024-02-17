@@ -5,7 +5,7 @@ import './AddReview.css'
 
 function AddReview ({restaurantId, onClose}){
     const dispatch = useDispatch();
-    const [rating, setRating] = useState(1)
+    const [rating, setRating] = useState(0)
     const [comment, setComment] = useState('');
     const [errors, setErrors] = useState([]);
     const user = useSelector(state=>state.session.user)

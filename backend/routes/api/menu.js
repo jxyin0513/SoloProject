@@ -22,7 +22,7 @@ const MenuValidator = [
     check('price')
         .exists({ checkFalsy: true })
         .withMessage('Please provide menu price')
-        .isInt()
+        .isInt({gt:0})
         .withMessage('Please provide proper price tag'),
     handleValidationErrors
 ]
@@ -39,7 +39,7 @@ router.get('/:restaurantId', asyncHandler(async (req, res)=>{
 
 router.post('/new', singleMulterUpload("image"), MenuValidator, asyncHandler(async (req, res)=>{
     const {restaurantId, name, price} = req.body
-    console.log(name, restaurantId)
+    // console.log(name, restaurantId, price)
     const profileImageUrl = await singlePublicFileUpload(req.file);
     const menu = await Menu.create({
         restaurantId,
