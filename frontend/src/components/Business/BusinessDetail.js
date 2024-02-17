@@ -1,5 +1,6 @@
 import React, {useMemo, useEffect, useState} from "react";
 import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
+import {setDefaults, fromAddress} from 'react-geocode'
 import {useDispatch, useSelector} from 'react-redux';
 import {getBusinessesThunk, deleteBusinessThunk} from "../../store/business";
 import GetReviews from "../Review/getReviews";
@@ -16,11 +17,29 @@ import './BusinessDetail.css'
 function BusinessDetail(){
     const dispatch = useDispatch();
     const history = useHistory();
-    const { isLoaded } = useLoadScript({
-        googleMapsApiKey: process.env.GOOGLE_MAP_APIKEYS,
-      });
-    const center = useMemo(() => ({ lat: 18.52043, lng: 73.856743 }), []);
+    let center;
     const {businessId} = useParams();
+    const business = useSelector(state=>state.allBusinesses[businessId])
+    const { isLoaded } = useLoadScript({
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
+      });
+    const [latitude, setLatitude] = useState(0)
+    const [longitude, setLongitude] = useState(0)
+    setDefaults({
+        key: process.env.REACT_APP_GOOGLE_API_KEY, // Your API key here.
+        language: "en", // Default language for responses.
+        region: "es", // Default region for responses.
+      });
+    fromAddress(`${business?.address}`)
+      .then(({ results }) => {
+        const { lat, lng } = results[0].geometry.location;
+        // console.log(lat, lng);
+        setLatitude(lat)
+        setLongitude(lng)
+      })
+      .catch(console.error);
+
+    center = useMemo(() => ({ lat: latitude, lng: longitude }), [latitude, longitude]);
     const [editBusiness, setEditBusiness] = useState(false);
     const [addReview, setAddReview] = useState(false);
     const [addMenu, setAddMenu] = useState(false)
@@ -28,7 +47,6 @@ function BusinessDetail(){
     // const [reqLog, setReqLog] = useState(false);
     const [menuId, setMenuId] = useState(0);
     const user = useSelector(state=>state.session.user)
-    const business = useSelector(state=>state.allBusinesses[businessId])
     const menus = Object.values(useSelector(state=>state.menus))
     const reviews = Object.values(useSelector(state=>state.reviews));
 
@@ -166,25 +184,28 @@ function BusinessDetail(){
                                 </div>
                                 <GetReviews businessId={businessId}  />
                             </div>
-                            <div className="restaurant-info">
-                                <p>Phone Number: {business.phoneNumber} </p>
-                                <p>Description: {business.description}</p>
-                                <p>Address: {business.address },  {business.city},   {business.state}</p>
-                                <p>Zip Code: {business.zipCode}</p>
-                            </div>
-                            <div className="map-Outer">
-                                {!isLoaded ? (
-                                    <h1>Loading...</h1>
-                                ) : (
-                                    <GoogleMap
-                                    mapContainerClassName="map-container"
-                                    center={center}
-                                    zoom={10}
-                                    >
-                                        <Marker position={{ lat: 18.52043, lng: 73.856743 }} />
-                                    </GoogleMap>
-                                )}
-                            </div>
+                            <div>
+                                <div className="restaurant-info">
+                                    <p>Phone Number: {business.phoneNumber} </p>
+                                    <p>Description: {business.description}</p>
+                                    <p>Address: {business.address },  {business.city},   {business.state}</p>
+                                    <p>Zip Code: {business.zipCode}</p>
+                                </div>
+                                <div className="map-Outer">
+                                    {!isLoaded ? (
+                                        <h1>Loading...</h1>
+                                    ) : (
+                                        <GoogleMap
+                                        mapContainerClassName="map-container"
+                                        center={center}
+                                        zoom={10}
+                                        >
+                                            <Marker position={{ lat: latitude, lng: longitude }} />
+                                        </GoogleMap>
+                                    )}
+                                </div>
+                                </div>
+
                         </div>
                         </div>
                     </div>
