@@ -42,7 +42,7 @@ const storage = multer.memoryStorage({
           if(file.mimetype=='image/jpeg'||file.mimetype=='image/jpg'||file.mimetype=='image/pdf'){
             cb(null, true)
           }else{
-            cb(new Error('Please upload correct image type'), false)
+            cb(new multer.MulterError("LIMIT_UNEXPECTED_FILE"), false)
           }
         },
         limits:{fileSize: 10000000}

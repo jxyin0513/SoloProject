@@ -6,7 +6,7 @@ const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const routes = require('./routes');
 const { ValidationError } = require('sequelize');
-
+const multer = require('multer')
 const { environment } = require('./config');
 const isProduction = environment === 'production';
 
@@ -35,6 +35,20 @@ app.use(
     })
   );
 app.use(routes);
+
+// app.use((err, _req, _res, next)=>{
+//   const err = Error('Bad request.');
+//   err.status = 400;
+//   err.title = 'Bad request.';
+//   if (err instanceof multer.MulterError) {
+//     if(err.code === "LIMIT_FILE_SIZE"){
+//       err.errors = ["Please try smaller file size"]
+//     }else if(err.code === "LIMIT_UNEXPECTED_FILE"){
+//       err.errors = ["Please submit appropriate file type"]
+//     }
+//   }
+//   next(err)
+// })
 
 app.use((_req, _res, next) => {
   const err = new Error("The requested resource couldn't be found.");

@@ -1,5 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {createRoot} from 'react-dom/client'
+// import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider as ReduxProvider } from 'react-redux';
 import './index.css';
@@ -31,10 +32,10 @@ function Root() {
     </ReduxProvider>
   );
 }
-
-ReactDOM.render(
+const container = document.getElementById('root');
+const root = createRoot(container)
+root.render(
   <React.StrictMode>
     <Root />
-  </React.StrictMode>,
-  document.getElementById('root')
+  </React.StrictMode>
 );
