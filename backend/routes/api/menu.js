@@ -41,11 +41,7 @@ router.post('/new', singleMulterUpload("image"), MenuValidator, asyncHandler(asy
     const {restaurantId, name, price} = req.body
     // console.log(name, restaurantId, price)
     if(req.file===undefined){
-        // const err = new Error("Bad request.");
-        // err.title = "Bad request.";
-        // err.errors = ["Please upload an image"];
-        // err.status = 400;
-        return res.status(400).json({ message: "Please upload image", errors:["Please upload image."]})
+        return res.status(400).json({ message: "Please upload image", errors:["Please upload image"]})
     }
     console.log(req.file)
     const profileImageUrl = await singlePublicFileUpload(req.file);
@@ -60,6 +56,9 @@ router.post('/new', singleMulterUpload("image"), MenuValidator, asyncHandler(asy
 
 router.put('/:menuId/edit', singleMulterUpload('image'), MenuValidator, asyncHandler(async (req, res)=>{
     const id = parseInt(req.params.menuId, 10)
+    if(req.file===undefined){
+        return res.status(400).json({ message: "Please upload image", errors:["Please upload image"]})
+    }
     const {restaurantId, name, price} = req.body
     const menu = await Menu.findByPk(id);
     const profileImageUrl = await singlePublicFileUpload(req.file);
