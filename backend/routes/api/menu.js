@@ -22,7 +22,7 @@ const MenuValidator = [
     check('price')
         .exists({ checkFalsy: true })
         .withMessage('Please provide menu price')
-        .isInt()
+        .isInt({gt:0})
         .withMessage('Please provide proper price tag'),
     handleValidationErrors
 ]
@@ -39,7 +39,11 @@ router.get('/:restaurantId', asyncHandler(async (req, res)=>{
 
 router.post('/new', singleMulterUpload("image"), MenuValidator, asyncHandler(async (req, res)=>{
     const {restaurantId, name, price} = req.body
-    console.log(name, restaurantId)
+    // console.log(name, restaurantId, price)
+    if(req.file===undefined){
+        return res.status(400).json({ message: "Please upload image", errors:["Please upload image"]})
+    }
+    console.log(req.file)
     const profileImageUrl = await singlePublicFileUpload(req.file);
     const menu = await Menu.create({
         restaurantId,
@@ -52,6 +56,9 @@ router.post('/new', singleMulterUpload("image"), MenuValidator, asyncHandler(asy
 
 router.put('/:menuId/edit', singleMulterUpload('image'), MenuValidator, asyncHandler(async (req, res)=>{
     const id = parseInt(req.params.menuId, 10)
+    if(req.file===undefined){
+        return res.status(400).json({ message: "Please upload image", errors:["Please upload image"]})
+    }
     const {restaurantId, name, price} = req.body
     const menu = await Menu.findByPk(id);
     const profileImageUrl = await singlePublicFileUpload(req.file);

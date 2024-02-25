@@ -36,7 +36,18 @@ const storage = multer.memoryStorage({
 
   // in awsS3.js
   const singleMulterUpload = (nameOfKey) =>
-    multer({ storage: storage }).single(nameOfKey);
+    multer(
+      { storage: storage,
+        fileFilter: function (req, file, cb){
+          if(file.mimetype=='image/jpeg'||file.mimetype=='image/jpg'||file.mimetype=='image/pdf'){
+            cb(null, true)
+          }else{
+            cb(new multer.MulterError("LIMIT_UNEXPECTED_FILE"), false)
+          }
+        },
+        limits:{fileSize: 10000000}
+
+       }).single(nameOfKey);
 
 // function uploadFile(file){
 //     const fileStream = fs.createReadStream(file.path)
