@@ -1,5 +1,6 @@
 import React, {useMemo, useEffect, useState} from "react";
-import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
+import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
+// import { Loader } from "@googlemaps/js-api-loader"
 import {setDefaults, fromAddress} from 'react-geocode'
 import {useDispatch, useSelector} from 'react-redux';
 import {getBusinessesThunk, deleteBusinessThunk} from "../../store/business";
@@ -20,11 +21,12 @@ function BusinessDetail(){
     let center;
     const {businessId} = useParams();
     const business = useSelector(state=>state.allBusinesses[businessId])
-    const { isLoaded } = useLoadScript({
+    const { isLoaded } = useJsApiLoader({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
       });
     const [latitude, setLatitude] = useState(0)
     const [longitude, setLongitude] = useState(0)
+    const [map, setMap] = useState(null)
     setDefaults({
         key: process.env.REACT_APP_GOOGLE_API_KEY, // Your API key here.
         language: "en", // Default language for responses.
@@ -60,6 +62,14 @@ function BusinessDetail(){
         dispatch(getMenusThunk(businessId))
     },[dispatch, businessId])
 
+    // const onLoad = useCallback(function onLoad(map){
+    //     const bounds = new window.google.maps.LatLngBounds(center);
+    //     map.fitBounds(bounds);
+    //     setMap(map)
+    // },[])
+    // function unLoad(map){
+    //     setMap(null)
+    // }
     async function deleteBusiness(e){
         const deleteBusiness =  await dispatch(deleteBusinessThunk(businessId))
         if(deleteBusiness){
@@ -199,7 +209,7 @@ function BusinessDetail(){
                                         mapContainerClassName="map-container"
                                         center={center}
                                         zoom={10}
-                                        >
+                                        onLoad={map=>setMap(map)}>
                                             <Marker position={{ lat: latitude, lng: longitude }} />
                                         </GoogleMap>
                                     )}
