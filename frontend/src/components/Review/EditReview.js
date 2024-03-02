@@ -34,8 +34,8 @@ function EditReview ({id, onClose}){
                 <div>Edit Review</div>
             </div>
             <div className="errors-handler-review">
-                {errors && (errors.map((error, key)=>
-                    <div key={key}>* {error}</div>
+                {errors && (errors.map((error, idx)=>
+                    <div key={idx}>* {error}</div>
                 ))}
             </div>
             <form className="edit-review-form" onSubmit={onSubmit}>

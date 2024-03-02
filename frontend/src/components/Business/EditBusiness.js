@@ -51,8 +51,8 @@ function EditBusiness({restaurantId, onClose}){
                 <div>Edit business</div>
             </div>
             <div className="errors-handler-business">
-                    {errors.length!==0&&errors.map((error, key)=>
-                        <div key={key}>* {error}</div>
+                    {errors.length!==0&&errors.map((error, idx)=>
+                        <div key={idx}>* {error}</div>
                     )}
             </div>
             <form className="edit-business" onSubmit={onSubmit}>

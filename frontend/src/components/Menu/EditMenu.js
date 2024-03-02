@@ -41,8 +41,8 @@ function EditMenu({onClose, menuId, restaurantId}){
                 <div>Edit menu</div>
             </div>
             <div className="errors-handler-menu">
-                    {errors.length!==0 && errors.map(error=>
-                        <div >* {error}</div>
+                    {errors.length!==0 && errors.map((error, idx)=>
+                        <div key={idx}>* {error}</div>
                     )}
                 </div>
             <form onSubmit={onSubmit} className='edit-menu-form'>
