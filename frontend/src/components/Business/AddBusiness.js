@@ -56,8 +56,8 @@ function AddBusiness({onClose}){
                     <div>List new business</div>
                 </div>
                 <div className="errors-handler-business">
-                    {errors && errors.map(error=>
-                        <div >* {error}</div>
+                    {errors && errors.map((error, key)=>
+                        <div key={key} >* {error}</div>
                     )}
                 </div>
                 <form className="add-business-form" onSubmit={onSubmit}>

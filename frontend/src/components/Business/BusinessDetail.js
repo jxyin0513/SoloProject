@@ -35,7 +35,7 @@ function BusinessDetail(){
     fromAddress(`${business?.address}`)
       .then(({ results }) => {
         const { lat, lng } = results[0].geometry.location;
-        // console.log(lat, lng);
+        console.log(lat, lng);
         setLatitude(lat)
         setLongitude(lng)
       })
