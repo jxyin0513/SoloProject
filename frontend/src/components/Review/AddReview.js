@@ -33,8 +33,8 @@ function AddReview ({restaurantId, onClose}){
                 <div>Add new review</div>
             </div>
             <div className="errors-handler-review">
-                    {errors && errors.map(error=>
-                        <div>* {error}</div>
+                    {errors && errors.map((error, idx)=>
+                        <div key={idx}>* {error}</div>
                     )}
                 </div>
             <form className="add-review-form" onSubmit={onSubmit}>

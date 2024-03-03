@@ -1,5 +1,6 @@
 import React, {useMemo, useEffect, useState} from "react";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
+// import {APIProvider, Map, AdvancedMarker} from '@vis.gl/react-google-maps'
 // import { Loader } from "@googlemaps/js-api-loader"
 import {setDefaults, fromAddress} from 'react-geocode'
 import {useDispatch, useSelector} from 'react-redux';
@@ -15,7 +16,7 @@ import { deleteMenuThunk } from "../../store/menu";
 import { useParams, useHistory } from 'react-router-dom';
 import './BusinessDetail.css'
 
-function BusinessDetail(){
+ function BusinessDetail(){
     const dispatch = useDispatch();
     const history = useHistory();
     let center;
@@ -27,6 +28,8 @@ function BusinessDetail(){
     const [latitude, setLatitude] = useState(0)
     const [longitude, setLongitude] = useState(0)
     const [map, setMap] = useState(null)
+    // const { Map } = await google.maps.importLibrary("maps");
+    // const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
     setDefaults({
         key: process.env.REACT_APP_GOOGLE_API_KEY, // Your API key here.
         language: "en", // Default language for responses.
@@ -35,13 +38,22 @@ function BusinessDetail(){
     fromAddress(`${business?.address}`)
       .then(({ results }) => {
         const { lat, lng } = results[0].geometry.location;
-        // console.log(lat, lng);
+        console.log(lat, lng);
         setLatitude(lat)
         setLongitude(lng)
       })
       .catch(console.error);
 
     center = useMemo(() => ({ lat: latitude, lng: longitude }), [latitude, longitude]);
+    // const map = new Map(document.getElementsByClassName("map-Outer"), {
+    //     center: { lat: latitude, lng: longitude },
+    //     zoom: 14,
+    //     mapId: "4504f8b37365c3d0",
+    //   });
+    // const marker = new AdvancedMarkerElement({
+    //     map,
+    //     position: { lat: 37.4239163, lng: -122.0947209 },
+    //   });
     const [editBusiness, setEditBusiness] = useState(false);
     const [addReview, setAddReview] = useState(false);
     const [addMenu, setAddMenu] = useState(false)
@@ -209,8 +221,9 @@ function BusinessDetail(){
                                         mapContainerClassName="map-container"
                                         center={center}
                                         zoom={10}
-                                        onLoad={map=>setMap(map)}>
-                                            <Marker position={{ lat: latitude, lng: longitude }} />
+                                        onLoad={map=>setMap(map)}
+                                        mapTypeId="351168e3c0f91f87">
+                                            <Marker position={{ lat: latitude, lng: longitude }}  />
                                         </GoogleMap>
                                     )}
                                 </div>

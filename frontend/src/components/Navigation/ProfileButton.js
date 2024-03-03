@@ -9,7 +9,9 @@ function ProfileButton({user}){
 
     function openMenu(){
         if(showMenu) return;
+
         setShowMenu(true)
+        console.log(showMenu)
     }
     useEffect(() => {
         if (!showMenu) return;
@@ -19,7 +21,7 @@ function ProfileButton({user}){
         };
 
         document.addEventListener('click', closeMenu);
-
+        console.log(showMenu)
         return () => document.removeEventListener("click", closeMenu);
     }, [showMenu]);
 
@@ -30,7 +32,7 @@ function ProfileButton({user}){
     return (
         <div className="profile-Outer">
           <button className="profile" onClick={openMenu}>
-            <i className="fas fa-user-circle" />
+            <i className="fas fa-user-circle"/>
           </button>
           {showMenu && (
             <div className="profile-dropdown">
