@@ -39,7 +39,7 @@ const storage = multer.memoryStorage({
     multer(
       { storage: storage,
         fileFilter: function (req, file, cb){
-          if(file.mimetype=='image/jpeg'||file.mimetype=='image/jpg'||file.mimetype=='image/pdf'){
+          if(file.mimetype=='image/jpeg'|| file.mimetype=='image/jpg' || file.mimetype=='image/pdf'){
             cb(null, true)
           }else{
             cb(new multer.MulterError("LIMIT_UNEXPECTED_FILE"), false)
