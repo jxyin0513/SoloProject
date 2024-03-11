@@ -213,13 +213,13 @@ function BusinessDetail(){
                                     {!isLoaded ? (
                                         <h1>Loading...</h1>
                                     ) : (
-                                <APIProvider apiKey={process.env.REACT_APP_GOOGLE_API_KEY}>
-                                        <Map center={center} zoom={10} mapId={process.env.REACT_APP_MAP_ID}>
-                                            <AdvancedMarker position={center}>
+                                        <APIProvider apiKey={process.env.REACT_APP_GOOGLE_API_KEY}>
+                                                <Map center={center} zoom={10} mapId={process.env.REACT_APP_MAP_ID}>
+                                                    <AdvancedMarker position={center}>
 
-                                            </AdvancedMarker>
-                                        </Map>
-                                </APIProvider>)}
+                                                    </AdvancedMarker>
+                                                </Map>
+                                        </APIProvider>)}
                                 </div>
                             </div>
 
