@@ -51,6 +51,9 @@ router.get('/:businessId', asyncHandler(async (req, res)=>{
 }))
 
 router.put('/:businessId/edit', singleMulterUpload('image'), businessValidators, asyncHandler(async (req, res)=>{
+    if(req.file===undefined){
+        return res.status(400).json({ message: "Please upload image", errors:["Please upload image"]})
+    }
     const id = parseInt(req.params.businessId, 10)
     const business = await Business.findByPk(id);
     const newBusiness = await business.update(req.body);
@@ -65,6 +68,9 @@ router.delete('/:businessId/delete', asyncHandler(async (req, res)=>{
 }))
 
 router.post('/create-business', singleMulterUpload('image'), businessValidators, asyncHandler( async(req, res)=>{
+    if(req.file===undefined){
+        return res.status(400).json({ message: "Please upload image", errors:["Please upload image"]})
+    }
     const {ownerId, name, phoneNumber, description, address, city, state, zipCode} = req.body;
     const profileImageUrl = await singlePublicFileUpload(req.file);
     const newBusiness = await Business.create({
