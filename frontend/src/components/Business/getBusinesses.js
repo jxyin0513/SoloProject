@@ -20,7 +20,7 @@ function AllBusinesses(){
                     return (
                         <div key={business.id} className="each-business">
                             <NavLink to={`/businesses/${business.id}`}>
-                                {business.logo.length>0&&
+                                {business.logo&&
                                 <img className="business-logo" alt="logo" src={`${business.logo}`} onError={e=>{e.target.src='https://e7.pngegg.com/pngimages/716/758/png-clipart-graphics-restaurant-logo-restaurant-thumbnail.png'; e.onerror=null}} ></img>}
                                 <div key={business.id}>{business.name}</div>
                             </NavLink>
