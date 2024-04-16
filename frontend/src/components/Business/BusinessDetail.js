@@ -1,6 +1,6 @@
 import React, {useMemo, useEffect, useState} from "react";
 import { useJsApiLoader } from "@react-google-maps/api";
-import {APIProvider, Map, AdvancedMarker} from '@vis.gl/react-google-maps';
+import {APIProvider, Map,useMapsLibrary, AdvancedMarker} from '@vis.gl/react-google-maps';
 // import { Loader } from "@googlemaps/js-api-loader"
 import {setDefaults, fromAddress} from 'react-geocode'
 import {useDispatch, useSelector} from 'react-redux';
@@ -31,19 +31,41 @@ function BusinessDetail(){
     // const [map, setMap] = useState(null)
     // const { Map } = await google.maps.importLibrary("maps");
     // const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
-    setDefaults({
-        key: process.env.REACT_APP_GOOGLE_API_KEY, // Your API key here.
-        language: "en", // Default language for responses.
-        region: "es", // Default region for responses.
-      });
-    fromAddress(`${business?.address}`)
-      .then( ({ results }) => {
-        const { lat, lng } = results[0].geometry.location;
-        // console.log(lat, lng);
-        setLatitude(lat)
-        setLongitude(lng)
-      })
-      .catch(console.error);
+    const geocodingApiLoaded = useMapsLibrary("geocoding");
+    const [geocodingService, setGeocodingService] = useState();
+    const [geocodingResult, setGeocodingResult] = useState();
+
+
+    useEffect(()=>{
+        if(!geocodingApiLoaded) return;
+        setGeocodingService(new window.google.maps.Geocoder())
+        console.log(geocodingService)
+    },[geocodingApiLoaded])
+
+    // useEffect(()=>{
+    //     if(!geocodingService && !business.address) return;
+    //     geocodingService.geocode({business}, (results, status)=>{
+    //         if(results, status === "OK"){
+    //             setLatitude(results.geometry.location.lat())
+    //             setLongitude(results.geometry.location.lng())
+    //         }
+    //     })
+    // },[geocodingService, business])
+
+
+    // setDefaults({
+    //     key: process.env.REACT_APP_GOOGLE_API_KEY, // Your API key here.
+    //     language: "en", // Default language for responses.
+    //     region: "es", // Default region for responses.
+    //   });
+    // fromAddress(`${business?.address}`)
+    //   .then( ({ results }) => {
+    //     const { lat, lng } = results[0].geometry.location;
+    //     // console.log(lat, lng);
+    //     setLatitude(lat)
+    //     setLongitude(lng)
+    //   })
+    //   .catch(console.error);
 
     center = useMemo(() => ({ lat: latitude, lng: longitude }), [latitude, longitude]);
     const [editBusiness, setEditBusiness] = useState(false);
@@ -65,7 +87,7 @@ function BusinessDetail(){
         dispatch(getBusinessesThunk())
         dispatch(getMenusThunk(businessId))
     },[dispatch, businessId])
-    console.log(center)
+    // console.log(center)
     async function deleteBusiness(e){
         const deleteBusiness =  await dispatch(deleteBusinessThunk(businessId))
         if(deleteBusiness){
