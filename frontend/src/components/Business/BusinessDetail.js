@@ -47,20 +47,6 @@ function BusinessDetail(){
 
     },[geocodingApiLoaded, business])
 
-    // setDefaults({
-    //     key: process.env.REACT_APP_GOOGLE_API_KEY, // Your API key here.
-    //     language: "en", // Default language for responses.
-    //     region: "es", // Default region for responses.
-    //   });
-    // fromAddress(`${business?.address}`)
-    //   .then( ({ results }) => {
-    //     const { lat, lng } = results[0].geometry.location;
-    //     // console.log(lat, lng);
-    //     setLatitude(lat)
-    //     setLongitude(lng)
-    //   })
-    //   .catch(console.error);
-
     center = useMemo(() => ({ lat: latitude, lng: longitude }), [latitude, longitude]);
     const [editBusiness, setEditBusiness] = useState(false);
     const [addReview, setAddReview] = useState(false);
