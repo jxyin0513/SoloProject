@@ -1,8 +1,7 @@
 import React, {useMemo, useEffect, useState} from "react";
 import { useJsApiLoader } from "@react-google-maps/api";
-import {APIProvider, Map,useMapsLibrary, AdvancedMarker} from '@vis.gl/react-google-maps';
+import {APIProvider, Map, useMapsLibrary, AdvancedMarker} from '@vis.gl/react-google-maps';
 // import { Loader } from "@googlemaps/js-api-loader"
-import {setDefaults, fromAddress} from 'react-geocode'
 import {useDispatch, useSelector} from 'react-redux';
 import {getBusinessesThunk, deleteBusinessThunk} from "../../store/business";
 import GetReviews from "../Review/getReviews";
@@ -32,26 +31,21 @@ function BusinessDetail(){
     // const { Map } = await google.maps.importLibrary("maps");
     // const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
     const geocodingApiLoaded = useMapsLibrary("geocoding");
-    const [geocodingService, setGeocodingService] = useState();
-    const [geocodingResult, setGeocodingResult] = useState();
-
+    // const [geocodingService, setGeocodingService] = useState();
 
     useEffect(()=>{
         if(!geocodingApiLoaded) return;
-        setGeocodingService(new window.google.maps.Geocoder())
-        console.log(geocodingService)
-    },[geocodingApiLoaded])
+        console.log('center')
+        const geocoder = new window.google.maps.Geocoder();
+        geocoder.geocode(business.address, (results, status)=>{
+            if(status === "OK"){
+                const location = results[0].geometry.location;
+                setLatitude(location.lat())
+                setLongitude(location.lng())
+            }
+        })
 
-    // useEffect(()=>{
-    //     if(!geocodingService && !business.address) return;
-    //     geocodingService.geocode({business}, (results, status)=>{
-    //         if(results, status === "OK"){
-    //             setLatitude(results.geometry.location.lat())
-    //             setLongitude(results.geometry.location.lng())
-    //         }
-    //     })
-    // },[geocodingService, business])
-
+    },[geocodingApiLoaded, business])
 
     // setDefaults({
     //     key: process.env.REACT_APP_GOOGLE_API_KEY, // Your API key here.
