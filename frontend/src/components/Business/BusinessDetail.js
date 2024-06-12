@@ -1,8 +1,7 @@
 import React, {useMemo, useEffect, useState} from "react";
 import { useJsApiLoader } from "@react-google-maps/api";
-import {APIProvider, Map, AdvancedMarker} from '@vis.gl/react-google-maps';
+import {APIProvider, Map, useMapsLibrary, AdvancedMarker} from '@vis.gl/react-google-maps';
 // import { Loader } from "@googlemaps/js-api-loader"
-import {setDefaults, fromAddress} from 'react-geocode'
 import {useDispatch, useSelector} from 'react-redux';
 import {getBusinessesThunk, deleteBusinessThunk} from "../../store/business";
 import GetReviews from "../Review/getReviews";
@@ -31,19 +30,36 @@ function BusinessDetail(){
     // const [map, setMap] = useState(null)
     // const { Map } = await google.maps.importLibrary("maps");
     // const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
-    setDefaults({
-        key: process.env.REACT_APP_GOOGLE_API_KEY, // Your API key here.
-        language: "en", // Default language for responses.
-        region: "es", // Default region for responses.
-      });
-    fromAddress(`${business?.address}`)
-      .then( ({ results }) => {
-        const { lat, lng } = results[0].geometry.location;
-        // console.log(lat, lng);
-        setLatitude(lat)
-        setLongitude(lng)
-      })
-      .catch(console.error);
+    const geocodingApiLoaded = useMapsLibrary("geocoding");
+    // const [geocodingService, setGeocodingService] = useState();
+
+    useEffect(()=>{
+        if(!geocodingApiLoaded) return;
+        console.log('center')
+        const geocoder = new window.google.maps.Geocoder();
+        geocoder.geocode(business.address, (results, status)=>{
+            if(status === "OK"){
+                const location = results[0].geometry.location;
+                setLatitude(location.lat())
+                setLongitude(location.lng())
+            }
+        })
+
+    },[geocodingApiLoaded, business])
+
+    // setDefaults({
+    //     key: process.env.REACT_APP_GOOGLE_API_KEY, // Your API key here.
+    //     language: "en", // Default language for responses.
+    //     region: "es", // Default region for responses.
+    //   });
+    // fromAddress(`${business?.address}`)
+    //   .then( ({ results }) => {
+    //     const { lat, lng } = results[0].geometry.location;
+    //     // console.log(lat, lng);
+    //     setLatitude(lat)
+    //     setLongitude(lng)
+    //   })
+    //   .catch(console.error);
 
     center = useMemo(() => ({ lat: latitude, lng: longitude }), [latitude, longitude]);
     const [editBusiness, setEditBusiness] = useState(false);
@@ -65,7 +81,7 @@ function BusinessDetail(){
         dispatch(getBusinessesThunk())
         dispatch(getMenusThunk(businessId))
     },[dispatch, businessId])
-    console.log(center)
+    // console.log(center)
     async function deleteBusiness(e){
         const deleteBusiness =  await dispatch(deleteBusinessThunk(businessId))
         if(deleteBusiness){
