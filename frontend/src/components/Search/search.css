@@ -42,6 +42,7 @@
 .search-Bar{
     display: inline-block;
     position: relative;
+    padding: 0 0 0 35px;
 }
 .search-name, .search-detail{
     margin: 0 3px 5px 3px;

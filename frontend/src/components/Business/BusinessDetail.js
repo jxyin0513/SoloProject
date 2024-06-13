@@ -1,6 +1,6 @@
 import React, {useMemo, useEffect, useState} from "react";
 import { useJsApiLoader } from "@react-google-maps/api";
-import {APIProvider, Map, AdvancedMarker} from '@vis.gl/react-google-maps';
+import {APIProvider, Map, useMapsLibrary, AdvancedMarker} from '@vis.gl/react-google-maps';
 // import { Loader } from "@googlemaps/js-api-loader"
 import {useDispatch, useSelector} from 'react-redux';
 import {getBusinessesThunk, deleteBusinessThunk} from "../../store/business";
