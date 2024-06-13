@@ -7,9 +7,9 @@ function ProfileButton({user}){
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false)
 
-    function openMenu(){
+    function openMenu(e){
         if(showMenu) return;
-
+        e.stopPropagation()
         setShowMenu(true)
         console.log(showMenu)
     }
@@ -17,11 +17,12 @@ function ProfileButton({user}){
         if (!showMenu) return;
 
         const closeMenu = () => {
+          console.log('tr')
           setShowMenu(false);
         };
-
-        document.addEventListener('click', closeMenu);
         console.log(showMenu)
+        document.addEventListener('click', closeMenu);
+
         return () => document.removeEventListener("click", closeMenu);
     }, [showMenu]);
 
