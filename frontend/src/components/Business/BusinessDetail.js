@@ -32,7 +32,7 @@ function BusinessDetail(){
     // const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
     const geocodingApiLoaded = useMapsLibrary("geocoding");
     // const [geocodingService, setGeocodingService] = useState();
-      console.log(business.address)
+    //   console.log(business?.address)
     useEffect(()=>{
         if(!geocodingApiLoaded) return;
         console.log('center')

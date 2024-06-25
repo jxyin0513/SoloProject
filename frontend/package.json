@@ -19,7 +19,11 @@
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.1"
   },
+  "resolutions": {
+    "ws": ">=8.17.1"
+  },
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -41,6 +45,7 @@
     ]
   },
   "devDependencies": {
+    "npm-force-resolutions": "^0.0.10",
     "redux-logger": "^3.0.6"
   },
   "proxy": "http://localhost:5001"
