@@ -20,7 +20,7 @@
     "redux-thunk": "^2.4.1"
   },
   "resolutions": {
-    "ws": ">=8.17.1"
+    "ws": "^8.17.1"
   },
   "scripts": {
     "preinstall": "npx npm-force-resolutions",
