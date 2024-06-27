@@ -11,16 +11,13 @@ function ProfileButton({user}){
         if(showMenu) return;
         e.stopPropagation()
         setShowMenu(true)
-        console.log(showMenu)
     }
     useEffect(() => {
         if (!showMenu) return;
 
         const closeMenu = () => {
-          console.log('tr')
           setShowMenu(false);
         };
-        console.log(showMenu)
         document.addEventListener('click', closeMenu);
 
         return () => document.removeEventListener("click", closeMenu);
