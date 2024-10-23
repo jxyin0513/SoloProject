@@ -1,6 +1,6 @@
 import React, {useMemo, useEffect, useState} from "react";
 import { useJsApiLoader } from "@react-google-maps/api";
-import {APIProvider, Map, useMapsLibrary, AdvancedMarker} from '@vis.gl/react-google-maps';
+import {APIProvider, Map, AdvancedMarker} from '@vis.gl/react-google-maps';
 // import { Loader } from "@googlemaps/js-api-loader"
 import {useDispatch, useSelector} from 'react-redux';
 import {getBusinessesThunk, deleteBusinessThunk} from "../../store/business";
@@ -25,19 +25,15 @@ function BusinessDetail(){
         id:'google-map-script',
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
       });
-    const [latitude, setLatitude] = useState(0)
-    const [longitude, setLongitude] = useState(0)
+    const [latitude, setLatitude] = useState(0);
+    const [longitude, setLongitude] = useState(0);
     // const [map, setMap] = useState(null)
     // const { Map } = await google.maps.importLibrary("maps");
     // const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
-    const geocodingApiLoaded = useMapsLibrary("geocoding");
-    // const [geocodingService, setGeocodingService] = useState();
-    //   console.log(business?.address)
     useEffect(()=>{
-        if(!geocodingApiLoaded) return;
-        console.log('center')
+        if(!isLoaded) return;
         const geocoder = new window.google.maps.Geocoder();
-        geocoder.geocode(business.address, (results, status)=>{
+        geocoder.geocode({address: `${business.address}, ${business.city}, ${business.state}`}, (results, status)=>{
             if(status === "OK"){
                 const location = results[0].geometry.location;
                 setLatitude(location.lat())
@@ -45,7 +41,7 @@ function BusinessDetail(){
             }
         })
 
-    },[geocodingApiLoaded, business])
+    },[business, isLoaded])
 
     center = useMemo(() => ({ lat: latitude, lng: longitude }), [latitude, longitude]);
     const [editBusiness, setEditBusiness] = useState(false);
@@ -67,7 +63,7 @@ function BusinessDetail(){
         dispatch(getBusinessesThunk())
         dispatch(getMenusThunk(businessId))
     },[dispatch, businessId])
-    console.log(center)
+    // console.log(center)
     async function deleteBusiness(e){
         const deleteBusiness =  await dispatch(deleteBusinessThunk(businessId))
         if(deleteBusiness){
