@@ -33,7 +33,7 @@ function BusinessDetail(){
     useEffect(()=>{
         if(!isLoaded) return;
         const geocoder = new window.google.maps.Geocoder();
-        geocoder.geocode({address: `${business.address}, ${business.city}, ${business.state}`}, (results, status)=>{
+        geocoder.geocode({address: `${business?.address}, ${business?.city}, ${business?.state}`}, (results, status)=>{
             if(status === "OK"){
                 const location = results[0].geometry.location;
                 setLatitude(location.lat())
@@ -41,7 +41,7 @@ function BusinessDetail(){
             }
         })
 
-    },[business, isLoaded])
+    },[businessId, isLoaded])
 
     center = useMemo(() => ({ lat: latitude, lng: longitude }), [latitude, longitude]);
     const [editBusiness, setEditBusiness] = useState(false);
