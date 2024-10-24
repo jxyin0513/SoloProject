@@ -27,7 +27,7 @@ function BusinessDetail(){
       });
     const [latitude, setLatitude] = useState(0);
     const [longitude, setLongitude] = useState(0);
-      console.log(process.env.REACT_APP_MAP_ID);
+
     useEffect(()=>{
         if(!isLoaded) return;
         const geocoder = new window.google.maps.Geocoder();
