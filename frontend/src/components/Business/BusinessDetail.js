@@ -1,6 +1,7 @@
 import React, {useMemo, useEffect, useState} from "react";
 import { useJsApiLoader } from "@react-google-maps/api";
 import {APIProvider, Map, AdvancedMarker} from '@vis.gl/react-google-maps';
+import usePlacesAutocomplete, {getGeocode, getLatLng} from "use-places-autocomplete";
 // import { Loader } from "@googlemaps/js-api-loader"
 import {useDispatch, useSelector} from 'react-redux';
 import {getBusinessesThunk, deleteBusinessThunk} from "../../store/business";
@@ -24,6 +25,7 @@ function BusinessDetail(){
     const { isLoaded } = useJsApiLoader({
         id:'google-map-script',
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
+        libraries: ['places']
       });
     const [latitude, setLatitude] = useState(0);
     const [longitude, setLongitude] = useState(0);
