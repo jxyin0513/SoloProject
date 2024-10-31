@@ -1,7 +1,6 @@
 import React, {useMemo, useEffect, useState} from "react";
-import { useJsApiLoader } from "@react-google-maps/api";
+import { useJsApiLoader, Autocomplete } from "@react-google-maps/api";
 import {APIProvider, Map, AdvancedMarker} from '@vis.gl/react-google-maps';
-import usePlacesAutocomplete, {getGeocode, getLatLng} from "use-places-autocomplete";
 // import { Loader } from "@googlemaps/js-api-loader"
 import {useDispatch, useSelector} from 'react-redux';
 import {getBusinessesThunk, deleteBusinessThunk} from "../../store/business";
@@ -16,6 +15,8 @@ import { deleteMenuThunk } from "../../store/menu";
 import { useParams, useHistory } from 'react-router-dom';
 import './BusinessDetail.css'
 
+const libraries = ['places'];
+
 function BusinessDetail(){
     const dispatch = useDispatch();
     const history = useHistory();
@@ -25,7 +26,7 @@ function BusinessDetail(){
     const { isLoaded } = useJsApiLoader({
         id:'google-map-script',
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
-        libraries: ['places']
+        libraries
       });
     const [latitude, setLatitude] = useState(0);
     const [longitude, setLongitude] = useState(0);
@@ -41,7 +42,7 @@ function BusinessDetail(){
             }
         })
 
-    },[businessId, isLoaded])
+    },[business, isLoaded])
 
     center = useMemo(() => ({ lat: latitude, lng: longitude }), [latitude, longitude]);
     const [editBusiness, setEditBusiness] = useState(false);
@@ -50,6 +51,7 @@ function BusinessDetail(){
     const [editMenu, setEditMenu] = useState(false);
     // const [reqLog, setReqLog] = useState(false);
     const [menuId, setMenuId] = useState(0);
+    const [autocomplete, setAutocomplete] = useState(null);
     const user = useSelector(state=>state.session.user)
     const menus = Object.values(useSelector(state=>state.menus))
     const reviews = Object.values(useSelector(state=>state.reviews));
@@ -107,7 +109,25 @@ function BusinessDetail(){
     async function onDeleteMenu(e){
         await dispatch(deleteMenuThunk(e.target.id))
     }
+    const onLoad = (autocompleteInstance) => setAutocomplete(autocompleteInstance);
 
+    function placesChanged(){
+        if (autocomplete) {
+            const place = autocomplete.getPlace();
+            const location = place.geometry?.location;
+            if (location) {
+              const newCenter = {
+                lat: location.lat(),
+                lng: location.lng(),
+              };
+            setLatitude(newCenter.lat)
+            setLongitude(newCenter.lng)
+            console.log(newCenter)
+            // setMapCenter(newCenter);
+            // setMarkerPosition(newCenter);
+            }
+          }
+    }
     return (
         <>
         {business&&(
@@ -219,12 +239,19 @@ function BusinessDetail(){
                                                 </Map>
                                         </APIProvider>)}
                                 </div>
+
+                                <Autocomplete onLoad={onLoad} onPlaceChanged={placesChanged}>
+                                    <input type="text" placeholder="Search Places"></input>
+                                </Autocomplete>
+
+                                {/* <PlaceAutocomplete /> */}
                             </div>
 
                         </div>
                         </div>
                     </div>
                 </div>
+
             </div>
             )
             }
