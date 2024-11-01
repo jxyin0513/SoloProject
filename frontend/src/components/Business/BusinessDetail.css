@@ -290,3 +290,17 @@ img.image{
     height: 100%;
     width: 100%;
 }
+.search-Places{
+    box-sizing: 'border-box';
+    border: '1px solid transparent';
+    width: '240px';
+    height: '32px';
+    padding: '0 12px';
+    border-radius: '3px';
+    font-size: '14px';
+    outline: 'none';
+    text-overflow: 'ellipsis';
+    position: 'absolute';
+    left: '50%';
+    margin-left: '-120px',
+}

@@ -28,23 +28,23 @@ function BusinessDetail(){
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
         libraries
       });
-    const [latitude, setLatitude] = useState(0);
-    const [longitude, setLongitude] = useState(0);
-
+    const [latLng, setLatLng] = useState({lat: 0, lng:0})
     useEffect(()=>{
         if(!isLoaded) return;
         const geocoder = new window.google.maps.Geocoder();
         geocoder.geocode({address: `${business?.address}, ${business?.city}, ${business?.state}`}, (results, status)=>{
             if(status === "OK"){
                 const location = results[0].geometry.location;
-                setLatitude(location.lat())
-                setLongitude(location.lng())
+                console.log(location);
+                const center = {lat: location.lat(), lng:location.lng()}
+                console.log(center)
+                setLatLng({lat: location.lat(), lng:location.lng()})
             }
         })
 
     },[business, isLoaded])
 
-    center = useMemo(() => ({ lat: latitude, lng: longitude }), [latitude, longitude]);
+    center = useMemo(() => (latLng), [latLng]);
     const [editBusiness, setEditBusiness] = useState(false);
     const [addReview, setAddReview] = useState(false);
     const [addMenu, setAddMenu] = useState(false)
@@ -120,8 +120,9 @@ function BusinessDetail(){
                 lat: location.lat(),
                 lng: location.lng(),
               };
-            setLatitude(newCenter.lat)
-            setLongitude(newCenter.lng)
+            // setLatitude(newCenter.lat)
+            // setLongitude(newCenter.lng)
+            setLatLng(newCenter);
             console.log(newCenter)
             // setMapCenter(newCenter);
             // setMarkerPosition(newCenter);
@@ -236,15 +237,29 @@ function BusinessDetail(){
                                                     <AdvancedMarker position={center}>
 
                                                     </AdvancedMarker>
+                                                    <Autocomplete onLoad={onLoad} onPlaceChanged={placesChanged}>
+                                                    <input type="text" placeholder="search-Places" className="search-Places" style={{
+                                                        boxSizing: 'border-box',
+                                                        border: '1px solid transparent',
+                                                        width: '240px',
+                                                        height: '32px',
+                                                        padding: '0 12px',
+                                                        borderRadius: '3px',
+                                                        fontSize: '14px',
+                                                        outline: 'none',
+                                                        textOverflow: 'ellipsis',
+                                                        position: 'absolute',
+                                                        left: '50%',
+                                                        marginLeft: '-120px',
+                                                    }}></input>
+                                                </Autocomplete>
                                                 </Map>
                                         </APIProvider>)}
                                 </div>
 
-                                <Autocomplete onLoad={onLoad} onPlaceChanged={placesChanged}>
-                                    <input type="text" placeholder="Search Places"></input>
-                                </Autocomplete>
-
-                                {/* <PlaceAutocomplete /> */}
+                                {/* {isLoaded && <Autocomplete onLoad={onLoad} onPlaceChanged={placesChanged}>
+                                    <input type="text" placeholder="Search Places" className="search-Places"></input>
+                                </Autocomplete>} */}
                             </div>
 
                         </div>
