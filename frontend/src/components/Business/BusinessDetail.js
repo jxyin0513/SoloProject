@@ -1,5 +1,5 @@
-import React, {useMemo, useEffect, useState} from "react";
-import { useJsApiLoader, Autocomplete } from "@react-google-maps/api";
+import React, {useMemo, useEffect, useState, useRef} from "react";
+import { useJsApiLoader, Autocomplete, DirectionsRenderer } from "@react-google-maps/api";
 import {APIProvider, Map, AdvancedMarker} from '@vis.gl/react-google-maps';
 // import { Loader } from "@googlemaps/js-api-loader"
 import {useDispatch, useSelector} from 'react-redux';
@@ -15,7 +15,7 @@ import { deleteMenuThunk } from "../../store/menu";
 import { useParams, useHistory } from 'react-router-dom';
 import './BusinessDetail.css'
 
-const libraries = ['places'];
+const libraries = ['places', 'routes'];
 
 function BusinessDetail(){
     const dispatch = useDispatch();
@@ -51,10 +51,16 @@ function BusinessDetail(){
     const [editMenu, setEditMenu] = useState(false);
     // const [reqLog, setReqLog] = useState(false);
     const [menuId, setMenuId] = useState(0);
-    const [autocomplete, setAutocomplete] = useState(null);
     const user = useSelector(state=>state.session.user)
     const menus = Object.values(useSelector(state=>state.menus))
     const reviews = Object.values(useSelector(state=>state.reviews));
+    const [originInstance, setOriginInstance] = useState(null);
+    const [destinInstance, setDestinInstance] = useState(null);
+    // const [origin, setOrigin] = useState({lat: 0, lng:0});
+    // const [destination, setDestination] = useState({lat: 0, lng:0});
+    const [directions, setDirections] = useState(null)
+    /** @type React.MutableRefObject<HTMLInputElement> */
+    const start = useRef();
 
     let reviewAvg=0;
     reviews.forEach(review=>{reviewAvg+=review.rating})
@@ -109,25 +115,41 @@ function BusinessDetail(){
     async function onDeleteMenu(e){
         await dispatch(deleteMenuThunk(e.target.id))
     }
-    const onLoad = (autocompleteInstance) => setAutocomplete(autocompleteInstance);
 
     function placesChanged(){
-        if (autocomplete) {
-            const place = autocomplete.getPlace();
-            const location = place.geometry?.location;
-            if (location) {
-              const newCenter = {
+        if (!originInstance) return;
+        const place = originInstance.getPlace();
+        const location = place.geometry?.location;
+        if (location) {
+            const newCenter = {
+            lat: location.lat(),
+            lng: location.lng(),
+            };
+        setLatLng(newCenter);
+        console.log(newCenter)
+        }
+    }
+
+    async function destinPlaces (){
+        if(!originInstance || !destinInstance) return;
+
+        const place = destinInstance.getPlace();
+        const location = place.geometry?.location;
+        let destination;
+        if (location) {
+            destination = {
                 lat: location.lat(),
                 lng: location.lng(),
-              };
-            // setLatitude(newCenter.lat)
-            // setLongitude(newCenter.lng)
-            setLatLng(newCenter);
-            console.log(newCenter)
-            // setMapCenter(newCenter);
-            // setMarkerPosition(newCenter);
-            }
-          }
+            };
+        }
+        const directionsService = new window.google.maps.DirectionsService();
+        const results = await directionsService.route({
+            origin: latLng,
+            destination: destination,
+            travelMode: window.google.maps.TravelMode.DRIVING
+        })
+        console.log(results.routes[0].legs[0].distance)
+        setDirections(results);
     }
     return (
         <>
@@ -217,44 +239,51 @@ function BusinessDetail(){
                                     <p>Zip Code: {business.zipCode}</p>
                                 </div>
                                 <div className="map-Outer">
-                                    {/* {!isLoaded ? (
-                                        <h1>Loading...</h1>
-                                    ) : (
-                                        <GoogleMap
-                                        mapContainerClassName="map-container"
-                                        center={center}
-                                        zoom={10}
-                                        onLoad={map=>setMap(map)}>
-                                            <AdvancedMarker position={{ lat: latitude, lng: longitude }}  />
-                                        </GoogleMap>
-                                    )} */}
-
+                                    <div className="map-Container">
                                     {!isLoaded ? (
                                         <h1>Loading...</h1>
                                     ) : (
                                         <APIProvider apiKey={process.env.REACT_APP_GOOGLE_API_KEY}>
                                                 <Map center={center} zoom={10} mapId={process.env.REACT_APP_MAP_ID}>
-                                                    <AdvancedMarker position={center}>
-
+                                                    <AdvancedMarker position={center} >
                                                     </AdvancedMarker>
-                                                    <Autocomplete onLoad={onLoad} onPlaceChanged={placesChanged}>
-                                                    <input type="text" placeholder="search-Places" className="search-Places" style={{
-                                                        boxSizing: 'border-box',
-                                                        border: '1px solid transparent',
-                                                        width: '240px',
-                                                        height: '32px',
-                                                        padding: '0 12px',
-                                                        borderRadius: '3px',
-                                                        fontSize: '14px',
-                                                        outline: 'none',
-                                                        textOverflow: 'ellipsis',
-                                                        position: 'absolute',
-                                                        left: '50%',
-                                                        marginLeft: '-120px',
-                                                    }}></input>
-                                                </Autocomplete>
+                                                    {/* {directions && <DirectionsRenderer directions={directions} options={{polylineOptions:{zIndex:50, strokeColor:"#1976D2", strokeWeight:7}}}/>}
+                                                    <Autocomplete onLoad={(instance)=>setOriginInstance(instance)} onPlaceChanged={placesChanged}>
+                                                        <input type="text" ref={start} placeholder="Search Places" className="search-Places" style={{
+                                                            boxSizing: 'border-box',
+                                                            border: '1px solid transparent',
+                                                            width: '240px',
+                                                            height: '32px',
+                                                            padding: '0 12px',
+                                                            borderRadius: '3px',
+                                                            fontSize: '14px',
+                                                            outline: 'none',
+                                                            textOverflow: 'ellipsis',
+                                                            position: 'absolute',
+                                                            left: '50%',
+                                                            marginLeft: '-120px',
+                                                        }}></input>
+                                                    </Autocomplete>
+                                                    <Autocomplete onLoad={(instance)=>setDestinInstance(instance)} onPlaceChanged={destinPlaces}>
+                                                        <input type="text" placeholder="Search Places" className="search-Places" style={{
+                                                            boxSizing: 'border-box',
+                                                            border: '1px solid transparent',
+                                                            width: '240px',
+                                                            height: '32px',
+                                                            padding: '0 12px',
+                                                            borderRadius: '3px',
+                                                            fontSize: '14px',
+                                                            outline: 'none',
+                                                            textOverflow: 'ellipsis',
+                                                            position: 'absolute',
+                                                            left: '50%',
+                                                            marginLeft: '-120px',
+                                                            marginTop: '50px'
+                                                        }}></input>
+                                                    </Autocomplete> */}
                                                 </Map>
                                         </APIProvider>)}
+                                        </div>
                                 </div>
 
                                 {/* {isLoaded && <Autocomplete onLoad={onLoad} onPlaceChanged={placesChanged}>

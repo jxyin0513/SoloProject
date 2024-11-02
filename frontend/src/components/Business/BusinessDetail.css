@@ -282,12 +282,12 @@ img.image{
     border-radius: 2px;
 }
 .map-Outer{
-    height: 350px;
-    width: 100%;
+    height: 550px;
+    width: 500px;
     margin: 20px 0 0 40px;
 }
-.map-container{
-    height: 100%;
+.map-Container{
+    height: 100vh;
     width: 100%;
 }
 .search-Places{
@@ -304,3 +304,7 @@ img.image{
     left: '50%';
     margin-left: '-120px',
 }
+/* #map{
+    height: 100vh;
+    width: 100%;
+} */
