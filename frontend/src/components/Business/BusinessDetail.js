@@ -1,6 +1,6 @@
 import React, {useMemo, useEffect, useState, useRef} from "react";
 import { useJsApiLoader, Autocomplete, DirectionsRenderer } from "@react-google-maps/api";
-import {APIProvider, Map, AdvancedMarker} from '@vis.gl/react-google-maps';
+import {APIProvider, Map, AdvancedMarker, useMap} from '@vis.gl/react-google-maps';
 // import { Loader } from "@googlemaps/js-api-loader"
 import {useDispatch, useSelector} from 'react-redux';
 import {getBusinessesThunk, deleteBusinessThunk} from "../../store/business";
@@ -13,6 +13,7 @@ import EditBusinessModal from "./EditBusinessModal";
 import { deleteMenuThunk } from "../../store/menu";
 // import LoginForm from "../LoginFormModal/LoginForm";
 import { useParams, useHistory } from 'react-router-dom';
+import MapTest from "./MapTrial";
 import './BusinessDetail.css'
 
 const libraries = ['places', 'routes'];
@@ -58,9 +59,9 @@ function BusinessDetail(){
     const [destinInstance, setDestinInstance] = useState(null);
     // const [origin, setOrigin] = useState({lat: 0, lng:0});
     // const [destination, setDestination] = useState({lat: 0, lng:0});
-    const [directions, setDirections] = useState(null)
+    const [directions, setDirections] = useState(null);
     /** @type React.MutableRefObject<HTMLInputElement> */
-    const start = useRef();
+    // const map = useMap("map-Id");
 
     let reviewAvg=0;
     reviews.forEach(review=>{reviewAvg+=review.rating})
@@ -244,12 +245,13 @@ function BusinessDetail(){
                                         <h1>Loading...</h1>
                                     ) : (
                                         <APIProvider apiKey={process.env.REACT_APP_GOOGLE_API_KEY}>
-                                                <Map center={center} zoom={10} mapId={process.env.REACT_APP_MAP_ID}>
+                                                <Map center={center} zoom={10} id={'map-Id'} mapId={process.env.REACT_APP_MAP_ID}>
                                                     <AdvancedMarker position={center} >
                                                     </AdvancedMarker>
-                                                    {/* {directions && <DirectionsRenderer directions={directions} options={{polylineOptions:{zIndex:50, strokeColor:"#1976D2", strokeWeight:7}}}/>}
+                                                    {isLoaded && <MapTest/>}
+                                                    {directions && (<DirectionsRenderer directions={directions} options={{polylineOptions:{zIndex:50, strokeColor:"#1976D2", strokeWeight:7}}}/>)}
                                                     <Autocomplete onLoad={(instance)=>setOriginInstance(instance)} onPlaceChanged={placesChanged}>
-                                                        <input type="text" ref={start} placeholder="Search Places" className="search-Places" style={{
+                                                        <input type="text" placeholder="Search Places" className="search-Places" style={{
                                                             boxSizing: 'border-box',
                                                             border: '1px solid transparent',
                                                             width: '240px',
@@ -280,7 +282,7 @@ function BusinessDetail(){
                                                             marginLeft: '-120px',
                                                             marginTop: '50px'
                                                         }}></input>
-                                                    </Autocomplete> */}
+                                                    </Autocomplete>
                                                 </Map>
                                         </APIProvider>)}
                                         </div>
