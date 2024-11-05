@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useMap } from "@vis.gl/react-google-maps";
 
-function MapTest(){
+function Directions({origin, destination}){
     const map = useMap("map-Id");
     const [directionService, setDirectionService] = useState();
     const [directionRenderer, setDirectionRenderer] = useState();
@@ -14,16 +14,16 @@ function MapTest(){
     useEffect(()=>{
         if(!directionService || !directionRenderer) return;
         directionService.route({
-            origin: "w 42nd, New York, NY",
-            destination: "penn station, New York, NY",
+            origin,
+            destination,
             travelMode: window.google.maps.TravelMode.DRIVING
         }).then((response)=>{
             console.log(response)
             directionRenderer.setDirections(response);
         })
-    },[directionService, directionRenderer])
+    },[directionService, directionRenderer, origin, destination])
 
     return null;
 }
 
-export default MapTest;
+export default Directions;

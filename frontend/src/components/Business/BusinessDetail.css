@@ -282,27 +282,31 @@ img.image{
     border-radius: 2px;
 }
 .map-Outer{
-    height: 550px;
-    width: 500px;
+    height: 500px;
+    width: 430px;
     margin: 20px 0 0 40px;
 }
 .map-Container{
-    height: 100vh;
+    height: 100%;
     width: 100%;
 }
 .search-Places{
-    box-sizing: 'border-box';
-    border: '1px solid transparent';
-    width: '240px';
-    height: '32px';
-    padding: '0 12px';
-    border-radius: '3px';
-    font-size: '14px';
-    outline: 'none';
-    text-overflow: 'ellipsis';
-    position: 'absolute';
-    left: '50%';
-    margin-left: '-120px',
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    width: 240px;
+    height: 32px;
+    padding: 0 12px;
+    border-radius: 3px;
+    font-size: 14px;
+    outline: none;
+    text-overflow: ellipsis;
+    position: absolute;
+}
+.input-Places-Autocomplete{
+    position:absolute;
+    z-index:300;
+    left: 50%;
+    margin-left: -120px;
 }
 /* #map{
     height: 100vh;
