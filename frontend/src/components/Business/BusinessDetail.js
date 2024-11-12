@@ -1,5 +1,5 @@
 import React, {useMemo, useEffect, useState} from "react";
-import { useJsApiLoader, Autocomplete } from "@react-google-maps/api";
+import { useJsApiLoader, Autocomplete} from "@react-google-maps/api";
 import {APIProvider, Map, AdvancedMarker} from '@vis.gl/react-google-maps';
 // import { Loader } from "@googlemaps/js-api-loader"
 import {useDispatch, useSelector} from 'react-redux';
@@ -13,9 +13,10 @@ import EditBusinessModal from "./EditBusinessModal";
 import { deleteMenuThunk } from "../../store/menu";
 // import LoginForm from "../LoginFormModal/LoginForm";
 import { useParams, useHistory } from 'react-router-dom';
+import Directions from "./DirectionRenderer";
 import './BusinessDetail.css'
 
-const libraries = ['places'];
+const libraries = ['places', 'routes'];
 
 function BusinessDetail(){
     const dispatch = useDispatch();
@@ -28,33 +29,38 @@ function BusinessDetail(){
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
         libraries
       });
-    const [latitude, setLatitude] = useState(0);
-    const [longitude, setLongitude] = useState(0);
-
     useEffect(()=>{
         if(!isLoaded) return;
         const geocoder = new window.google.maps.Geocoder();
         geocoder.geocode({address: `${business?.address}, ${business?.city}, ${business?.state}`}, (results, status)=>{
             if(status === "OK"){
                 const location = results[0].geometry.location;
-                setLatitude(location.lat())
-                setLongitude(location.lng())
+                // console.log(location);
+                const center = {lat: location.lat(), lng:location.lng()}
+                console.log(center)
+                setOrigin({lat: location.lat(), lng:location.lng()})
             }
         })
 
     },[business, isLoaded])
 
-    center = useMemo(() => ({ lat: latitude, lng: longitude }), [latitude, longitude]);
     const [editBusiness, setEditBusiness] = useState(false);
     const [addReview, setAddReview] = useState(false);
     const [addMenu, setAddMenu] = useState(false)
     const [editMenu, setEditMenu] = useState(false);
     // const [reqLog, setReqLog] = useState(false);
     const [menuId, setMenuId] = useState(0);
-    const [autocomplete, setAutocomplete] = useState(null);
     const user = useSelector(state=>state.session.user)
     const menus = Object.values(useSelector(state=>state.menus))
     const reviews = Object.values(useSelector(state=>state.reviews));
+    const [originInstance, setOriginInstance] = useState(null);
+    const [destinInstance, setDestinInstance] = useState(null);
+    const [origin, setOrigin] = useState(null);
+    const [destination, setDestination] = useState(null);
+    // const [directions, setDirections] = useState(null);
+    /** @type React.MutableRefObject<HTMLInputElement> */
+    // const map = useMap("map-Id");
+    center = useMemo(() => (origin), [origin]);
 
     let reviewAvg=0;
     reviews.forEach(review=>{reviewAvg+=review.rating})
@@ -109,24 +115,42 @@ function BusinessDetail(){
     async function onDeleteMenu(e){
         await dispatch(deleteMenuThunk(e.target.id))
     }
-    const onLoad = (autocompleteInstance) => setAutocomplete(autocompleteInstance);
 
     function placesChanged(){
-        if (autocomplete) {
-            const place = autocomplete.getPlace();
-            const location = place.geometry?.location;
-            if (location) {
-              const newCenter = {
+        if (!originInstance) return;
+        const place = originInstance.getPlace();
+        const location = place.geometry?.location;
+        if (location) {
+            const origin = {
+            lat: location.lat(),
+            lng: location.lng(),
+            };
+        setOrigin(origin);
+        console.log(origin)
+        }
+    }
+
+    async function destinPlaces (){
+        if(!destinInstance) return;
+
+        const place = destinInstance.getPlace();
+        const location = place.geometry?.location;
+        let destination;
+        if (location) {
+            destination = {
                 lat: location.lat(),
                 lng: location.lng(),
-              };
-            setLatitude(newCenter.lat)
-            setLongitude(newCenter.lng)
-            console.log(newCenter)
-            // setMapCenter(newCenter);
-            // setMarkerPosition(newCenter);
-            }
-          }
+            };
+        }
+        setDestination(destination);
+        // const directionsService = new window.google.maps.DirectionsService();
+        // const results = await directionsService.route({
+        //     origin,
+        //     destination: destination,
+        //     travelMode: window.google.maps.TravelMode.DRIVING
+        // })
+        // console.log(results.routes[0].legs[0].distance)
+        // setDirections(results);
     }
     return (
         <>
@@ -215,36 +239,34 @@ function BusinessDetail(){
                                     <p>Address: {business.address },  {business.city},   {business.state}</p>
                                     <p>Zip Code: {business.zipCode}</p>
                                 </div>
+                                {!isLoaded ? (
+                                        <h1>Loading...</h1>
+                                    ) : (
                                 <div className="map-Outer">
-                                    {/* {!isLoaded ? (
-                                        <h1>Loading...</h1>
-                                    ) : (
-                                        <GoogleMap
-                                        mapContainerClassName="map-container"
-                                        center={center}
-                                        zoom={10}
-                                        onLoad={map=>setMap(map)}>
-                                            <AdvancedMarker position={{ lat: latitude, lng: longitude }}  />
-                                        </GoogleMap>
-                                    )} */}
+                                    <div className="map-Container" style={{position:'relative', zIndex:1}}>
+                                        <div className="input-Places-Autocomplete" >
+                                            <Autocomplete onLoad={(instance)=>setOriginInstance(instance)} onPlaceChanged={placesChanged}>
+                                                <input type="text" placeholder="origin" className="search-Places"></input>
+                                            </Autocomplete>
+                                            <Autocomplete onLoad={(instance)=>setDestinInstance(instance)} onPlaceChanged={destinPlaces}>
+                                                <input type="text" placeholder="destination" className="search-Places" style={{marginTop: '50px'}}></input>
+                                            </Autocomplete>
+                                        </div>
 
-                                    {!isLoaded ? (
-                                        <h1>Loading...</h1>
-                                    ) : (
                                         <APIProvider apiKey={process.env.REACT_APP_GOOGLE_API_KEY}>
-                                                <Map center={center} zoom={10} mapId={process.env.REACT_APP_MAP_ID}>
-                                                    <AdvancedMarker position={center}>
+                                            <Map center={center? center:{lat: 0, lng:0}} zoom={10} id={'map-Id'} mapId={process.env.REACT_APP_MAP_ID}>
+                                                <AdvancedMarker position={center} >
+                                                </AdvancedMarker>
+                                                {origin && destination && <Directions origin={origin} destination={destination}/>}
+                                                {/* {directions && (<DirectionsRenderer directions={directions} options={{polylineOptions:{zIndex:50, strokeColor:"#1976D2", strokeWeight:7}}}/>)} */}
+                                            </Map>
+                                        </APIProvider>
+                                    </div>
+                                </div>)}
 
-                                                    </AdvancedMarker>
-                                                </Map>
-                                        </APIProvider>)}
-                                </div>
-
-                                <Autocomplete onLoad={onLoad} onPlaceChanged={placesChanged}>
-                                    <input type="text" placeholder="Search Places"></input>
-                                </Autocomplete>
-
-                                {/* <PlaceAutocomplete /> */}
+                                {/* {isLoaded && <Autocomplete onLoad={onLoad} onPlaceChanged={placesChanged}>
+                                    <input type="text" placeholder="Search Places" className="search-Places"></input>
+                                </Autocomplete>} */}
                             </div>
 
                         </div>
