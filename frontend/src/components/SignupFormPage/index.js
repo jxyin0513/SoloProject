@@ -44,7 +44,7 @@ function SignupFormPage(){
             <div className="signup-Outer">
                 <form className="sign-up" onSubmit={onSubmit}>
                     <div>
-                        {errors.map((error, idx) => <li className="error" key={idx}>*{error}</li>)}
+                        {errors.map((error, idx) => <li className="error" key={idx}>* {error}</li>)}
                     </div>
                     <label>Username:
                         <input required type="text" placeholder="Username" name="username" value={username} onChange={e=>setUsername(e.target.value)}>

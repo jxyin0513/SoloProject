@@ -40,8 +40,8 @@ function LoginForm(){
 }
     return (
         <div className="sign-in-container">
-            <div className="errors-handler-signin">
-                {errors.map((error, idx) => <div key={idx}>{error}</div>)}
+            <div className="errors-handler-auth">
+                {errors.map((error, idx) => <div key={idx}>* {error}</div>)}
             </div>
             <form className="sign-in-form" onSubmit={onSubmit}>
                 <label>Username or Email
