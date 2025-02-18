@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { signInThunk } from "../../store/session";
 import './LoginForm.css';
 // import { Redirect } from "react-router-dom";
@@ -14,7 +14,7 @@ function LoginForm(){
     const user = useSelector(state=>state.session.user)
 
     if(user){
-       return <Redirect to="/" />
+       return <Navigate to="/" />
     }
 
     async function onSubmit(e){

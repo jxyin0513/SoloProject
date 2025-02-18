@@ -1,14 +1,14 @@
 import React, { useState} from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import { addBusinessThunk } from "../../store/business";
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import './AddBusiness.css'
 
 function AddBusiness({onClose}){
     const dispatch = useDispatch();
     const user = useSelector(state=>state.session.user);
     const[name, setName] = useState('');
-    const history = useHistory();
+    const navigate = useNavigate();
     const [phoneNumber, setPhoneNumber] = useState('');
     // const [logo, setLogo] = useState('')
     const [address, setAddress] = useState('');
@@ -41,7 +41,7 @@ function AddBusiness({onClose}){
 
     return dispatch(addBusinessThunk(formData))
     .then((res)=>{
-        history.push(`/businesses/${res.id}`)
+        navigate.push(`/businesses/${res.id}`)
         onClose()})
     .catch(async (res) => {
         const data = await res.json();
