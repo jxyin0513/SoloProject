@@ -12,7 +12,7 @@ import AddReviewModal from "../Review/AddReviewModal";
 import EditBusinessModal from "./EditBusinessModal";
 import { deleteMenuThunk } from "../../store/menu";
 // import LoginForm from "../LoginFormModal/LoginForm";
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Directions from "./DirectionRenderer";
 import './BusinessDetail.css'
 
@@ -20,7 +20,7 @@ const libraries = ['places', 'routes'];
 
 function BusinessDetail(){
     const dispatch = useDispatch();
-    const history = useHistory();
+    const navigate = useNavigate();
     let center;
     const {businessId} = useParams();
     const business = useSelector(state=>state.allBusinesses[businessId])
@@ -75,7 +75,7 @@ function BusinessDetail(){
     async function deleteBusiness(e){
         const deleteBusiness =  await dispatch(deleteBusinessThunk(businessId))
         if(deleteBusiness){
-            history.push('/');
+            navigate.push('/');
         }
     }
     function edit(e){

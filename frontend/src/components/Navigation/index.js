@@ -30,7 +30,7 @@ function Navigation ({ isLoaded}){
     return (
       <header>
           <div id='header-original' className='header'>
-            <NavLink exact to="/"><img className='img' src="/images/1.jpg" alt='logo'></img></NavLink>
+            <NavLink end to="/"><img className='img' src="/images/1.jpg" alt='logo'></img></NavLink>
             <Search />
             {isLoaded && sessionLinks}
           </div>

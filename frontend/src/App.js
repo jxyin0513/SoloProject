@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import SignupFormPage from "./components/SignupFormPage";
-import {Route, Switch} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
@@ -21,23 +21,13 @@ function App() {
     <>
       <Navigation isLoaded={{isLoaded}}/>
       {isLoaded&&
-      (<Switch>
-        <Route exact path="/">
-          <AllBusinesses />
-        </Route>
-        <Route path='/demo-user'>
-          <DemoLogin />
-        </Route>
-        <Route path="/signup">
-          <SignupFormPage />
-        </Route>
-        <Route path="/create-business">
-          <AddBusiness />
-        </Route>
-        <Route path={`/businesses/:businessId`}>
-          <BusinessDetail />
-        </Route>
-      </Switch>
+      (<Routes>
+        <Route path='/' element={<AllBusinesses />} />
+        <Route path='/demo-user' element={<DemoLogin />} />
+        <Route path="/signup" element={<SignupFormPage />} />
+        <Route path="/create-business" element={<AddBusiness />} />
+        <Route path={`/businesses/:businessId`} element={<BusinessDetail />} />
+      </Routes>
       )}
     </>
   );
